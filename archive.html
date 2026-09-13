@@ -445,7 +445,7 @@
       background: #ffffff;
     }
 
-    /* =========================
+/* =========================
        MOBILE OPTIMIZATION
     ========================= */
     @media (max-width: 640px) {
@@ -462,8 +462,30 @@
         grid-template-columns: 1fr;
       }
 
-      .zoom-controls, #zoomReset {
-        display: none; /* Hemat ruang navbar mobile saat shooting */
+      /* Tampilan topbar modal di HP */
+      .viewer-top {
+        gap: 6px;
+        padding: 0 10px;
+      }
+
+      /* Ringkas teks tombol agar muat */
+      .button {
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+
+      #zoomReset {
+        display: none; /* Sembunyikan reset saja agar hemat ruang */
+      }
+
+      .zoom-level {
+        min-width: 32px;
+        font-size: 10px;
+      }
+
+      .zoom-btn {
+        width: 26px;
+        height: 26px;
       }
     }
   </style>
@@ -537,7 +559,13 @@
 
     <div class="viewer" id="viewer">
       <div class="viewer-frame" id="viewerFrame">
-        <iframe id="pdfViewer" title="Document Preview"></iframe>
+        <iframe
+          id="pdfViewer"
+          title="Document Preview"
+          allowfullscreen="true"
+          allow="fullscreen"
+        >
+        </iframe>
       </div>
     </div>
   </div>
@@ -558,6 +586,14 @@
         description: "Breakdown kebutuhan produksi",
         files: [
           { name: "Master Breakdown", file: "https://docs.google.com/spreadsheets/d/1H3bndVZ1mIDCqQ_J5QjAFw8brcTymQHLGMUHy3IsnY8/htmlembed?gid=1428216985&single=true&widget=false" }
+        ]
+      },
+      {
+        category: "Shooting Document",
+        name: "Production Book",
+        description: "Kumpulan Production Book",
+        files: [
+          { name: "Production Book", file: "https://www.canva.com/design/DAHUtFMoKiQ/DDtuLjiynOTdCV1T-wnVdw/view?embed" }
         ]
       },
       {
@@ -629,11 +665,11 @@
         ]
       },
       {
-        category: "Wardrobe",
-        name: "Wardrobe List",
-        description: "Daftar kostum & wardrobe",
+        category: "Costume & Make Up",
+        name: "Costume",
+        description: "Apapun lah dari Kostum",
         files: [
-          { name: "Wardrobe List", file: "pdf/wardrobe-list.pdf" }
+          { name: "Costume Concept", file: "pdf/wardrobe-list.pdf" }
         ]
       },
       {
@@ -810,6 +846,14 @@
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closePreview();
     });
+
+    function getFileType(fileName) {
+      if (fileName.includes("canva.com")) return "CANVA"; // <-- Tambah ini
+      if (fileName.includes("spreadsheets") || fileName.includes("htmlembed")) return "SHEET";
+      if (fileName.includes(".jpg") || fileName.includes(".jpeg") || fileName.includes(".png")) return "IMG";
+      if (fileName.includes("google.com/maps")) return "MAPS";
+      return "DOC";
+    }
 
     initFilterPills();
     renderDocuments();
