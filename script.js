@@ -155,9 +155,13 @@ function initFilterPills() {
 function renderDocuments() {
   const filtered = documents.filter(doc => {
     const matchesCategory = currentCategory === "Semua" || doc.category === currentCategory;
+    
+    // Cek apakah kata kunci pencarian cocok dengan nama dokumen, deskripsi, kategori, ATAU nama file sub-menu di dalamnya
     const matchesSearch = doc.name.toLowerCase().includes(searchQuery) ||
                           doc.description.toLowerCase().includes(searchQuery) ||
-                          doc.category.toLowerCase().includes(searchQuery);
+                          doc.category.toLowerCase().includes(searchQuery) ||
+                          doc.files.some(file => file.name.toLowerCase().includes(searchQuery));
+                          
     return matchesCategory && matchesSearch;
   });
 
