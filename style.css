@@ -441,7 +441,25 @@ main {
   .grid {
     grid-template-columns: 1fr;
   }
-  .zoom-controls, #zoomReset {
-    display: none;
+  
+  /* Penyesuaian topbar modal di HP agar tombol zoom tetap muat */
+  .viewer-top {
+    gap: 6px;
+    padding: 0 10px;
+  }
+  .button {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  #zoomReset {
+    display: none; /* Tombol reset disembunyikan saja agar hemat ruang */
+  }
+  .zoom-level {
+    min-width: 32px;
+    font-size: 10px;
+  }
+  .zoom-btn {
+    width: 26px;
+    height: 26px;
   }
 }
