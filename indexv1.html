@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malamar Gawian · Shooting Documents</title>
+<style>
+:root{--bg:#0a0b0d;--card:#111318;--card2:#171a20;--text:#f4f5f7;--muted:#858c97;--line:#272c34;--accent:#e9ff62}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{max-width:1200px;margin:auto;padding:42px 28px 25px;display:flex;justify-content:space-between;align-items:flex-end}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800}
+h1{font-size:clamp(32px,5vw,58px);letter-spacing:-.05em;line-height:.98;margin:10px 0 0}
+.desc{font-size:14px;color:var(--muted);margin-top:13px}.count{font-size:12px;color:var(--muted)}
+main{max-width:1200px;margin:auto;padding:0 28px 70px}.section{margin-top:30px}.section h3{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;min-height:155px;cursor:pointer;transition:.18s}.card:hover{background:var(--card2);border-color:#3a414c;transform:translateY(-2px)}
+.icon{width:38px;height:38px;border-radius:10px;background:#20242b;display:grid;place-items:center;color:var(--accent);font-size:10px;font-weight:900}
+.card h2{font-size:16px;margin:18px 0 5px}.card p{font-size:12px;color:var(--muted);margin:0}.open{font-size:12px;font-weight:750;margin-top:18px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:none;z-index:10}.modal.show{display:flex;flex-direction:column}
+.top{height:62px;display:flex;align-items:center;gap:10px;padding:0 15px;background:#0d0f12;border-bottom:1px solid var(--line)}
+.btn,.tab{border:1px solid var(--line);background:#171a20;color:var(--text);border-radius:9px;padding:9px 12px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none}.btn:hover{background:#22262d}
+.title{flex:1;min-width:0;font-size:13px;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:5px;overflow:auto;padding:9px 15px;background:#111318;border-bottom:1px solid var(--line)}
+.tab{border-color:transparent;background:transparent;color:var(--muted);white-space:nowrap}.tab.active{background:var(--accent);color:#0a0b0d}
+.viewer{flex:1;min-height:0;padding:10px 12px 12px}.viewer iframe{width:100%;height:100%;border:1px solid var(--line);border-radius:10px;background:#fff}
+@media(max-width:650px){header{padding:28px 17px 20px;display:block}.count{margin-top:15px}main{padding:0 17px 45px}.top{height:57px}.btn{padding:8px 10px}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="kicker">NGERUJAKS STUDIO · MALAMAR GAWIAN</div><h1>Shooting Documents</h1><div class="desc">Production documents archive · Dummy preview</div></div>
+  <div class="count" id="count"></div>
+</header>
+<main id="content"></main>
+
+<div class="modal" id="modal">
+  <div class="top">
+    <button class="btn" onclick="closePreview()">← Tutup</button>
+    <div class="title" id="title"></div>
+    <a class="btn" id="openPdf" target="_blank">Buka PDF ↗</a>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="viewer"><iframe id="viewer"></iframe></div>
+</div>
+
+<script>
+const documents=[
+ {cat:"Shooting",name:"Call Sheet",desc:"Call sheet produksi",files:[
+   ["Sheet 1","pdf/callsheet-sheet-1.pdf"],["Sheet 2","pdf/callsheet-sheet-2.pdf"],["Sheet 3","pdf/callsheet-sheet-3.pdf"]
+ ]},
+ {cat:"Shooting",name:"Production Breakdown",desc:"Breakdown kebutuhan produksi",files:[
+   ["Sheet 1","pdf/breakdown-sheet-1.pdf"],["Sheet 2","pdf/breakdown-sheet-2.pdf"],["Sheet 3","pdf/breakdown-sheet-3.pdf"]
+ ]},
+ {cat:"Crew",name:"Crew List",desc:"Daftar kru produksi",files:[["Crew List","pdf/crew-list.pdf"]]},
+ {cat:"Crew",name:"Talent List",desc:"Daftar talent",files:[["Talent List","pdf/talent-list.pdf"]]},
+ {cat:"Production",name:"Location List",desc:"Daftar lokasi",files:[["Location List","pdf/location-list.pdf"]]},
+ {cat:"Art",name:"Props List",desc:"Daftar properti",files:[["Props List","pdf/props-list.pdf"]]},
+ {cat:"Wardrobe",name:"Wardrobe List",desc:"Daftar wardrobe",files:[["Wardrobe List","pdf/wardrobe-list.pdf"]]},
+ {cat:"Equipment",name:"Equipment List",desc:"Daftar equipment",files:[["Equipment List","pdf/equipment-list.pdf"]]}
+];
+
+const content=document.querySelector("#content"),count=document.querySelector("#count"),modal=document.querySelector("#modal"),tabs=document.querySelector("#tabs"),viewer=document.querySelector("#viewer"),title=document.querySelector("#title"),openPdf=document.querySelector("#openPdf");
+
+function render(){
+ let groups={};documents.forEach(d=>(groups[d.cat]??=[]).push(d));
+ content.innerHTML="";let n=documents.length;
+ count.textContent=`${n} documents`;
+ for(const [cat,items] of Object.entries(groups)){
+   const s=document.createElement("section");s.className="section";
+   s.innerHTML=`<h3>${cat}</h3><div class="grid"></div>`;
+   const grid=s.querySelector(".grid");
+   items.forEach(d=>{
+     const c=document.createElement("article");c.className="card";
+     c.innerHTML=`<div class="icon">PDF</div><h2>${d.name}</h2><p>${d.desc}</p><div class="open">Preview document →</div>`;
+     c.onclick=()=>openPreview(d);grid.appendChild(c);
+   });
+   content.appendChild(s);
+ }
+}
+function openPreview(d){
+ modal.classList.add("show");document.body.style.overflow="hidden";tabs.innerHTML="";
+ d.files.forEach((f,i)=>{const b=document.createElement("button");b.className="tab"+(!i?" active":"");b.textContent=f[0];b.onclick=()=>select(d,f,b);tabs.appendChild(b)});
+ select(d,d.files[0],tabs.children[0]);
+}
+function select(d,f,b){
+ [...tabs.children].forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ viewer.src=f[1];title.textContent=`${d.name} · ${f[0]}`;openPdf.href=f[1];
+}
+function closePreview(){modal.classList.remove("show");document.body.style.overflow="";viewer.src=""}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closePreview()});
+modal.addEventListener("click",e=>{if(e.target===modal)closePreview()});
+render();
+</script>
+</body></html>

@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{THE_REQUEST} \s/+archive\.html[\s?] [NC]
+RewriteRule ^archive\.html$ /archive [R=301,L]
+
+RewriteRule ^archive/?$ archive.html [L]
