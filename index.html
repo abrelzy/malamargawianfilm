@@ -69,18 +69,6 @@
       text-align: center;
     }
 
-    .kicker {
-      margin-bottom: 28px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.4;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
     h1 {
       margin: 0 auto;
 
@@ -92,12 +80,31 @@
       font-weight: 600;
     }
 
+    .gif-wrap {
+      margin-top: 34px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .giphy-embed {
+      display: block;
+      width: min(100%, 480px);
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 480 / 288;
+      border: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+    }
+
     .construction {
       margin-top: 38px;
 
       color: var(--text);
 
-      font-size: 12px;
+      font-size: 18px;
       line-height: 1;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -178,8 +185,8 @@
     <main>
       <div class="content">
 
-        <div class="kicker">
-          MALAMAR GAWIAN
+        <div class="gif-wrap">
+          <iframe src="https://giphy.com/embed/QBd2kLB5qDmysEXre9" width="480" height="288" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
         </div>
 
         <h1>
