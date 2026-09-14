@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Visit & Kolaborasi Kreator - Malamar Gawian</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --card-bg: #18181b;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --accent: #e50914; /* Merah sinematik */
+      --border: #27272a;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      font-weight: 800;
+    }
+    
+    .description {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: inherit;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 10px;
+    }
+    
+    .btn-submit:hover {
+      background-color: #b20710;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="kicker">Ngerujaks Studio Presents</div>
+      <h1>Malamar Gawian</h1>
+      <div class="description">
+        "Terjebak di antara tuntutan realita dan rayuan jalan pintas."<br><br>
+        Daftarkan dirimu sebagai Kreator Konten untuk berkolaborasi dan melihat langsung (Open Visit / Behind The Scene) proses produksi film pendek kami.
+      </div>
+    </div>
+
+    <div class="card">
+      <form action="#" method="POST" id="creatorForm">
+        
+        <div class="form-group">
+          <label for="fullName">Nama Lengkap / Nama Kreator</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Masukkan nama Anda..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Nomor WhatsApp</label>
+          <input type="text" id="contact" name="contact" placeholder="Contoh: 081234567890" required>
+        </div>
+
+        <div class="form-group">
+          <label for="platform">Platform Utama</label>
+          <select id="platform" name="platform" required>
+            <option value="">-- Pilih Platform Utama --</option>
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="YouTube">YouTube</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="portfolio">Link Akun / Portofolio Konten</label>
+          <input type="url" id="portfolio" name="portfolio" placeholder="https://..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="interest">Fokus Konten yang Ingin Dibuat</label>
+          <select id="interest" name="interest" required>
+            <option value="">-- Pilih Rencana Konten --</option>
+            <option value="Vlog BTS">Vlog Behind The Scene (BTS)</option>
+            <option value="Interview Cast & Crew">Interview Cast & Crew</option>
+            <option value="Review Konsep">Review Konsep Film</option>
+            <option value="Fotografi Set">Fotografi Set & Lokasi</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="motivation">Mengapa tertarik meliput produksi "Malamar Gawian"?</label>
+          <textarea id="motivation" name="motivation" placeholder="Ceritakan singkat motivasi atau ide konten yang ingin Anda buat..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Kirim Pendaftaran</button>
+      </form>
+    </div>
+    
+    <div class="footer">
+      &copy; 2026 Ngerujaks Studio | Banua Film Fund
+    </div>
+  </div>
+</body>
+</html>
