@@ -63,6 +63,7 @@ const documents = [
     name: "Callsheet",
     description: "Jadwal harian shooting & recce",
     files: [
+      { name: "Callsheet All day & Stripboard", file: "https://docs.google.com/spreadsheets/d/1bUycb8FNiVQ-ukYm8MQHGWTOeU6pCZU-6FMvRrS2i_c/preview" },
       { name: "Recce", file: "https://drive.google.com/file/d/16OyftC0lsZ8fZ8j3CBbqwC1O1XbiaJfS/preview" }
     ]
   },
@@ -89,7 +90,9 @@ const documents = [
     files: [
       { name: "Denah Lokasi", file: "images/denah.jpg" },
       { name: "Rumah Izai [BJB]",
-        file: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.467031332893!2d114.82083469999998!3d-3.4786403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de687006e4ac47f%3A0xc94b602785556692!2sUpa%20pempek!5e0!3m2!1sen!2sid!4v1789320028245!5m2!1sen!2sid" }
+        file: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.467031332893!2d114.82083469999998!3d-3.4786403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de687006e4ac47f%3A0xc94b602785556692!2sUpa%20pempek!5e0!3m2!1sen!2sid!4v1789320028245!5m2!1sen!2sid" },
+      { name: "Rumah Ubay [BJB]",
+        file: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d497.82566107943546!2d114.8256817!3d-3.4457633!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de681001edcff95%3A0x9ee33bc699d7583d!2sPutera%20Mahbara%20Advertising!5e0!3m2!1sen!2sid!4v1789366249401!5m2!1sen!2sid" }
     ]
   },
   {
