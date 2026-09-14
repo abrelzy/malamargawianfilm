@@ -88,11 +88,8 @@ const documents = [
     description: "Daftar & denah lokasi",
     files: [
       { name: "Denah Lokasi", file: "images/denah.jpg" },
-      { 
-        name: "Rumah Izai [BJB]",
-        file: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.467031332893!2d114.82083469999998!3d-3.4786403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de687006e4ac47f%3A0xc94b602785556692!2sUpa%20pempek!5e0!3m2!1sen!2sid!4v1789320028245!5m2!1sen!2sid",
-        isExternal: true 
-      }
+      { name: "Rumah Izai [BJB]",
+        file: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.467031332893!2d114.82083469999998!3d-3.4786403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de687006e4ac47f%3A0xc94b602785556692!2sUpa%20pempek!5e0!3m2!1sen!2sid!4v1789320028245!5m2!1sen!2sid" }
     ]
   },
   {
@@ -117,6 +114,14 @@ const documents = [
     description: "Daftar alat kamera & sound",
     files: [
       { name: "Equipment List", file: "pdf/equipment-list.pdf" }
+    ]
+  },
+    {
+    category: "Sponsor & Partner",
+    name: "Proposal",
+    description: "Proposal Sponsor & Dukungan",
+    files: [
+      { name: "Equipment List", file: "assets/Proposal-cetak.pdf" }
     ]
   }
 ];
