@@ -35,7 +35,7 @@ const documents = [
   {
     category: "Shooting Document",
     name: "PPM",
-    description: "Dokumen display PPM 1",
+    description: "Dokumen display PPM 1,2 dan FPPM",
     files: [
       { name: "Deck PPM 1 [PDF]", file: "https://drive.google.com/file/d/1yXpYzidTvo30qBhCvXeXjVcnqLO2cact/preview" },
       { name: "Deck PPM 1 [SLIDESHOW]", file: "https://www.canva.com/design/DAHUPnv1Wrg/exb_QwFsWBRBEqBv9ANH0Q/view?embed" },
