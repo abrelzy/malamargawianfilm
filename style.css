@@ -37,6 +37,14 @@ header {
   padding: 44px 24px 20px;
 }
 
+.judul-malamar {
+  background: linear-gradient(180deg, #FFD54F, #FF9800);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Rockstone', sans-serif; /* Menggunakan font utama Anda */
+}
+
 .top-brand {
   display: flex;
   justify-content: space-between;
