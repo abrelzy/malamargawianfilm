@@ -38,7 +38,8 @@ const documents = [
     description: "Dokumen display PPM 1",
     files: [
       { name: "Deck PPM 1 [PDF]", file: "https://drive.google.com/file/d/1yXpYzidTvo30qBhCvXeXjVcnqLO2cact/preview" },
-      { name: "Deck PPM 1 [SLIDESHOW]", file: "https://www.canva.com/design/DAHUPnv1Wrg/exb_QwFsWBRBEqBv9ANH0Q/view?embed" }
+      { name: "Deck PPM 1 [SLIDESHOW]", file: "https://www.canva.com/design/DAHUPnv1Wrg/exb_QwFsWBRBEqBv9ANH0Q/view?embed" },
+      { name: "Notulensi PPM 2", file: "https://docs.google.com/document/d/1w7dZwCVzG4HHn5sfeJxBOr4BvhnlfMaDsA-DoS9V3CI/preview" }
     ]
   },
   {
@@ -106,9 +107,9 @@ const documents = [
   {
     category: "Costume & Make Up",
     name: "Costume",
-    description: "Konsep kostum & wardrobe",
+    description: "Konsep kostum & Make up",
     files: [
-      { name: "Costume Concept", file: "pdf/wardrobe-list.pdf" }
+      { name: "Costume Concept", file: "pdf/costume-list.pdf" }
     ]
   },
   {
@@ -124,7 +125,7 @@ const documents = [
     name: "Proposal",
     description: "Proposal Sponsor & Dukungan",
     files: [
-      { name: "Equipment List", file: "assets/Proposal-cetak.pdf" }
+      { name: "Proposal", file: "assets/Proposal-cetak.pdf" }
     ]
   }
 ];
