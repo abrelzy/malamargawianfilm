@@ -412,11 +412,14 @@ main {
   min-height: 0;
   padding: 10px;
   overflow: auto;
+  position: relative; /* Tambahkan ini */
 }
 
 .viewer-frame {
   width: 100%;
   height: 100%;
+  min-height: 500px; /* Berikan batas minimum tinggi agar iframe maps tidak 0px */
+  position: relative; /* Tambahkan ini */
 }
 
 .viewer iframe {

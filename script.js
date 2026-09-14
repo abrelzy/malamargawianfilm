@@ -268,7 +268,22 @@ function selectFile(documentData, file, selectedTab) {
   Array.from(tabs.children).forEach(tab => tab.classList.remove("active"));
   selectedTab.classList.add("active");
 
-  setZoom(1);
+  const isMaps = file.file.includes("google.com/maps/embed");
+
+  // Reset ukuran kontainer secara paksa
+  viewerFrame.style.width = "100%";
+  viewerFrame.style.height = "100%";
+  pdfViewer.style.width = "100%";
+  pdfViewer.style.height = "100%";
+
+  if (isMaps) {
+    zoom = 1;
+    zoomLevel.textContent = "100%";
+    pdfViewer.style.transform = "none";
+  } else {
+    setZoom(1);
+  }
+
   pdfViewer.src = file.file;
   documentTitle.textContent = `${documentData.name} · ${file.name}`;
   openPdf.href = file.file;
@@ -283,6 +298,13 @@ function closePreview() {
 /* Zoom Handlers */
 let zoom = 1;
 function updateZoom() {
+  if (pdfViewer.src && pdfViewer.src.includes("google.com/maps/embed")) {
+    viewerFrame.style.width = "100%";
+    viewerFrame.style.height = "100%";
+    pdfViewer.style.transform = "none";
+    return;
+  }
+
   zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
   viewerFrame.style.width = `${100 / zoom}%`;
   viewerFrame.style.height = `${100 / zoom}%`;
