@@ -52,15 +52,23 @@ header {
   margin-bottom: 24px;
 }
 
+.brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
 .logo-link {
   display: inline-block;
   line-height: 0;
 }
 
-.logo {
-  width: 130px;
-  height: auto;
+.logo,
+.title-logo {
+  width: auto;
+  height: 38px;
   object-fit: contain;
+  display: block;
 }
 
 .count-badge {
@@ -70,14 +78,6 @@ header {
   border: 1px solid var(--line);
   padding: 5px 10px;
   border-radius: 999px;
-}
-
-.kicker {
-  font-family: 'Rockstone', sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #ffde59;
 }
 
 h1 {

@@ -2,9 +2,9 @@ const documents = [
   {
     category: "Shooting Document",
     name: "Script Final Draft",
-    description: "Naskah Final terbaru 07/09/2026",
+    description: "Naskah Final terbaru 14/09/2026",
     files: [
-      { name: "Final Draft", file: "https://drive.google.com/file/d/1S4RNCFppn2bkuyowzNZXOANrKF_oA8ee/preview" }
+      { name: "Final Draft Revisi 1", file: "archives/pdf/MalamarGawian_Revised01FinalDraft_20260914.pdf" }
     ]
   },
   {
@@ -13,6 +13,7 @@ const documents = [
     description: "Breakdown kebutuhan produksi",
     files: [
       { name: "Master Breakdown", file: "https://docs.google.com/spreadsheets/d/1H3bndVZ1mIDCqQ_J5QjAFw8brcTymQHLGMUHy3IsnY8/htmlembed?gid=1428216985&single=true&widget=false" },
+      { name: "Script Breakdown Sheet", file: "https://docs.google.com/spreadsheets/d/1a2urSseE0H86rR5A33RfvJ-EexvgXATvwCVkVnPg_ds/preview" },
       { name: "Cast Breakdown", file: "https://docs.google.com/spreadsheets/d/1H3bndVZ1mIDCqQ_J5QjAFw8brcTymQHLGMUHy3IsnY8/htmlembed?gid=730519025&single=true&widget=false" }
     ]
   },
@@ -137,7 +138,7 @@ const documents = [
     name: "Proposal",
     description: "Proposal Sponsor & Dukungan",
     files: [
-      { name: "Proposal", file: "assets/Proposal-cetak.pdf" }
+      { name: "Proposal", file: "assets/Proposal Malamar Gawian.pdf" }
     ]
   }
 ];
