@@ -9,6 +9,14 @@ const documents = [
   },
   {
     category: "Shooting Document",
+    name: "Character Bible",
+    description: "Character Bible terbaru 15/09/2026",
+    files: [
+      { name: "Character Bible draft 2", file: "assets/Character Bible_Malamar Gawian Draft 02.pdf" }
+    ]
+  },
+  {
+    category: "Shooting Document",
     name: "Production Breakdown",
     description: "Breakdown kebutuhan produksi",
     files: [
