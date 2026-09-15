@@ -4,7 +4,7 @@ const documents = [
     name: "Script Final Draft",
     description: "Naskah Final terbaru 14/09/2026",
     files: [
-      { name: "Final Draft Revisi 1", file: "archives/pdf/MalamarGawian_Revised01FinalDraft_20260914.pdf" }
+      { name: "Final Draft Revisi 1", file: "assets/FIX Malamar Gawian_Revised 01 Final Draft_20260914.pdf" }
     ]
   },
   {
