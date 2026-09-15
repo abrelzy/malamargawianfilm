@@ -197,11 +197,11 @@
     input:focus, textarea:focus { outline: none; border-color: var(--accent-green); }
     textarea { resize: vertical; min-height: 120px; }
     
-    .checkbox-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-    .checkbox-item { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--line); padding: 14px; border-radius: 6px; cursor: pointer; transition: border-color 0.15s ease; }
+    .checkbox-list { display: flex; flex-direction: row; gap: 12px; margin-top: 15px; }
+    .checkbox-item { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--line); padding: 14px; border-radius: 6px; cursor: pointer; transition: border-color 0.15s ease; flex: 1; min-width: 0; }
     .checkbox-item:hover { border-color: var(--line-focus); }
-    .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-green); cursor: pointer; }
-    .checkbox-item span { font-size: 14px; font-weight: 500; }
+    .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-green); cursor: pointer; flex-shrink: 0; }
+    .checkbox-item span { font-size: 14px; font-weight: 500; line-height: 1.4; }
     
     .agreement { display: flex; align-items: flex-start; gap: 14px; margin-top: 40px; margin-bottom: 30px; padding: 20px; background: #17171a; border: 1px solid var(--line-focus); border-radius: 6px; }
     .agreement input[type="checkbox"] { accent-color: var(--accent-green); width: 20px; height: 20px; cursor: pointer; margin-top: 2px; }
@@ -333,17 +333,17 @@
 
         <div class="form-group">
           <label for="domisili">Domisili</label>
-          <input type="text" id="domisili" name="domisili" placeholder="Contoh: Banjarbaru, Martapura, dst..." required>
+          <input type="text" id="domisili" name="domisili" placeholder="Contoh: Banjarbaru, Martapura, London." required>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="igUsername">Username Instagram</label>
-            <input type="text" id="igUsername" name="igUsername" placeholder="Contoh: @ngerujaks" required>
+            <input type="text" id="igUsername" name="igUsername" placeholder="Contoh: @ngerujaks.studio" required>
           </div>
           <div class="form-group">
             <label for="igFollowers">Jumlah Followers IG</label>
-            <input type="number" id="igFollowers" name="igFollowers" placeholder="Contoh: 2500" required>
+            <input type="number" id="igFollowers" name="igFollowers" placeholder="Contoh: 19.000.000" required>
           </div>
         </div>
 
@@ -353,14 +353,14 @@
               Username TikTok
               <span class="note">Kosongkan jika tidak menggunakan TikTok</span>
             </label>
-            <input type="text" id="tiktokUsername" name="tiktokUsername" placeholder="Contoh: @ngerujaks">
+            <input type="text" id="tiktokUsername" name="tiktokUsername" placeholder="Contoh: @malamargawian.film">
           </div>
           <div class="form-group">
             <label for="tiktokFollowers">
               Jumlah Followers TikTok
               <span class="note">Kosongkan jika tidak menggunakan TikTok</span>
             </label>
-            <input type="number" id="tiktokFollowers" name="tiktokFollowers" placeholder="Contoh: 10500">
+            <input type="number" id="tiktokFollowers" name="tiktokFollowers" placeholder="Contoh: 19.000.000">
           </div>
         </div>
 
@@ -369,7 +369,7 @@
             Link Portofolio / Konten Terbaik
             <span class="note">Sertakan link Reels / TikTok / YouTube terbaikmu.</span>
           </label>
-          <input type="url" id="portofolio" name="portofolio" placeholder="https://..." required>
+          <input type="url" id="portofolio" name="portofolio" placeholder="https://www.instagram.com/reel/xxxx" required>
         </div>
 
         <div class="form-group">
@@ -382,7 +382,7 @@
             Alasan Visit & Membuat Konten
             <span class="note">Berikan alasan mengapa kamu ingin visit ke lokasi dan rencana konten apa yang akan dibuat.</span>
           </label>
-          <textarea id="alasan" name="alasan" placeholder="Ceritakan motivasi kamu di sini..." required></textarea>
+          <textarea id="alasan" name="alasan" placeholder="..." required></textarea>
         </div>
 
         <div class="form-group">
@@ -407,7 +407,7 @@
 
         <div class="agreement">
           <input type="checkbox" id="persetujuan" name="persetujuan" required>
-          <label for="persetujuan">Saya telah membaca ketentuan pendaftaran dan bersedia mengikuti tata tertib selama di lokasi produksi film "Malamar Gawian".</label>
+          <label for="persetujuan">Dengan ini saya menyatakan bahwa semua data yang saya berikan adalah benar</label>
         </div>
 
         <button type="submit" id="btnSubmit" class="btn-submit">Submit Pendaftaran</button>
