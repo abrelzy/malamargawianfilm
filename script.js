@@ -154,7 +154,8 @@ const documents = [
     name: "Proposal",
     description: "Proposal Sponsor & Dukungan",
     files: [
-      { name: "Proposal", file: "assets/Proposal Malamar Gawian.pdf" }
+      { name: "Proposal", file: "assets/Proposal Malamar Gawian.pdf" },
+      { name: "Tanda Terima Proposal", file: "https://docs.google.com/spreadsheets/d/1d-Ph8mqWI_RHa_YGdYHyw-f5tyjVVs-j7w0d5Badtm4/edit?usp=sharing" }
     ]
   }
 ];
