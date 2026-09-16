@@ -142,10 +142,12 @@ const documents = [
     ]
   },
   {
-    category: "Equipment",
-    name: "Equipment List",
-    description: "Daftar alat kamera & sound",
+    category: "Camera",
+    name: "Visual Mood, Shotlist, & Equipment List",
+    description: "ya itulah isinya",
     files: [
+      { name: "Visual Mood", file: "https://drive.google.com/file/d/1RtbT2SpR7vKe1PKYw4nIPvyi04T9UNi4/preview" },
+      { name: "Shotlist", file: "https://docs.google.com/spreadsheets/d/1z6kSWAS8mhrFGZrG97zTThultuZ3ENBgptdsTcq4hl8/preview" },
       { name: "Equipment List", file: "pdf/equipment-list.pdf" }
     ]
   },
