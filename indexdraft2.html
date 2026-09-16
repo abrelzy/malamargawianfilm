@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malamar Gawian — Official Film</title>
+<meta name="description" content="Malamar Gawian — Sebuah film pendek fiksi komedi satir karya Sutradara Arko dan Produser Abrelsh.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg: #09090b;
+  --card: #121214;
+  --text: #f4f4f5;
+  --muted: #808089;
+  --line: #222226;
+  --line-focus: #3e3e44;
+  --accent-green: #9ccc65;
+  --accent-yellow: #ffd54f;
+  --accent-orange: #ff9800;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* Subtle organic texture */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  z-index:99;
+}
+
+nav{
+  position:fixed;top:0;left:0;width:100%;height:76px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;z-index:100;
+  background:rgba(9,9,11,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  font-family:"Space Grotesk",sans-serif;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent-yellow);font-weight:700;
+}
+.nav-menu{
+  display:flex;gap:28px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+}
+.nav-menu a{color:var(--muted);transition:.25s}
+.nav-menu a:hover{color:var(--accent-green)}
+
+/* HERO */
+.hero{
+  min-height:100svh;position:relative;display:flex;align-items:flex-end;
+  padding:7vw 6vw 6vw;overflow:hidden;background:var(--bg);color:var(--text);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(9,9,11,.95),rgba(9,9,11,.45) 75%),
+    linear-gradient(0deg,rgba(9,9,11,1),transparent 65%),
+    url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=85");
+  background-size:cover;background-position:center;
+  transform:scale(1.03);
+}
+.hero-content{position:relative;z-index:2;max-width:1200px}
+.eyebrow{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:20px;color:var(--accent-green);font-weight:700;
+}
+.hero h1{
+  font-family:"Fraunces",serif;
+  font-size:clamp(55px,9.5vw,140px);
+  line-height:.85;font-weight:600;letter-spacing:-4px;
+  max-width:1050px;
+  background:linear-gradient(180deg, var(--accent-yellow), var(--accent-orange));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  display:flex;align-items:flex-end;gap:25px;margin-top:40px;
+}
+.hero-description{max-width:380px;font-size:14px;line-height:1.7;color:var(--muted)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent-green);color:#09090b;font-weight:800;
+  border:none;border-radius:6px;
+  padding:14px 22px;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;transition:.25s;
+}
+.btn:hover{background:#8cbb55}
+
+/* STICKER */
+.sticker{
+  position:absolute;right:7vw;top:20%;
+  width:125px;height:125px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  background:var(--accent-yellow);color:#09090b;
+  font-family:"Fraunces",serif;font-size:18px;line-height:1.05;font-weight:700;
+  transform:rotate(8deg);z-index:3;
+  box-shadow:0 12px 25px rgba(0,0,0,.6);
+}
+.sticker small{
+  display:block;font:9px "DM Sans",sans-serif;
+  letter-spacing:1px;text-transform:uppercase;margin-top:4px;
+  color:#1b1b1f;
+}
+
+/* GENERAL SECTION */
+section{padding:100px 6vw}
+.section-label{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent-green);margin-bottom:45px;font-weight:700;
+}
+.section-title{
+  font-family:"Fraunces",serif;
+  font-size:clamp(38px,5vw,72px);line-height:.95;
+  letter-spacing:-2px;font-weight:600;color:#fff;
+}
+
+/* ABOUT */
+.about{
+  display:grid;grid-template-columns:1fr 1.35fr;gap:8vw;
+}
+.about-text{
+  max-width:680px;font-size:clamp(17px,1.8vw,23px);
+  line-height:1.6;font-weight:300;color:var(--text);
+}
+.about-text p+p{margin-top:24px;color:var(--muted)}
+.pullquote{
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+  font-family:"Fraunces",serif;font-size:22px;line-height:1.3;
+  color:var(--accent-yellow);
+}
+
+/* CREDITS SECTION DENGAN PHOTO HOVER */
+.credits-section{
+  background:var(--card);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.credits{
+  border-top:1px solid var(--line);
+  margin-top:25px;
+}
+.credit-row{
+  position:relative;
+  min-height:140px;
+  display:grid;
+  grid-template-columns:280px 1fr;
+  align-items:end;
+  padding:26px 20px;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  cursor:pointer;
+}
+.credit-photo{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transform:scale(1.04);
+  transition:opacity .45s ease, transform .45s ease;
+  z-index:1;
+}
+.credit-photo:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(9,9,11,0.95) 15%, rgba(9,9,11,0.45) 85%);
+}
+.credit-row:hover .credit-photo{
+  opacity:0.9;
+  transform:scale(1);
+}
+.credit-role, .credit-name{
+  position:relative;
+  z-index:2;
+}
+.credit-role{
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent-green);
+  font-weight:600;
+  transition:color .25s;
+}
+.credit-name{
+  font-family:"Fraunces",serif;
+  font-size:clamp(30px, 3.8vw, 48px);
+  font-weight:600;
+  color:#fff;
+  letter-spacing:-1px;
+  line-height:1.1;
+  transition:color .25s;
+}
+.credit-row:hover .credit-name{
+  color:var(--accent-yellow);
+}
+
+/* PRESS */
+.press{
+  background:var(--bg);
+  text-align:center;
+  padding:140px 6vw;
+  border-bottom:1px solid var(--line);
+}
+.poster{
+  width:min(300px,75vw);
+  margin:0 auto 50px;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  transform:rotate(-1.5deg);
+  border-radius:8px;
+  border:1px solid var(--line-focus);
+  box-shadow:0 25px 50px rgba(0,0,0,.8);
+}
+.poster img{width:100%;height:100%;object-fit:cover}
+.press h2{
+  font:600 clamp(48px,8vw,110px)/.85 "Fraunces",serif;
+  letter-spacing:-3px;
+  margin-bottom:40px;
+  color:#fff;
+}
+.press .btn{
+  background:transparent;
+  border:1px solid var(--accent-green);
+  color:var(--accent-green);
+}
+.press .btn:hover{
+  background:var(--accent-green);
+  color:#09090b;
+}
+
+/* FOOTER */
+footer{
+  background:var(--card);color:var(--muted);
+  border-top:1px solid var(--line);
+  padding:45px 6vw;display:flex;justify-content:space-between;
+  gap:20px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+}
+footer a:hover{color:var(--accent-green)}
+
+/* MOBILE */
+@media(max-width:800px){
+  nav{height:64px;padding:0 25px}.nav-menu{display:none}
+  .hero{padding:30px;min-height:100svh}
+  .hero h1{letter-spacing:-2px}
+  .hero-sub{flex-direction:column;align-items:flex-start}
+  .sticker{width:90px;height:90px;font-size:13px;right:20px;top:18%}
+  section{padding:80px 25px}
+  .about{grid-template-columns:1fr;gap:40px}
+  .credit-row{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:20px 14px;
+    min-height:120px;
+  }
+  .credit-row .credit-photo{
+    opacity:0.85; /* Pada layar sentuh/hp foto tetap terlihat halus */
+  }
+  .credit-name{
+    font-size:clamp(26px, 7vw, 36px);
+  }
+  footer{flex-direction:column;gap:15px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="logo" href="#">MGP / 2026</a>
+  <div class="nav-menu">
+    <a href="#about">Film</a>
+    <a href="#credits">Cast & Crew</a>
+    <a href="#press">Press Kit</a>
+    <a href="OpenVisit.html" style="color:var(--accent-yellow)">Creator Visit</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="sticker">MALAMAR<br>GAWIAN<small>short film</small></div>
+
+  <div class="hero-content">
+    <div class="eyebrow">A Short Film · Banua Film Fund 2026</div>
+    <h1>Malamar<br>Gawian</h1>
+
+    <div class="hero-sub">
+      <a class="btn" href="#about">Explore Film ↓</a>
+      <p class="hero-description">
+        Terjebak di antara tuntutan realita dan rayuan jalan pintas[cite: 1].
+        Sebuah potret keresahan sarjana muda di tengah budaya dan dinamika Banua.
+      </p>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="section-label">01 — The Film</div>
+
+  <div class="about">
+    <h2 class="section-title">SEBUAH<br>LANGKAH.</h2>
+
+    <div class="about-text">
+      <p>
+        Sulitnya mendapat pekerjaan yang layak kini menjadi permasalahan utama
+        bagi kalangan sarjana muda. Di tengah harapan keluarga, identitas,
+        dan kehidupan masyarakat Banjar, seorang pemuda mencoba menemukan jalannya sendiri.
+      </p>
+      <p>
+        Di balik keresahan mencari nafkah, selalu ada situasi yang tidak sesuai rencana—sedikit
+        canggung, sedikit absurd, tetapi nyata terjadi di sekitar kita.
+      </p>
+
+      <div class="pullquote">
+        “Mencari gawian kada selalu kawa langsung dapat. Tapi perjalanan menuju sana bisa jadi cerita.”
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credits" class="credits-section">
+  <div class="section-label">02 — The Crew</div>
+  <h2 class="section-title">CREW LIST.</h2>
+
+  <div class="credits">
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Producer</span>
+      <span class="credit-name">Abrelsh</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Writer & Director</span>
+      <span class="credit-name">Arko</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Co-Writer</span>
+      <span class="credit-name">Ahmad Zulfiannur</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Director of Photography</span>
+      <span class="credit-name">Anies Fikri</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Art Director</span>
+      <span class="credit-name">Dede Kurniawan</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Costume Designer</span>
+      <span class="credit-name">St. Musallamah</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Editor</span>
+      <span class="credit-name">Ari Arung Purnama</span>
+    </div>
+
+    <div class="credit-row">
+      <div class="credit-photo" style="background-image:url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1600&q=80')"></div>
+      <span class="credit-role">Sound Designer</span>
+      <span class="credit-name">Muhammad Azra Raihan</span>
+    </div>
+  </div>
+</section>
+
+<section id="press" class="press">
+  <div class="section-label">Press & Media</div>
+
+  <div class="poster">
+    <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1000&q=85" alt="Poster Film Malamar Gawian">
+  </div>
+
+  <h2>PRESS<br>KIT.</h2>
+  <a class="btn" href="#">Download Press Kit →</a>
+</section>
+
+<footer>
+  <span>© 2026 MALAMAR GAWIAN · NGERUJAKS STUDIO</span>[cite: 1]
+  <span>Martapura & Banjarbaru, Kalimantan Selatan</span>[cite: 1]
+  <span>
+    <a href="https://instagram.com/malamargawian.film" target="_blank">Instagram</a> · 
+    <a href="https://instagram.com/ngerujaks.studio" target="_blank">Studio</a>
+  </span>
+</footer>
+
+</body>
+</html>

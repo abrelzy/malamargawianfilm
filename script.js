@@ -78,6 +78,14 @@ const documents = [
     ]
   },
   {
+    category: "Schedule",
+    name: "Talent Schedule",
+    description: "Jadwal harian talent",
+    files: [
+      { name: "Talent Calendar", file: "https://docs.google.com/spreadsheets/d/1jNVwNmAFc9Pv8CxkUOae9zQY0_jg5Sff/preview" },
+    ]
+  },
+  {
     category: "Man Behind the Film",
     name: "Crew List",
     description: "Daftar kru produksi lengkap",
