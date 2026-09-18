@@ -487,7 +487,7 @@
       const scriptURL = 'https://script.google.com/macros/s/AKfycbxg0rBHYBiWxMDACaOqU4GlvFsAhgy6ZJW0BN4iWHtbKab8V_pYCEzFsewu7c3pFrRjnA/exec';
 
       form.addEventListener('submit', async function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const tanggalCheckboxes = document.querySelectorAll('input[name="tanggal"]:checked');
         if (tanggalCheckboxes.length === 0) {
@@ -514,6 +514,13 @@
           }
 
           if (response.ok && result && result.success === true) {
+            formContainer.style.display = 'none';
+            successContainer.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+
+          if (response.ok && text && text.includes('success')) {
             formContainer.style.display = 'none';
             successContainer.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
