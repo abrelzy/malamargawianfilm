@@ -607,7 +607,7 @@
         { field: rekening, hint: document.getElementById('rekeningHint') },
         { field: daruratNomor, hint: document.getElementById('daruratNomorHint') }
       ];
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbzFQ5uydg7JnA-MKwOK3bw_5E9QkDf9P-JWVEetxeiuaDR237QubT9uVA_OEBdhEuE7tQ/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbw6zQI40EAIeD50u2crqQSxx21olDOWLOraIVZdyMx6gmyDtf37-hg7qfqhUKroFza0mA/exec';
       const driveFolderUrl = 'https://drive.google.com/drive/folders/1AHLGeYGUF45RRlljIC_kG918yFb4zDEc?usp=sharing';
 
       if (ukuranBaju) {
@@ -646,9 +646,9 @@
           return;
         }
 
-        // Batas ukuran file asli: 10 MB
-        if (file.size > 10 * 1024 * 1024) {
-          alert('Ukuran foto maksimal 10 MB.');
+        // Batas ukuran foto 5 MB
+        if (file.size > 5 * 1024 * 1024) {
+          alert('Ukuran foto maksimal 5 MB.');
           return;
         }
 
@@ -656,53 +656,74 @@
         btnSubmit.disabled = true;
 
         try {
+          // Ubah foto menjadi Base64
+          const base64 = await fileToBase64(file);
+
           // Ambil semua data form
           const formData = new FormData(form);
           const data = {};
 
           formData.forEach(function(value, key) {
+            // File tidak dikirim langsung.
+            // Foto dikirim sebagai Base64 di bawah.
             if (key !== 'fotoCrew') {
               data[key] = value;
             }
           });
 
-          // Ubah foto menjadi Base64 supaya bisa diterima doPost(e)
+          // Data foto
           data.foto = {
             name: file.name,
             mimeType: file.type || 'image/jpeg',
-            base64: await fileToBase64(file)
+            base64: base64
           };
 
-          // Kirim sebagai simple POST.
-          // no-cors sengaja dipakai karena halaman berada di domain
-          // malamargawianfilm.com, sedangkan Apps Script berada di Google.
-          await fetch(scriptUrl, {
+          // Kirim ke Google Apps Script
+          const response = await fetch(scriptUrl, {
             method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8'
+            }
           });
 
-          // Pada no-cors browser tidak boleh membaca response Apps Script.
-          // Jika request selesai tanpa network error, tampilkan sukses.
-          formContainer.style.display = 'none';
-          successContainer.style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          const result = await response.json();
+
+          if (result && result.success) {
+            formContainer.style.display = 'none';
+            successContainer.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            alert(
+              'Gagal mengirim data: ' +
+              (result && result.message
+                ? result.message
+                : 'Terjadi kesalahan.')
+            );
+
+            btnSubmit.textContent = 'Submit Data Crew';
+            btnSubmit.disabled = false;
+          }
 
         } catch (error) {
           console.error(error);
+
           alert('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+
           btnSubmit.textContent = 'Submit Data Crew';
           btnSubmit.disabled = false;
         }
       });
 
+      // File → Base64
       function fileToBase64(file) {
         return new Promise(function(resolve, reject) {
           const reader = new FileReader();
 
           reader.onload = function() {
             const result = reader.result;
-            resolve(result.split(',')[1]);
+            const base64 = result.split(',')[1];
+            resolve(base64);
           };
 
           reader.onerror = function(error) {
