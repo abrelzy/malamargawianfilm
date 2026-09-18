@@ -191,6 +191,15 @@
     
     label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); letter-spacing: 0.02em; }
     .note { font-size: 13px; color: var(--muted); font-weight: normal; display: block; margin-top: 6px; line-height: 1.5; }
+    .field-hint {
+      display: none;
+      margin-top: 8px;
+      color: #ffb347;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .field-hint.visible { display: block; }
     
     input[type="text"], input[type="number"], input[type="url"], textarea { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; color: var(--text); font-family: inherit; font-size: 14px; transition: border-color 0.15s ease; }
     input::placeholder, textarea::placeholder { color: var(--muted); }
@@ -343,7 +352,8 @@
           </div>
           <div class="form-group">
             <label for="igFollowers">Jumlah Followers IG</label>
-            <input type="number" id="igFollowers" name="igFollowers" placeholder="Contoh: 19.000.000" required>
+            <input type="text" id="igFollowers" name="igFollowers" inputmode="numeric" pattern="[0-9]*" placeholder="Contoh: 19000000" required>
+            <div class="field-hint" id="igFollowersHint">⚠️ Field ini hanya boleh berisi angka.</div>
           </div>
         </div>
 
@@ -360,7 +370,8 @@
               Jumlah Followers TikTok
               <span class="note">Kosongkan jika tidak menggunakan TikTok</span>
             </label>
-            <input type="number" id="tiktokFollowers" name="tiktokFollowers" placeholder="Contoh: 19.000.000">
+            <input type="text" id="tiktokFollowers" name="tiktokFollowers" inputmode="numeric" pattern="[0-9]*" placeholder="Contoh: 19000000">
+            <div class="field-hint" id="tiktokFollowersHint">⚠️ Field ini hanya boleh berisi angka.</div>
           </div>
         </div>
 
@@ -374,7 +385,8 @@
 
         <div class="form-group">
           <label for="whatsapp">Nomor WhatsApp</label>
-          <input type="text" id="whatsapp" name="whatsapp" placeholder="Contoh: 08xxxx" required>
+          <input type="text" id="whatsapp" name="whatsapp" inputmode="numeric" pattern="[0-9]*" placeholder="Contoh: 08xxxx" required>
+          <div class="field-hint" id="whatsappHint">⚠️ Field ini hanya boleh berisi angka.</div>
         </div>
 
         <div class="form-group">
@@ -450,6 +462,25 @@
       const btnSubmit = document.getElementById('btnSubmit');
       const formContainer = document.getElementById('formContainer');
       const successContainer = document.getElementById('successContainer');
+      const numericFields = [
+        { field: document.getElementById('igFollowers'), hint: document.getElementById('igFollowersHint') },
+        { field: document.getElementById('tiktokFollowers'), hint: document.getElementById('tiktokFollowersHint') },
+        { field: document.getElementById('whatsapp'), hint: document.getElementById('whatsappHint') }
+      ];
+
+      numericFields.forEach(function(item) {
+        if (!item.field) return;
+        item.field.addEventListener('input', function() {
+          const raw = this.value;
+          const cleaned = raw.replace(/[^0-9]/g, '');
+          if (raw !== cleaned) {
+            item.hint && item.hint.classList.add('visible');
+          } else {
+            item.hint && item.hint.classList.remove('visible');
+          }
+          this.value = cleaned;
+        });
+      });
 
       // --- URL WEB APP GOOGLE APPS SCRIPT ANDA ---
       const scriptURL = 'https://script.google.com/macros/s/AKfycbxg0rBHYBiWxMDACaOqU4GlvFsAhgy6ZJW0BN4iWHtbKab8V_pYCEzFsewu7c3pFrRjnA/exec';

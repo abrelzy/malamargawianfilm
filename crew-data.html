@@ -602,13 +602,14 @@
       const nik = document.getElementById('nik');
       const rekening = document.getElementById('rekening');
       const daruratNomor = document.getElementById('daruratNomor');
+
       const numericFields = [
         { field: nik, hint: document.getElementById('nikHint') },
         { field: rekening, hint: document.getElementById('rekeningHint') },
         { field: daruratNomor, hint: document.getElementById('daruratNomorHint') }
       ];
+
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbxK3XZjIdgKgRVWDOufJGa2ji7HxvScac-eLC5rN5-6i2C7Y58lQFTbXqwzElhZgzFwug/exec';
-      const driveFolderUrl = 'https://drive.google.com/drive/folders/1AHLGeYGUF45RRlljIC_kG918yFb4zDEc?usp=sharing';
 
       if (ukuranBaju) {
         ukuranBaju.addEventListener('change', function() {
@@ -618,14 +619,17 @@
 
       numericFields.forEach(function(item) {
         if (!item.field) return;
+
         item.field.addEventListener('input', function() {
           const raw = this.value;
           const cleaned = raw.replace(/[^0-9]/g, '');
+
           if (raw !== cleaned) {
             item.hint && item.hint.classList.add('visible');
           } else {
             item.hint && item.hint.classList.remove('visible');
           }
+
           this.value = cleaned;
         });
       });
@@ -646,7 +650,7 @@
           return;
         }
 
-        // Batas ukuran file asli: 10 MB
+        // Batas ukuran file asli 10 MB.
         if (file.size > 10 * 1024 * 1024) {
           alert('Ukuran foto maksimal 10 MB.');
           return;
@@ -656,34 +660,37 @@
         btnSubmit.disabled = true;
 
         try {
-          // Ambil semua data form
           const formData = new FormData(form);
-          const data = {};
+          const payload = new URLSearchParams();
 
+          // Kirim semua field teks/form biasa.
           formData.forEach(function(value, key) {
             if (key !== 'fotoCrew') {
-              data[key] = value;
+              payload.append(key, value);
             }
           });
 
-          // Ubah foto menjadi Base64 supaya bisa diterima doPost(e)
-          data.foto = {
-            name: file.name,
-            mimeType: file.type || 'image/jpeg',
-            base64: await fileToBase64(file)
-          };
+          // File dikirim sebagai Base64 karena Apps Script Web App
+          // menerima parameter POST, bukan Blob file dari fetch eksternal.
+          const fotoBase64 = await fileToBase64(file);
 
-          // Kirim sebagai simple POST.
-          // no-cors sengaja dipakai karena halaman berada di domain
-          // malamargawianfilm.com, sedangkan Apps Script berada di Google.
+          payload.append('fotoName', file.name);
+          payload.append('fotoMimeType', file.type || 'image/jpeg');
+          payload.append('fotoBase64', fotoBase64);
+
+          // Content-Type ini termasuk simple/safelisted request,
+          // sehingga dapat dikirim ke Apps Script tanpa preflight.
           await fetch(scriptUrl, {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify(data)
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: payload.toString()
           });
 
-          // Pada no-cors browser tidak boleh membaca response Apps Script.
-          // Jika request selesai tanpa network error, tampilkan sukses.
+          // Dengan no-cors browser tidak dapat membaca response Apps Script.
+          // Jika request selesai tanpa network error, tampilkan konfirmasi.
           formContainer.style.display = 'none';
           successContainer.style.display = 'block';
           window.scrollTo({ top: 0, behavior: 'smooth' });
