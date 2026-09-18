@@ -403,15 +403,15 @@
           
           <div class="checkbox-list">
             <label class="checkbox-item">
-              <input type="checkbox" name="tanggal" value="25 September"> 
+              <input type="checkbox" name="tanggal" value="25"> 
               <span>Jumat, 25 September 2026</span>
             </label>
             <label class="checkbox-item">
-              <input type="checkbox" name="tanggal" value="26 September"> 
+              <input type="checkbox" name="tanggal" value="26"> 
               <span>Sabtu, 26 September 2026</span>
             </label>
             <label class="checkbox-item">
-              <input type="checkbox" name="tanggal" value="27 September"> 
+              <input type="checkbox" name="tanggal" value="27"> 
               <span>Minggu, 27 September 2026</span>
             </label>
           </div>
@@ -495,17 +495,19 @@
           return;
         }
 
-        const tanggalText = Array.from(tanggalCheckboxes)
-          .map(function(item) {
-            return item.value;
-          })
-          .join(', ');
+        const tanggalValues = Array.from(tanggalCheckboxes).map(function(item) {
+          return item.value;
+        });
 
-        const hiddenTanggal = document.createElement('input');
-        hiddenTanggal.type = 'hidden';
-        hiddenTanggal.name = 'tanggalText';
-        hiddenTanggal.value = tanggalText;
-        form.appendChild(hiddenTanggal);
+        const dateFields = ['tanggal1', 'tanggal2', 'tanggal3'];
+
+        dateFields.forEach(function(fieldName, index) {
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = fieldName;
+          hiddenInput.value = tanggalValues[index] || '';
+          form.appendChild(hiddenInput);
+        });
 
         btnSubmit.textContent = 'MENGIRIM...';
         btnSubmit.disabled = true;
