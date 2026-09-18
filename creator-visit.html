@@ -495,6 +495,18 @@
           return;
         }
 
+        const tanggalText = Array.from(tanggalCheckboxes)
+          .map(function(item) {
+            return item.value;
+          })
+          .join(', ');
+
+        const hiddenTanggal = document.createElement('input');
+        hiddenTanggal.type = 'hidden';
+        hiddenTanggal.name = 'tanggalText';
+        hiddenTanggal.value = tanggalText;
+        form.appendChild(hiddenTanggal);
+
         btnSubmit.textContent = 'MENGIRIM...';
         btnSubmit.disabled = true;
 
