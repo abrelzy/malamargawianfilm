@@ -485,32 +485,49 @@
       // --- URL WEB APP GOOGLE APPS SCRIPT ANDA ---
       const scriptURL = 'https://script.google.com/macros/s/AKfycbxg0rBHYBiWxMDACaOqU4GlvFsAhgy6ZJW0BN4iWHtbKab8V_pYCEzFsewu7c3pFrRjnA/exec';
 
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault(); 
 
-        // Validasi: Cek apakah minimal 1 checkbox tanggal tercentang
         const tanggalCheckboxes = document.querySelectorAll('input[name="tanggal"]:checked');
         if (tanggalCheckboxes.length === 0) {
           alert('Mohon pilih minimal 1 (satu) tanggal ketersediaan waktu visit Anda.');
           return;
         }
-        
+
         btnSubmit.textContent = 'MENGIRIM...';
         btnSubmit.disabled = true;
 
-        // Mengirim data form menggunakan Fetch API ke Google Sheets
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-          .then(response => {
+        try {
+          const response = await fetch(scriptURL, {
+            method: 'POST',
+            body: new FormData(form)
+          });
+
+          const text = await response.text();
+          let result = null;
+
+          try {
+            result = JSON.parse(text);
+          } catch (error) {
+            result = { success: false, message: text || 'Respons server tidak valid.' };
+          }
+
+          if (response.ok && result && result.success === true) {
             formContainer.style.display = 'none';
             successContainer.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-          })
-          .catch(error => {
-            alert('Gagal mengirim pendaftaran, silakan coba lagi.');
-            console.error('Error!', error.message);
-            btnSubmit.textContent = 'Submit Pendaftaran';
-            btnSubmit.disabled = false;
-          });
+            return;
+          }
+
+          alert('Gagal mengirim pendaftaran: ' + (result && result.message ? result.message : 'Respons server tidak valid.'));
+          btnSubmit.textContent = 'Submit Pendaftaran';
+          btnSubmit.disabled = false;
+        } catch (error) {
+          console.error('Error!', error);
+          alert('Gagal mengirim pendaftaran, silakan coba lagi.');
+          btnSubmit.textContent = 'Submit Pendaftaran';
+          btnSubmit.disabled = false;
+        }
       });
     });
   </script>
