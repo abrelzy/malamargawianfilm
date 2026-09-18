@@ -48,7 +48,8 @@ const documents = [
     files: [
       { name: "Deck PPM 1 [PDF]", file: "https://drive.google.com/file/d/1yXpYzidTvo30qBhCvXeXjVcnqLO2cact/preview" },
       { name: "Deck PPM 1 [SLIDESHOW]", file: "https://www.canva.com/design/DAHUPnv1Wrg/exb_QwFsWBRBEqBv9ANH0Q/view?embed" },
-      { name: "Notulensi PPM 2", file: "https://docs.google.com/document/d/1w7dZwCVzG4HHn5sfeJxBOr4BvhnlfMaDsA-DoS9V3CI/preview" }
+      { name: "Notulensi PPM 2", file: "https://docs.google.com/document/d/1w7dZwCVzG4HHn5sfeJxBOr4BvhnlfMaDsA-DoS9V3CI/preview" },
+      { name: "Record PPM 2", file: "https://drive.google.com/file/d/16GWuxYNJmfHRc6JD5jL85JncvWHaqeoW/view?usp=sharing" }
     ]
   },
   {
