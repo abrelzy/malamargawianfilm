@@ -644,6 +644,7 @@
 
         const fileInput = document.getElementById('fotoCrew');
         const file = fileInput.files[0];
+        const namaLengkapInput = document.getElementById('namaLengkap');
 
         if (!file) {
           alert('Silakan upload foto terlebih dahulu.');
@@ -662,6 +663,18 @@
         try {
           const formData = new FormData(form);
           const payload = new URLSearchParams();
+          const namaLengkap = (namaLengkapInput ? namaLengkapInput.value : '').trim();
+          const fileExtension = file.name.includes('.') ? file.name.slice(file.name.lastIndexOf('.')) : (file.type === 'image/png' ? '.png' : '.jpg');
+          const safeNama = namaLengkap ? namaLengkap
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, ' ')
+            .replace(/\s+/g, '-')
+            .toLowerCase() : 'crew-photo';
+
+          const renamedFileName = `${safeNama || 'crew-photo'}${fileExtension}`;
 
           // Kirim semua field teks/form biasa.
           formData.forEach(function(value, key) {
@@ -674,7 +687,7 @@
           // menerima parameter POST, bukan Blob file dari fetch eksternal.
           const fotoBase64 = await fileToBase64(file);
 
-          payload.append('fotoName', file.name);
+          payload.append('fotoName', renamedFileName);
           payload.append('fotoMimeType', file.type || 'image/jpeg');
           payload.append('fotoBase64', fotoBase64);
 
