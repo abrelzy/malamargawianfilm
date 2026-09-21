@@ -91,7 +91,7 @@ const documents = [
     name: "Crew List",
     description: "Daftar kru produksi lengkap",
     files: [
-      { name: "Crew List", file: "https://docs.google.com/spreadsheets/d/146ImwxB4C1qiWp4z-bErnRfu3puE9IKHLo5e-EM5VCA/edit?usp=sharing" }
+      { name: "Crew List", file: "https://docs.google.com/spreadsheets/d/146ImwxB4C1qiWp4z-bErnRfu3puE9IKHLo5e-EM5VCA/htmlembed?gid=1442937362&single=true&widget=false" }
     ]
   },
   {
@@ -128,10 +128,11 @@ const documents = [
   },
   {
     category: "Art",
-    name: "Props List",
-    description: "Daftar master properti",
+    name: "Artistik Documents",
+    description: "Breakdown Art DLL",
     files: [
-      { name: "Props List", file: "pdf/props-list.pdf" }
+      { name: "Breakdown Art", file: "https://docs.google.com/spreadsheets/d/1b_ooaaFF31XZEUANwaziJq67TCyHhRHw/preview" },
+      { name: "Konsep & Moodboard", file: "https://drive.google.com/file/d/1JxRabqB-0OKXy4Y4gQvwKRmCOmRHZ6T2/preview" }
     ]
   },
   {

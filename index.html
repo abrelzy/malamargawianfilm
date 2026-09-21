@@ -111,33 +111,47 @@
       font-weight: 700;
     }
 
-    .archive {
-      display: inline-block;
-
+    .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
       margin-top: 38px;
-      padding: 10px 13px;
-
-      color: var(--muted);
-      text-decoration: none;
-
-      border: 1px solid var(--line);
-      border-radius: 7px;
-
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 600;
-
-      transition:
-        color 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease;
     }
 
-    .archive:hover {
+    .archive,
+    .creator-visit {
+      display: inline-block;
+
+      padding: 14px 22px;
+
       color: var(--text);
-      background: #151516;
-      border-color: #353537;
+      text-decoration: none;
+
+      border: 1px solid #3a3a3d;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      transition:
+        transform 0.15s ease,
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .archive:hover,
+    .creator-visit:hover {
+      color: var(--text);
+      background: #17171a;
+      border-color: #5a5a5d;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+      transform: translateY(-1px);
     }
 
     footer {
@@ -201,12 +215,23 @@
           Harap bersabar, sedang mencari gawian yang layak dengan upah yang pantas.
         </h1>
 
-        <a
-          href="/archive"
-          class="archive"
-        >
-          Production Archive →
-        </a>
+        <div class="links">
+          <a
+            href="/archive"
+            class="archive"
+          >
+            Production Archive →
+          </a>
+
+          <a
+            href="https://malamargawianfilm.com/creator-visit"
+            class="creator-visit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Daftar Jadi Creator Visit →
+          </a>
+        </div>
 
       </div>
     </main>
