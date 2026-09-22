@@ -99,7 +99,7 @@ const documents = [
     name: "Talent List",
     description: "Daftar talent & kontak",
     files: [
-      { name: "Talent List", file: "pdf/talent-list.pdf" }
+      { name: "Talent List", file: "assets/Talent.pdf" }
     ]
   },
   {
