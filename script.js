@@ -2,9 +2,9 @@ const documents = [
   {
     category: "Shooting Document",
     name: "Script Final Draft",
-    description: "Naskah Final terbaru 14/09/2026",
+    description: "Naskah Final terbaru 21/09/2026",
     files: [
-      { name: "Final Draft Revisi 1", file: "assets/Malamar Gawian_Revised 02 Final Draft_20260921.pdf" }
+      { name: "Final Draft Revisi 2", file: "assets/Malamar Gawian_Revised 02 Final Draft_20260921.pdf" }
     ]
   },
   {
