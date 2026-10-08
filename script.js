@@ -150,7 +150,7 @@ const documents = [
     files: [
       { name: "Visual Mood", file: "https://drive.google.com/file/d/1RtbT2SpR7vKe1PKYw4nIPvyi04T9UNi4/preview" },
       { name: "Shotlist", file: "https://docs.google.com/spreadsheets/d/1z6kSWAS8mhrFGZrG97zTThultuZ3ENBgptdsTcq4hl8/preview" },
-      { name: "Equipment List", file: "pdf/equipment-list.pdf" }
+      { name: "Equipment List", file: "https://docs.google.com/spreadsheets/d/1gk_OfiEN8oOX7kRwrWQSIrJsBWkjneW5uo4rl6W7O9k/preview" }
     ]
   },
     {
