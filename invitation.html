@@ -362,33 +362,46 @@
 		.footer-links a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); text-decoration: none; }
 		.footer-links svg { width: 13px; height: 13px; fill: currentColor; }
 		.footer-links a:hover { color: var(--accent); }
+		.rsvp-controls-spacer { height: 88px; }
 		.rsvp-controls {
+			position: fixed;
+			z-index: 5;
+			right: 0;
+			bottom: max(18px, env(safe-area-inset-bottom));
+			left: 0;
 			display: flex;
 			width: min(100% - 48px, 920px);
-			min-height: 88px;
-			box-sizing: border-box;
 			margin: 0 auto;
-			align-items: center;
+			align-items: flex-end;
 			justify-content: space-between;
 			gap: 16px;
-			padding-top: 14px;
-			padding-bottom: 14px;
+			transform: translateY(var(--rsvp-controls-offset, 0px));
+			pointer-events: none;
 		}
-		.rsvp-music-group { display: contents; }
-		body.rsvp-controls-visible .rsvp-controls {
+		.rsvp-controls > * { pointer-events: auto; }
+		.rsvp-music-group {
 			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			gap: 4px;
 		}
-		body.rsvp-controls-visible .rsvp-music-group { display: flex; align-items: center; gap: 10px; }
-		body.rsvp-controls-visible .rsvp-music-info { position: static; min-width: 0; align-items: flex-end; }
-		body.rsvp-controls-visible .music-toggle,
-		body.rsvp-controls-visible .scroll-top {
+		.rsvp-music-info { position: static; min-width: 0; align-items: flex-end; }
+		.rsvp-controls .music-toggle,
+		.rsvp-controls .scroll-top {
 			position: static;
 			transform: none;
+		}
+		body.rsvp-controls-visible .rsvp-controls { align-items: center; }
+		body.rsvp-controls-visible .rsvp-music-group { flex-direction: row; align-items: center; gap: 10px; }
+		body.rsvp-controls-visible .music-toggle,
+		body.rsvp-controls-visible .scroll-top {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
 		}
 		body.rsvp-controls-visible .now-playing,
 		body.rsvp-controls-visible .music-status { text-align: right; }
 		body.rsvp-controls-visible .music-status { max-width: min(260px, calc(100vw - 80px)); }
-		body.rsvp-controls-visible .scroll-top.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
 		@media (max-width: 720px) {
 			.hero { padding: 14px 14px 78px; }
@@ -413,9 +426,9 @@
 			.map-caption { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
-			footer { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 18px 0 calc(24px + env(safe-area-inset-bottom)); }
-			.footer-links { justify-content: flex-start; flex-wrap: wrap; white-space: normal; }
-			body.rsvp-controls-visible .rsvp-controls { width: calc(100% - 40px); }
+			footer { grid-template-columns: auto 1fr; width: calc(100% - 40px); padding: 18px 0 calc(24px + env(safe-area-inset-bottom)); }
+			.footer-links { flex-direction: column; align-items: flex-end; justify-content: center; gap: 8px; white-space: normal; }
+			.rsvp-controls { width: calc(100% - 40px); }
 		}
 		@media (max-width: 380px) {
 			.hero { padding-right: 10px; padding-left: 10px; }
@@ -561,6 +574,7 @@
 					</form>
 					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP submission response" hidden></iframe>
 				</div>
+				<div class="rsvp-controls-spacer" aria-hidden="true"></div>
 				<div class="rsvp-controls" id="rsvpControls">
 					<a class="scroll-top" id="scrollTop" href="#top" aria-label="Scroll to top" title="Scroll to top">↑</a>
 					<div class="rsvp-music-group">
@@ -613,7 +627,7 @@
 		const musicStatus = document.getElementById("musicStatus");
 		const scrollCue = document.getElementById("scrollCue");
 		const scrollTop = document.getElementById("scrollTop");
-		const rsvpContent = document.querySelector(".rsvp");
+		const rsvpContent = document.querySelector(".rsvp-wrap");
 		const rsvpReminder = document.getElementById("rsvpReminder");
 		const rsvpReminderGo = document.getElementById("rsvpReminderGo");
 		let invitationVerified = false;
@@ -698,34 +712,12 @@
 			scrollTop.classList.toggle("is-visible", hasScrolled);
 
 			const rsvpBounds = rsvpContent.getBoundingClientRect();
-			const isDocked = document.body.classList.contains("rsvp-controls-visible");
-			const dockTriggerY = isDocked
-				? window.innerHeight
-				: scrollTop.getBoundingClientRect().top;
 			const shouldDockControls = hasScrolled
-				&& rsvpBounds.bottom < dockTriggerY
-				&& rsvpBounds.bottom > 0;
-			if (isDocked === shouldDockControls) return;
-
-			const movingControls = [musicStatus, document.querySelector(".now-playing"), scrollTop, musicToggle]
-				.filter(element => getComputedStyle(element).display !== "none");
-			movingControls.forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
-			const startPositions = new Map(movingControls.map(element => [element, element.getBoundingClientRect()]));
+				&& rsvpBounds.bottom <= window.innerHeight - parseFloat(getComputedStyle(rsvpControls).bottom);
 			document.body.classList.toggle("rsvp-controls-visible", shouldDockControls);
-
-			if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-			movingControls.forEach(element => {
-				const start = startPositions.get(element);
-				const end = element.getBoundingClientRect();
-				const x = start.left - end.left;
-				const y = start.top - end.top;
-				if (x || y) {
-					element.animate(
-						[{ transform: `translate(${x}px, ${y}px)` }, { transform: "translate(0, 0)" }],
-						{ duration: shouldDockControls ? 320 : 220, easing: "cubic-bezier(.22, 1, .36, 1)" }
-					);
-				}
-			});
+			const bottomInset = parseFloat(getComputedStyle(rsvpControls).bottom);
+			const controlsOffset = Math.min(0, rsvpBounds.bottom - (window.innerHeight - bottomInset));
+			rsvpControls.style.setProperty("--rsvp-controls-offset", `${controlsOffset}px`);
 		}
 
 		window.addEventListener("scroll", updateScrollCue, { passive: true });
