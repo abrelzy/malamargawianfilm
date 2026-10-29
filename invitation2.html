@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#09090b">
+	<meta name="description" content="Undangan Gala Premiere film Malamar Gawian. Mari bertemu dan menyaksikan ceritanya bersama.">
+	<title>Gala Premiere — Malamar Gawian</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #f4f4f5;
+			--paper: #09090b;
+			--muted: #808089;
+			--line: #222226;
+			--accent: #ffd54f;
+			--accent-end: #ff9800;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		a { color: inherit; }
+		button, input, select { font: inherit; }
+		button, a { -webkit-tap-highlight-color: transparent; }
+
+		.page-shell { min-height: 100vh; }
+		.studio-mark { width: 72px; height: 28px; object-fit: contain; object-position: left top; }
+		.topbar-label, .eyebrow, .detail-label, .section-kicker {
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .13em;
+			text-transform: uppercase;
+		}
+		.topbar-label { color: var(--muted); }
+
+		.hero {
+			position: relative;
+			display: grid;
+			place-items: center;
+			min-height: 100vh;
+			min-height: 100svh;
+			padding: clamp(16px, 4vh, 36px) 18px;
+			text-align: center;
+			background:
+				radial-gradient(ellipse at 50% 30%, rgba(255, 152, 0, .1), transparent 58%),
+				var(--paper);
+		}
+		.invite-card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: min(100%, 520px);
+			min-height: min(780px, calc(100svh - 72px));
+			padding: clamp(28px, 6vh, 54px) clamp(22px, 7vw, 58px);
+			border: 1px solid rgba(255, 213, 79, .22);
+			border-radius: 4px;
+			background: linear-gradient(160deg, rgba(24, 23, 22, .97), rgba(13, 13, 15, .97));
+			box-shadow: 0 28px 90px rgba(0, 0, 0, .42), inset 0 0 0 5px rgba(255, 255, 255, .018);
+		}
+		.invite-card::before, .invite-card::after {
+			position: absolute;
+			left: 50%;
+			width: 54px;
+			height: 1px;
+			content: "";
+			transform: translateX(-50%);
+			background: linear-gradient(90deg, transparent, var(--accent), transparent);
+		}
+		.invite-card::before { top: 14px; }
+		.invite-card::after { bottom: 14px; }
+		.invite-brand { position: absolute; top: 22px; left: 28px; display: flex; align-items: center; height: 34px; }
+		.bff-mark { position: absolute; top: 22px; right: 28px; width: 58px; height: 34px; object-fit: contain; object-position: right center; }
+		.film-logo { display: block; width: min(200px, 70%); max-height: 88px; object-fit: contain; margin: 0 auto 30px; }
+		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(17px, 3vh, 26px) auto; color: var(--accent); font-size: 10px; }
+		.invite-divider::before, .invite-divider::after { width: 34px; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--accent)); }
+		.invite-divider::after { transform: rotate(180deg); }
+		.eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 12px; letter-spacing: .16em; }
+		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
+		.invite-recipient { max-width: 350px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(18px, 2.4vh, 21px); font-weight: 700; line-height: 1.45; }
+		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+		.hero-title {
+			margin: 0;
+			color: var(--ink);
+			font-family: Georgia, serif;
+			font-size: clamp(23px, 3.8vw, 29px);
+			font-weight: 500;
+			letter-spacing: .01em;
+			line-height: 1.2;
+		}
+		.film-subtitle { margin: 5px 0 0; color: var(--accent); font-family: Georgia, serif; font-size: clamp(13px, 1.8vw, 15px); font-style: italic; letter-spacing: .03em; line-height: 1.4; }
+		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(20px, 3vh, 28px); border-top: 1px solid var(--line); }
+		.hero-event-detail { padding: 12px 7px 11px; }
+		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
+		.hero-event-detail .detail-label { margin-bottom: 5px; font-size: 8px; letter-spacing: .16em; }
+		.hero-event-detail .detail-value { font-size: 11px; line-height: 1.45; }
+		.hero-location { grid-column: 1 / -1; padding: 11px 7px 0; border-top: 1px solid var(--line); }
+		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(255, 213, 79, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
+		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
+		.rsvp-note a { white-space: nowrap; }
+		.music-toggle {
+			position: fixed;
+			z-index: 5;
+			right: max(18px, env(safe-area-inset-right));
+			bottom: max(18px, env(safe-area-inset-bottom));
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			padding: 0;
+			border: 1px solid rgba(255, 213, 79, .2);
+			border-radius: 999px;
+			background: rgba(18, 18, 20, .42);
+			box-shadow: 0 4px 14px rgba(0, 0, 0, .16);
+			color: rgba(244, 244, 245, .72);
+			cursor: pointer;
+			font-size: 15px;
+			line-height: 1;
+			backdrop-filter: blur(6px);
+			transition: background .2s ease, border-color .2s ease, color .2s ease;
+		}
+		.music-toggle:hover { border-color: rgba(255, 213, 79, .42); background: rgba(18, 18, 20, .72); color: var(--ink); }
+		.music-toggle[aria-pressed="false"] #musicIcon { color: var(--accent); }
+		.music-toggle[aria-pressed="true"] #musicIcon { animation: music-spin 3s linear infinite; }
+		.music-toggle-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+		.now-playing {
+			position: fixed;
+			z-index: 4;
+			right: max(18px, env(safe-area-inset-right));
+			bottom: calc(max(18px, env(safe-area-inset-bottom)) + 44px);
+			max-width: min(340px, calc(100vw - 36px));
+			margin: 0;
+			color: #c4c4ca;
+			font-size: 10px;
+			line-height: 1.4;
+			text-align: right;
+			text-shadow: 0 1px 5px rgba(0, 0, 0, .8);
+		}
+		.now-playing span { display: block; margin-bottom: 2px; color: var(--accent); font-size: 8px; font-weight: 700; letter-spacing: .14em; }
+		.music-status {
+			position: fixed;
+			z-index: 4;
+			bottom: max(20px, env(safe-area-inset-bottom));
+			left: max(18px, env(safe-area-inset-left));
+			max-width: min(260px, calc(100vw - 84px));
+			margin: 0;
+			padding: 7px 10px;
+			border: 1px solid rgba(255, 255, 255, .08);
+			border-radius: 6px;
+			background: rgba(18, 18, 20, .72);
+			color: #c4c4ca;
+			font-size: 10px;
+			line-height: 1.4;
+			backdrop-filter: blur(8px);
+		}
+		.scroll-cue {
+			position: fixed;
+			z-index: 4;
+			bottom: max(18px, env(safe-area-inset-bottom));
+			left: 50%;
+			display: inline-flex;
+			align-items: center;
+			gap: 9px;
+			padding: 9px 14px;
+			transform: translateX(-50%);
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			background: rgba(18, 18, 20, .92);
+			box-shadow: 0 6px 22px rgba(0, 0, 0, .28);
+			color: var(--muted);
+			font-size: 9px;
+			font-weight: 600;
+			letter-spacing: .12em;
+			text-decoration: none;
+			text-transform: uppercase;
+			white-space: nowrap;
+			backdrop-filter: blur(12px);
+			transition: opacity .2s ease, visibility .2s ease;
+		}
+		.scroll-cue.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+		.scroll-cue-icon { color: var(--accent); font-size: 15px; line-height: 1; animation: scroll-hint 1.8s ease-in-out infinite; }
+		@keyframes music-spin { to { transform: rotate(360deg); } }
+		@keyframes scroll-hint { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
+
+		.event-band {
+			display: grid;
+			grid-template-columns: .8fr .7fr 1.5fr;
+			width: min(100% - 48px, 920px);
+			margin: 0 auto;
+			padding: 26px 0;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+		.event-detail { padding: 4px 24px; border-right: 1px solid var(--line); }
+		.event-detail:first-child { padding-left: 0; }
+		.event-detail:last-child { padding-right: 0; border-right: 0; }
+		.detail-label { display: block; margin-bottom: 9px; color: var(--accent); }
+		.detail-value { margin: 0; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.55; }
+		.detail-note { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+		.map-preview {
+			width: min(100% - 48px, 920px);
+			margin: 20px auto 0;
+			overflow: hidden;
+			border: 1px solid var(--line);
+			border-radius: 6px;
+			background: #121214;
+		}
+		.map-frame { display: block; width: 100%; height: 220px; border: 0; }
+		.map-caption {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 10px 14px;
+			color: var(--muted);
+			font-size: 11px;
+		}
+		.map-caption a { color: var(--ink); text-underline-offset: 3px; }
+
+		.invitation {
+			max-width: 620px;
+			margin: 0 auto;
+			padding: 52px 24px 58px;
+			text-align: center;
+		}
+		.section-kicker { margin: 0 0 12px; color: var(--accent); }
+		.invitation h2, .rsvp h2 {
+			margin: 0;
+			font-family: Georgia, serif;
+			font-size: clamp(26px, 3.5vw, 34px);
+			font-weight: 500;
+			line-height: 1.15;
+		}
+		.invitation-copy { margin-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+		.invitation-copy p { margin: 0; }
+
+		.rsvp-wrap { border-top: 1px solid var(--line); background: #121214; color: var(--ink); }
+		.rsvp {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			gap: 48px;
+			max-width: 920px;
+			margin: 0 auto;
+			padding: 42px 24px;
+		}
+		.rsvp-intro { max-width: 420px; margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+		.rsvp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+		.field { display: grid; gap: 7px; }
+		.field-name, .field-attendance, .field-institution { grid-column: 1 / -1; }
+		.field label { color: #a1a1aa; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+		.field input, .field select {
+			width: 100%;
+			min-height: 42px;
+			padding: 0 11px;
+			border: 1px solid var(--line);
+			border-radius: 6px;
+			outline: none;
+			background: #18181b;
+			color: var(--ink);
+			font-size: 13px;
+		}
+		.field input:focus, .field select:focus { border-color: #3e3e44; box-shadow: 0 0 0 2px rgba(244,244,245,.08); }
+		.field input[readonly] { border-color: #303035; background: #202024; color: #a1a1aa; cursor: not-allowed; }
+		.rsvp-submit {
+			grid-column: 1 / -1;
+			display: flex;
+			min-height: 44px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 14px;
+			border: 0;
+			border-radius: 6px;
+			background: linear-gradient(90deg, var(--accent), var(--accent-end));
+			color: #09090b;
+			cursor: pointer;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .07em;
+			text-transform: uppercase;
+		}
+		.rsvp-submit:hover { filter: brightness(1.08); }
+		.rsvp-submit:disabled { cursor: wait; opacity: .6; }
+		.form-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
+
+		footer {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: center;
+			gap: 20px;
+			width: min(100% - 48px, 1040px);
+			min-height: 68px;
+			margin: 0 auto;
+			color: var(--muted);
+			font-size: 10px;
+			letter-spacing: .06em;
+		}
+		.footer-logo { width: 100px; max-height: 28px; object-fit: contain; object-position: left center; }
+		.footer-links { display: flex; align-items: center; justify-content: flex-end; gap: 14px; white-space: nowrap; }
+		.footer-links a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); text-decoration: none; }
+		.footer-links svg { width: 13px; height: 13px; fill: currentColor; }
+		.footer-links a:hover { color: var(--accent); }
+
+		@media (max-width: 720px) {
+			.hero { padding: 14px 14px 78px; }
+			.invite-card { min-height: 0; padding: 76px 20px 34px; }
+			.invite-brand { top: 19px; left: 21px; height: 30px; }
+			.bff-mark { top: 19px; right: 21px; width: 50px; height: 30px; }
+			.invite-divider { margin: 15px auto; }
+			.film-logo { width: min(180px, 68%); max-height: 74px; margin-bottom: 25px; }
+			.invite-intro { font-size: 10px; line-height: 1.7; }
+			.invite-recipient { margin-top: 0; }
+			.invite-recipient strong { font-size: 17px; line-height: 1.45; }
+			.hero-event-details { margin-top: 21px; }
+			.hero-event-detail { padding: 12px 5px; }
+			.hero-location { padding-top: 11px; }
+			.rsvp-note { font-size: 9px; }
+			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
+			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+			.event-detail:last-child { border-bottom: 0; }
+			.detail-label { margin-bottom: 6px; }
+			.map-preview { width: calc(100% - 40px); margin-top: 16px; }
+			.map-frame { height: 190px; }
+			.map-caption { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
+			.invitation { padding: 40px 24px 44px; }
+			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
+			footer { grid-template-columns: 1fr auto; width: calc(100% - 40px); padding: 18px 0; }
+		}
+		@media (max-width: 380px) {
+			.hero { padding-right: 10px; padding-left: 10px; }
+			.invite-card { padding-right: 15px; padding-left: 15px; }
+			.invite-brand { top: 17px; left: 16px; }
+			.invite-intro { font-size: 10px; line-height: 1.65; }
+			.invite-recipient { margin-top: 0; }
+			.invite-recipient strong { font-size: 15px; }
+			.hero-event-detail .detail-value { font-size: 11px; }
+		}
+		@media (max-height: 680px) and (max-width: 720px) {
+			.hero { padding-top: 8px; padding-bottom: 66px; }
+			.invite-card { padding-top: 58px; padding-bottom: 22px; }
+			.invite-card::before { top: 9px; }
+			.invite-card::after { bottom: 9px; }
+			.invite-brand { top: 12px; left: 15px; height: 26px; }
+			.bff-mark { top: 12px; right: 15px; width: 44px; height: 26px; }
+			.studio-mark { height: 24px; }
+			.invite-divider { margin: 10px auto; }
+			.eyebrow { margin-bottom: 7px; font-size: 11px; }
+			.invite-intro { font-size: 10px; line-height: 1.5; }
+			.invite-recipient { margin-top: 0; font-size: 10px; line-height: 1.4; }
+			.invite-recipient strong { margin-top: 0; font-size: 14px; line-height: 1.4; }
+			.film-logo { max-height: 58px; margin-top: 8px; margin-bottom: 20px; }
+			.hero-title { font-size: 21px; }
+			.hero-event-details { margin-top: 13px; }
+			.hero-event-detail { padding-top: 8px; padding-bottom: 8px; }
+			.hero-location { padding-top: 8px; }
+			.hero-map-link { margin-top: 5px; padding: 6px 10px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page-shell">
+		<main>
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="invite-card">
+					<div class="invite-brand">
+						<img class="studio-mark" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
+					</div>
+					<img class="bff-mark" src="images/logo-bff.png" alt="BFF">
+					<img class="film-logo" src="images/logo-mg3.png" alt="Malamar Gawian">
+					<p class="eyebrow">Undangan eksklusif</p>
+					<h1 class="hero-title" id="hero-title">GALA PREMIERE</h1>
+					<p class="film-subtitle">Film Malamar Gawian</p>
+					<div class="invite-divider" aria-hidden="true"></div>
+					<p class="invite-recipient">
+						<strong id="recipientOrganization">Load your data, please wait...</strong>
+						<span class="seat-count" id="seatCount"></span>
+					</p>
+					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
+						<div class="hero-event-detail">
+							<span class="detail-label">Tanggal</span>
+							<p class="detail-value">Sabtu, 31 Oktober 2026</p>
+						</div>
+						<div class="hero-event-detail">
+							<span class="detail-label">Waktu</span>
+							<p class="detail-value">10.00 WITA · Sampai selesai</p>
+						</div>
+						<div class="hero-location">
+							<span class="detail-label">Lokasi</span>
+							<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)<br>Banjarmasin</p>
+							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Lihat lokasi di peta ↗</a>
+							<p class="rsvp-note">Gulir ke bawah untuk konfirmasi kehadiran.</p>
+						</div>
+					</div>
+				</div>
+				<a class="scroll-cue" id="scrollCue" href="#detail-acara" aria-label="Gulir ke bawah untuk melihat detail acara">
+					<span class="scroll-cue-icon" aria-hidden="true">↓</span>
+					<span>Gulir untuk detail acara</span>
+				</a>
+			</section>
+
+			<section class="event-band" id="detail-acara" aria-label="Detail Gala Premiere">
+				<div class="event-detail">
+					<span class="detail-label">Tanggal</span>
+					<p class="detail-value">Sabtu, 31 Oktober 2026</p>
+				</div>
+				<div class="event-detail">
+					<span class="detail-label">Waktu</span>
+					<p class="detail-value">10.00 WITA</p>
+					<span class="detail-note">Sampai selesai</span>
+				</div>
+				<div class="event-detail">
+					<span class="detail-label">Lokasi</span>
+					<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)</p>
+					<span class="detail-note">Banjarmasin</span>
+				</div>
+			</section>
+
+			<section class="map-preview" aria-label="Pratinjau peta lokasi acara">
+				<iframe
+					class="map-frame"
+					src="https://www.google.com/maps?q=Kota%20Cinema%20Mall%20Belitung%20Darat%20KCM%20Belda%20Banjarmasin&output=embed"
+					title="Peta Kota Cinema Mall Belitung Darat, Banjarmasin"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen>
+				</iframe>
+				<div class="map-caption">
+					<span>Kota Cinema Mall Belitung Darat · Banjarmasin</span>
+					<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Buka di Google Maps ↗</a>
+				</div>
+			</section>
+
+			<section class="invitation" aria-labelledby="invitation-title">
+				<h2 id="invitation-title">Sampai bertemu di pemutaran perdana <br><em>film Malamar Gawian</em>.</h2>
+				<div class="invitation-copy">
+					<p>Dimohon untuk hadir tepat waktu.</p>
+				</div>
+			</section>
+
+			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
+				<div class="rsvp">
+					<div>
+						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
+						<p class="rsvp-intro">Anda dapat mengirim konfirmasi ulang jika ingin mengubah status kehadiran.</p>
+					</div>
+					<form class="rsvp-form" id="rsvpForm">
+						<div class="field field-institution">
+							<label for="institution">Undangan</label>
+							<input id="institution" name="institution" value="" readonly>
+						</div>
+						<div class="field field-attendance">
+							<label for="attendance">Konfirmasi</label>
+							<select id="attendance" name="attendance">
+								<option value="akan hadir">Dengan senang hati, saya akan hadir</option>
+								<option value="belum dapat hadir">Mohon maaf, saya belum dapat hadir</option>
+							</select>
+						</div>
+						<input type="hidden" name="action" value="rsvp">
+						<input type="hidden" name="id" id="rsvpInvitationId">
+						<input type="hidden" name="code" id="rsvpInvitationCode">
+						<input type="hidden" name="request_id" id="rsvpRequestId">
+						<button class="rsvp-submit" type="submit">Kirim konfirmasi <span aria-hidden="true">↗</span></button>
+						<p class="rsvp-note">Jika ada kendala atau perubahan kehadiran, hubungi <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
+						<p class="form-status" id="formStatus" aria-live="polite"></p>
+					</form>
+					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="Respons penyimpanan RSVP" hidden></iframe>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<img class="footer-logo" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
+			<div class="footer-links">
+				<a href="https://malamargawianfilm.com" target="_blank" rel="noopener noreferrer">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 9h-3.06a15.7 15.7 0 0 0-1.24-5.08A8.03 8.03 0 0 1 18.92 11ZM12 4c.9 1.3 1.57 3.91 1.82 7h-3.64C10.43 7.91 11.1 5.3 12 4ZM4.08 13h3.06a15.7 15.7 0 0 0 1.24 5.08A8.03 8.03 0 0 1 4.08 13Zm3.06-2H4.08a8.03 8.03 0 0 1 4.3-5.08A15.7 15.7 0 0 0 7.14 11ZM12 20c-.9-1.3-1.57-3.91-1.82-7h3.64c-.25 3.09-.92 5.7-1.82 7Zm2.62-1.92A15.7 15.7 0 0 0 15.86 13h3.06a8.03 8.03 0 0 1-4.3 5.08Z"/></svg>
+					malamargawianfilm.com
+				</a>
+				<a href="https://www.instagram.com/malamargawian.film/" target="_blank" rel="noopener noreferrer">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
+					@malamargawian.film
+				</a>
+			</div>
+		</footer>
+	</div>
+
+	<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Putar musik undangan">
+		<span id="musicIcon" aria-hidden="true">♫</span>
+		<span class="music-toggle-label" id="musicLabel">Aktifkan suara</span>
+	</button>
+	<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack Malamar Gawian)</p>
+	<p class="music-status" id="musicStatus" aria-live="polite"></p>
+	<audio id="inviteMusic" src="assets/ost-mg.mp3" playsinline preload="auto" loop></audio>
+
+	<script>
+		const RSVP_API_URL = "https://script.google.com/macros/s/AKfycbzOFvn2728_RAZUL44EgxUJVUcewjS6bRo8LlIxvF5RgDp6pICf7Q2kLBTst07KXO1a/exec";
+		const form = document.getElementById("rsvpForm");
+		const status = document.getElementById("formStatus");
+		const submitButton = form.querySelector(".rsvp-submit");
+		const responseFrame = document.getElementById("rsvpResponseFrame");
+		const music = document.getElementById("inviteMusic");
+		const musicToggle = document.getElementById("musicToggle");
+		const musicIcon = document.getElementById("musicIcon");
+		const musicLabel = document.getElementById("musicLabel");
+		const musicStatus = document.getElementById("musicStatus");
+		const scrollCue = document.getElementById("scrollCue");
+		let invitationVerified = false;
+		let activeRsvpRequestId = "";
+		const invitationLinkMessage = "Load your data, please wait...";
+
+		function loadInvitationFromSpreadsheet() {
+			const query = new URLSearchParams(window.location.search);
+			const id = query.get("id") || "";
+			const code = query.get("code") || "";
+			if (!id || !code) {
+				document.getElementById("recipientOrganization").textContent = invitationLinkMessage;
+				document.getElementById("seatCount").textContent = "";
+				submitButton.disabled = true;
+				return;
+			}
+
+			submitButton.disabled = true;
+			status.textContent = "Memuat data undangan...";
+			const callbackName = `mgInvitation_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+			const script = document.createElement("script");
+			const timeout = window.setTimeout(() => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman."), 12000);
+
+			function finish(data, errorMessage) {
+				window.clearTimeout(timeout);
+				delete window[callbackName];
+				script.remove();
+				if (!data || !data.ok) {
+					document.getElementById("recipientOrganization").textContent = invitationLinkMessage;
+					document.getElementById("seatCount").textContent = "";
+					status.textContent = errorMessage || data?.message || "Tautan undangan tidak valid.";
+					return;
+				}
+
+				document.getElementById("recipientOrganization").textContent = data.invitation.organization || data.invitation.name;
+				document.getElementById("seatCount").textContent = `Jumlah Kursi: ${data.invitation.seats}`;
+				document.getElementById("institution").value = data.invitation.organization || data.invitation.name;
+				document.getElementById("rsvpInvitationId").value = id;
+				document.getElementById("rsvpInvitationCode").value = code;
+				if (data.invitation.attendance === "Hadir") {
+					document.getElementById("attendance").value = "akan hadir";
+				} else if (data.invitation.attendance === "Tidak hadir") {
+					document.getElementById("attendance").value = "belum dapat hadir";
+				}
+				invitationVerified = true;
+				submitButton.disabled = false;
+				status.textContent = data.invitation.attendance
+					? `Konfirmasi terakhir: ${data.invitation.attendance}. Kamu dapat mengubah pilihan lalu mengirim ulang.`
+					: "";
+			}
+
+			window[callbackName] = data => finish(data, "");
+			script.onerror = () => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman.");
+			const requestUrl = new URL(RSVP_API_URL);
+			requestUrl.searchParams.set("action", "lookup");
+			requestUrl.searchParams.set("id", id);
+			requestUrl.searchParams.set("code", code);
+			requestUrl.searchParams.set("callback", callbackName);
+			script.src = requestUrl.toString();
+			document.head.append(script);
+		}
+
+		if (RSVP_API_URL) {
+			form.action = RSVP_API_URL;
+			form.method = "post";
+			form.target = "rsvpResponseFrame";
+			loadInvitationFromSpreadsheet();
+		}
+
+		function updateScrollCue() {
+			scrollCue.classList.toggle("is-hidden", window.scrollY > window.innerHeight * 0.2);
+		}
+
+		window.addEventListener("scroll", updateScrollCue, { passive: true });
+		updateScrollCue();
+
+		function updateMusicToggle(isPlaying) {
+			const soundEnabled = isPlaying && !music.muted;
+			musicToggle.setAttribute("aria-pressed", String(soundEnabled));
+			musicToggle.setAttribute("aria-label", soundEnabled ? "Matikan suara musik undangan" : "Aktifkan suara musik undangan");
+			musicIcon.textContent = soundEnabled ? "♫" : "♪";
+			musicLabel.textContent = soundEnabled ? "Matikan suara" : "Aktifkan suara";
+		}
+
+		function removeMusicUnlockListeners() {
+			document.removeEventListener("pointerdown", handleFirstPointerInteraction);
+			document.removeEventListener("keydown", enableMusicAfterInteraction);
+		}
+
+		musicToggle.addEventListener("click", async () => {
+			musicStatus.textContent = "";
+			try {
+				if (music.paused) {
+					music.muted = false;
+					await music.play();
+				} else {
+					music.muted = !music.muted;
+				}
+				updateMusicToggle(!music.paused);
+				if (!music.muted) {
+					removeMusicUnlockListeners();
+				}
+			} catch (error) {
+				updateMusicToggle(false);
+				musicStatus.textContent = "Musik tidak dapat diputar. Periksa file audio atau coba lagi.";
+				console.error("Gagal memutar musik undangan:", error);
+			}
+		});
+
+		music.addEventListener("play", () => updateMusicToggle(true));
+		music.addEventListener("pause", () => updateMusicToggle(false));
+		music.addEventListener("volumechange", () => updateMusicToggle(!music.paused));
+		music.addEventListener("error", () => {
+			musicStatus.textContent = "File musik tidak dapat dimuat.";
+		});
+
+		async function enableMusicAfterInteraction() {
+			try {
+				music.muted = false;
+				await music.play();
+				musicStatus.textContent = "";
+				updateMusicToggle(true);
+				removeMusicUnlockListeners();
+			} catch (error) {
+				updateMusicToggle(false);
+				musicStatus.textContent = "Ketuk ikon musik untuk menyalakan suara.";
+				if (error.name !== "NotAllowedError") {
+					console.error("Gagal memutar musik undangan setelah interaksi:", error);
+				}
+			}
+		}
+
+		function handleFirstPointerInteraction(event) {
+			if (event.target instanceof Element && !event.target.closest("#musicToggle")) {
+				enableMusicAfterInteraction();
+			}
+		}
+
+		document.addEventListener("pointerdown", handleFirstPointerInteraction);
+		document.addEventListener("keydown", enableMusicAfterInteraction);
+
+		window.addEventListener("message", event => {
+			const trustedResponseOrigin = event.origin === "https://script.google.com"
+				|| event.origin.endsWith(".googleusercontent.com");
+			if (event.source !== responseFrame.contentWindow && !trustedResponseOrigin) return;
+			const result = event.data;
+			if (!result || result.type !== "mg-rsvp-result" || result.requestId !== activeRsvpRequestId) return;
+
+			activeRsvpRequestId = "";
+			submitButton.disabled = false;
+			status.textContent = result.ok
+				? `Konfirmasi tersimpan sebagai "${result.attendance}". Jika berubah, kamu dapat kirim konfirmasi ulang.`
+				: result.message || "Konfirmasi belum berhasil disimpan. Coba lagi.";
+		});
+
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (RSVP_API_URL) {
+				if (!invitationVerified) {
+					status.textContent = "Data undangan belum terverifikasi. Muat ulang halaman lalu coba kembali.";
+					return;
+				}
+				activeRsvpRequestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+				document.getElementById("rsvpRequestId").value = activeRsvpRequestId;
+				submitButton.disabled = true;
+				status.textContent = "Menyimpan konfirmasi...";
+				HTMLFormElement.prototype.submit.call(form);
+				return;
+			}
+
+			const formData = new FormData(form);
+			const message = `Halo, saya dari ${formData.get("institution")} mengonfirmasi ${formData.get("attendance")} untuk Gala Premiere Malamar Gawian.`;
+			const whatsappUrl = `https://wa.me/6285194128355?text=${encodeURIComponent(message)}`;
+			const whatsappWindow = window.open(whatsappUrl, "_blank");
+
+			if (whatsappWindow) {
+				whatsappWindow.opener = null;
+				status.textContent = "WhatsApp dibuka dengan pesan konfirmasi. Tinjau pesan lalu tekan Kirim di WhatsApp.";
+			} else {
+				status.textContent = "WhatsApp tidak terbuka. Izinkan pop-up lalu coba lagi.";
+			}
+		});
+
+	</script>
+</body>
+</html>
