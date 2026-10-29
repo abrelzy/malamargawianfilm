@@ -576,7 +576,7 @@
 				}
 
 				document.getElementById("recipientOrganization").textContent = data.invitation.organization || data.invitation.name;
-				document.getElementById("seatCount").textContent = `Seats: ${data.invitation.seats}`;
+				document.getElementById("seatCount").textContent = `Your invitation includes ${data.invitation.seats} seats`;
 				document.getElementById("institution").value = data.invitation.organization || data.invitation.name;
 				document.getElementById("rsvpInvitationId").value = id;
 				document.getElementById("rsvpInvitationCode").value = code;
