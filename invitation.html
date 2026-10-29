@@ -138,9 +138,20 @@
 			backdrop-filter: blur(6px);
 			transition: background .2s ease, border-color .2s ease, color .2s ease;
 		}
+		.music-toggle::after {
+			position: absolute;
+			inset: -3px;
+			border: 1px solid transparent;
+			border-top-color: var(--accent);
+			border-right-color: rgba(156, 204, 101, .35);
+			border-radius: inherit;
+			content: "";
+			opacity: 0;
+			pointer-events: none;
+		}
 		.music-toggle:hover { border-color: rgba(156, 204, 101, .42); background: rgba(18, 18, 20, .72); color: var(--ink); }
 		.music-toggle[aria-pressed="false"] #musicIcon { color: var(--accent); }
-		.music-toggle[aria-pressed="true"] #musicIcon { animation: music-spin 3s linear infinite; }
+		.music-toggle[aria-pressed="true"]::after { animation: music-spin 2.8s linear infinite; opacity: 1; }
 		.music-toggle-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 		.rsvp-music-info {
 			position: fixed;
@@ -405,7 +416,7 @@
 		body.rsvp-controls-visible .music-status { max-width: min(260px, calc(100vw - 80px)); }
 
 		@media (max-width: 720px) {
-			.hero { height: 100vh; height: 100svh; min-height: 100svh; padding: 8px 14px 68px; }
+			.hero { height: 100vh; height: 100dvh; min-height: 100dvh; padding: 8px 14px 68px; }
 			.invite-card { width: min(100%, 440px); min-height: 0; padding: clamp(54px, 9vh, 76px) 20px clamp(18px, 3vh, 34px); }
 			.invite-brand { top: 19px; left: 21px; height: 30px; }
 			.bff-mark { top: 19px; right: 21px; width: 50px; height: 30px; }
