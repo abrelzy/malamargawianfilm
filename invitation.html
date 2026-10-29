@@ -405,18 +405,21 @@
 		body.rsvp-controls-visible .music-status { max-width: min(260px, calc(100vw - 80px)); }
 
 		@media (max-width: 720px) {
-			.hero { padding: 14px 14px 78px; }
-			.invite-card { width: min(100%, 440px); min-height: 0; padding: 76px 20px 34px; }
+			.hero { height: 100vh; height: 100svh; min-height: 100svh; padding: 8px 14px 68px; }
+			.invite-card { width: min(100%, 440px); min-height: 0; padding: clamp(54px, 9vh, 76px) 20px clamp(18px, 3vh, 34px); }
 			.invite-brand { top: 19px; left: 21px; height: 30px; }
 			.bff-mark { top: 19px; right: 21px; width: 50px; height: 30px; }
-			.invite-divider { margin: 15px auto; }
-			.film-logo { width: min(160px, 62%); max-height: 66px; margin-bottom: 25px; transform: translateY(-10px); }
+			.invite-divider { margin: clamp(8px, 2vh, 15px) auto; }
+			.film-logo { width: min(160px, 62%); max-height: clamp(48px, 8vh, 66px); margin-bottom: clamp(12px, 3vh, 25px); transform: translateY(-8px); }
 			.invite-intro { font-size: 10px; line-height: 1.7; }
 			.invite-recipient { margin-top: 0; }
 			.invite-recipient strong { font-size: 17px; line-height: 1.45; }
-			.hero-event-details { margin-top: 21px; }
-			.hero-event-detail { padding: 12px 5px; }
-			.hero-location { padding-top: 11px; }
+			.seat-count { margin-top: clamp(8px, 1.7vh, 14px); }
+			.hero-event-details { margin-top: clamp(12px, 2.5vh, 21px); }
+			.hero-event-detail { padding: clamp(6px, 1.4vh, 12px) 5px; }
+			.hero-location { padding-top: clamp(6px, 1.3vh, 11px); }
+			.hero-map-link { margin-top: clamp(4px, 1vh, 9px); }
+			.hero-instagram { margin-top: clamp(8px, 1.9vh, 16px); }
 			.rsvp-note { font-size: 9px; }
 			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
 			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
