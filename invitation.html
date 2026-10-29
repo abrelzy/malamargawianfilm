@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#09090b">
+	<meta name="description" content="Undangan Gala Premiere film Malamar Gawian. Mari bertemu dan menyaksikan ceritanya bersama.">
+	<title>Gala Premiere — Malamar Gawian</title>
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #f4f4f5;
+			--paper: #09090b;
+			--muted: #808089;
+			--line: #222226;
+			--accent: #ffd54f;
+			--accent-end: #ff9800;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		a { color: inherit; }
+		button, input, select { font: inherit; }
+		button, a { -webkit-tap-highlight-color: transparent; }
+
+		.page-shell { min-height: 100vh; }
+		.topbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: min(100% - 48px, 1040px);
+			min-height: 78px;
+			margin: 0 auto;
+			border-bottom: 1px solid var(--line);
+		}
+		.studio-mark { width: 116px; height: 34px; object-fit: contain; object-position: left center; }
+		.topbar-label, .eyebrow, .detail-label, .section-kicker {
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .13em;
+			text-transform: uppercase;
+		}
+		.topbar-label { color: var(--muted); }
+
+		.hero {
+			display: grid;
+			place-items: center;
+			min-height: 370px;
+			padding: 64px 24px 48px;
+			text-align: center;
+		}
+		.hero-content { width: min(680px, 100%); }
+		.eyebrow { margin: 0 0 20px; color: var(--accent); }
+		.film-logo { display: block; width: min(350px, 82%); max-height: 132px; object-fit: contain; margin: 0 auto 24px; }
+		.hero-title {
+			margin: 0;
+			color: var(--ink);
+			font-family: Georgia, serif;
+			font-size: clamp(30px, 5vw, 46px);
+			font-weight: 500;
+			line-height: 1.12;
+		}
+		.hero-copy { margin: 14px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+		.hero-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+		.primary-link {
+			display: inline-flex;
+			min-height: 44px;
+			align-items: center;
+			justify-content: center;
+			gap: 9px;
+			padding: 0 17px;
+			border-radius: 6px;
+			background: linear-gradient(90deg, var(--accent), var(--accent-end));
+			color: #09090b;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: .04em;
+			text-decoration: none;
+			transition: filter .2s ease;
+		}
+		.primary-link:hover { filter: brightness(1.08); }
+		.text-link { color: var(--muted); font-size: 12px; text-underline-offset: 4px; }
+
+		.event-band {
+			display: grid;
+			grid-template-columns: .8fr .7fr 1.5fr;
+			width: min(100% - 48px, 920px);
+			margin: 0 auto;
+			padding: 26px 0;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+		.event-detail { padding: 4px 24px; border-right: 1px solid var(--line); }
+		.event-detail:first-child { padding-left: 0; }
+		.event-detail:last-child { padding-right: 0; border-right: 0; }
+		.detail-label { display: block; margin-bottom: 9px; color: var(--accent); }
+		.detail-value { margin: 0; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.55; }
+		.detail-note { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+		.location-link { display: inline-block; margin-top: 7px; color: var(--accent); font-size: 12px; text-underline-offset: 3px; }
+
+		.map-preview {
+			width: min(100% - 48px, 920px);
+			margin: 24px auto 0;
+			overflow: hidden;
+			border: 1px solid var(--line);
+			border-radius: 8px;
+			background: #121214;
+		}
+		.map-frame { display: block; width: 100%; height: 300px; border: 0; }
+		.map-caption {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 12px 16px;
+			color: var(--muted);
+			font-size: 12px;
+		}
+		.map-caption a { color: var(--accent); text-underline-offset: 3px; }
+
+		.invitation {
+			max-width: 620px;
+			margin: 0 auto;
+			padding: 52px 24px 58px;
+			text-align: center;
+		}
+		.section-kicker { margin: 0 0 12px; color: var(--accent); }
+		.invitation h2, .rsvp h2 {
+			margin: 0;
+			font-family: Georgia, serif;
+			font-size: clamp(26px, 3.5vw, 34px);
+			font-weight: 500;
+			line-height: 1.15;
+		}
+		.invitation-copy { margin-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+		.invitation-copy p { margin: 0; }
+
+		.rsvp-wrap { border-top: 1px solid var(--line); background: #121214; color: var(--ink); }
+		.rsvp {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			gap: 48px;
+			max-width: 920px;
+			margin: 0 auto;
+			padding: 42px 24px;
+		}
+		.rsvp-intro { max-width: 420px; margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+		.rsvp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+		.field { display: grid; gap: 7px; }
+		.field-name, .field-attendance { grid-column: 1 / -1; }
+		.field label { color: #a1a1aa; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+		.field input, .field select {
+			width: 100%;
+			min-height: 42px;
+			padding: 0 11px;
+			border: 1px solid var(--line);
+			border-radius: 6px;
+			outline: none;
+			background: #18181b;
+			color: var(--ink);
+			font-size: 13px;
+		}
+		.field input:focus, .field select:focus { border-color: #3e3e44; box-shadow: 0 0 0 2px rgba(244,244,245,.08); }
+		.rsvp-submit {
+			grid-column: 1 / -1;
+			display: flex;
+			min-height: 44px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 14px;
+			border: 0;
+			border-radius: 6px;
+			background: linear-gradient(90deg, var(--accent), var(--accent-end));
+			color: #09090b;
+			cursor: pointer;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: .07em;
+			text-transform: uppercase;
+		}
+		.rsvp-submit:hover { filter: brightness(1.08); }
+		.form-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
+
+		footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			width: min(100% - 48px, 1040px);
+			min-height: 68px;
+			margin: 0 auto;
+			color: var(--muted);
+			font-size: 10px;
+			letter-spacing: .06em;
+		}
+		.footer-logo { width: 100px; max-height: 28px; object-fit: contain; object-position: left center; }
+		.share-button { padding: 8px 0; border: 0; background: none; color: var(--ink); cursor: pointer; font-size: 10px; letter-spacing: .05em; }
+		.share-button:hover { color: var(--accent); }
+
+		@media (max-width: 720px) {
+			.topbar { width: calc(100% - 40px); min-height: 68px; }
+			.studio-mark { width: 104px; }
+			.topbar-label { font-size: 8px; }
+			.hero { min-height: 330px; padding: 52px 20px 40px; }
+			.film-logo { width: min(290px, 82%); max-height: 108px; margin-bottom: 19px; }
+			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
+			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+			.event-detail:last-child { border-bottom: 0; }
+			.detail-label { margin-bottom: 6px; }
+			.map-preview { width: calc(100% - 40px); margin-top: 18px; }
+			.map-frame { height: 240px; }
+			.map-caption { align-items: flex-start; flex-direction: column; gap: 5px; }
+			.invitation { padding: 40px 24px 44px; }
+			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
+			footer { flex-wrap: wrap; width: calc(100% - 40px); padding: 18px 0; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page-shell">
+		<header class="topbar">
+			<a href="index.html" aria-label="Malamar Gawian, halaman utama">
+				<img class="studio-mark" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
+			</a>
+			<span class="topbar-label">Undangan pemutaran perdana</span>
+		</header>
+
+		<main>
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero-content">
+					<p class="eyebrow">Ngerujaks Studio mengundang Anda</p>
+					<img class="film-logo" src="images/logo-mg2.png" alt="Malamar Gawian">
+					<h1 class="hero-title" id="hero-title">Gala Premiere<br>Malamar Gawian</h1>
+					<p class="hero-copy">Ngerujaks Studio mengundang Anda untuk menyaksikan film <em>Malamar Gawian</em> bersama.</p>
+					<div class="hero-actions">
+						<a class="primary-link" href="#detail-acara">Detail acara <span aria-hidden="true">↓</span></a>
+						<a class="text-link" href="#konfirmasi">Konfirmasi kehadiran</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="event-band" id="detail-acara" aria-label="Detail Gala Premiere">
+				<div class="event-detail">
+					<span class="detail-label">Tanggal</span>
+					<p class="detail-value">Sabtu, 31 Oktober 2026</p>
+				</div>
+				<div class="event-detail">
+					<span class="detail-label">Waktu</span>
+					<p class="detail-value">10.00 WITA</p>
+					<span class="detail-note">Sampai selesai</span>
+				</div>
+				<div class="event-detail">
+					<span class="detail-label">Lokasi</span>
+					<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)</p>
+					<span class="detail-note">Banjarmasin</span>
+					<a class="location-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Lihat lokasi di peta ↗</a>
+				</div>
+			</section>
+
+			<section class="map-preview" aria-label="Pratinjau peta lokasi acara">
+				<iframe
+					class="map-frame"
+					src="https://www.google.com/maps?q=Kota%20Cinema%20Mall%20Belitung%20Darat%20KCM%20Belda%20Banjarmasin&output=embed"
+					title="Peta Kota Cinema Mall Belitung Darat, Banjarmasin"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen>
+				</iframe>
+				<div class="map-caption">
+					<span>Kota Cinema Mall Belitung Darat · Banjarmasin</span>
+					<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Buka di Google Maps ↗</a>
+				</div>
+			</section>
+
+			<section class="invitation" aria-labelledby="invitation-title">
+				<p class="section-kicker">Sebuah undangan</p>
+				<h2 id="invitation-title">Kami menantikan kehadiran Anda.</h2>
+				<div class="invitation-copy">
+					<p>Sampai bertemu di pemutaran perdana film <em>Malamar Gawian</em>.</p>
+				</div>
+			</section>
+
+			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
+				<div class="rsvp">
+					<div>
+						<p class="section-kicker">Sampai bertemu</p>
+						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
+						<p class="rsvp-intro">Isi nama dan konfirmasi kehadiran. Pesan konfirmasi akan disalin agar dapat dikirimkan kepada panitia.</p>
+					</div>
+					<form class="rsvp-form" id="rsvpForm">
+						<div class="field field-name">
+							<label for="guestName">Nama</label>
+							<input id="guestName" name="name" autocomplete="name" placeholder="Nama lengkap" required>
+						</div>
+						<div class="field field-attendance">
+							<label for="attendance">Konfirmasi</label>
+							<select id="attendance" name="attendance">
+								<option value="akan hadir">Dengan senang hati, saya akan hadir</option>
+								<option value="belum dapat hadir">Mohon maaf, saya belum dapat hadir</option>
+							</select>
+						</div>
+						<button class="rsvp-submit" type="submit">Salin pesan konfirmasi <span aria-hidden="true">↗</span></button>
+						<p class="form-status" id="formStatus" aria-live="polite"></p>
+					</form>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<img class="footer-logo" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
+			<span>Malamar Gawian · Gala Premiere</span>
+			<button class="share-button" id="shareButton" type="button">Salin tautan undangan</button>
+		</footer>
+	</div>
+
+	<script>
+		const form = document.getElementById("rsvpForm");
+		const status = document.getElementById("formStatus");
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const formData = new FormData(form);
+			const message = `Halo panitia Gala Premiere Malamar Gawian, saya ${formData.get("name")} ${formData.get("attendance")}.`;
+			try {
+				await navigator.clipboard.writeText(message);
+				status.textContent = "Pesan disalin. Silakan kirimkan kepada panitia melalui kanal komunikasi undangan ini.";
+			} catch {
+				status.textContent = message;
+			}
+		});
+
+		document.getElementById("shareButton").addEventListener("click", async () => {
+			const button = document.getElementById("shareButton");
+			try {
+				await navigator.clipboard.writeText(window.location.href);
+				button.textContent = "Tautan berhasil disalin";
+			} catch {
+				button.textContent = "Salin alamat halaman dari browser";
+			}
+		});
+	</script>
+</body>
+</html>
