@@ -78,7 +78,8 @@
 		}
 		.invite-card::before { top: 14px; }
 		.invite-card::after { bottom: 14px; }
-		.invite-brand { position: absolute; top: 26px; left: 28px; display: flex; align-items: flex-start; }
+		.invite-brand { position: absolute; top: 22px; left: 28px; display: flex; align-items: center; height: 34px; }
+		.bff-mark { position: absolute; top: 22px; right: 28px; width: 58px; height: 34px; object-fit: contain; object-position: right center; }
 		.film-logo { display: block; width: min(200px, 70%); max-height: 88px; object-fit: contain; margin: 0 auto 30px; }
 		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(17px, 3vh, 26px) auto; color: var(--accent); font-size: 10px; }
 		.invite-divider::before, .invite-divider::after { width: 34px; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--accent)); }
@@ -107,6 +108,7 @@
 		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(255, 213, 79, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
+		.rsvp-note a { white-space: nowrap; }
 		.music-toggle {
 			position: fixed;
 			z-index: 5;
@@ -298,7 +300,8 @@
 		@media (max-width: 720px) {
 			.hero { padding: 14px 14px 78px; }
 			.invite-card { min-height: 0; padding: 76px 20px 34px; }
-			.invite-brand { top: 21px; left: 21px; }
+			.invite-brand { top: 19px; left: 21px; height: 30px; }
+			.bff-mark { top: 19px; right: 21px; width: 50px; height: 30px; }
 			.invite-divider { margin: 15px auto; }
 			.film-logo { width: min(180px, 68%); max-height: 74px; margin-bottom: 25px; }
 			.invite-intro { font-size: 10px; line-height: 1.7; }
@@ -335,7 +338,8 @@
 			.invite-card { padding-top: 58px; padding-bottom: 22px; }
 			.invite-card::before { top: 9px; }
 			.invite-card::after { bottom: 9px; }
-			.invite-brand { top: 14px; left: 15px; }
+			.invite-brand { top: 12px; left: 15px; height: 26px; }
+			.bff-mark { top: 12px; right: 15px; width: 44px; height: 26px; }
 			.studio-mark { height: 24px; }
 			.invite-divider { margin: 10px auto; }
 			.eyebrow { margin-bottom: 7px; font-size: 11px; }
@@ -362,6 +366,7 @@
 					<div class="invite-brand">
 						<img class="studio-mark" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
 					</div>
+					<img class="bff-mark" src="images/logo-bff.png" alt="BFF">
 					<img class="film-logo" src="images/logo-mg3.png" alt="Malamar Gawian">
 					<p class="eyebrow">Undangan eksklusif</p>
 					<h1 class="hero-title" id="hero-title">GALA PREMIERE</h1>
@@ -427,9 +432,9 @@
 			</section>
 
 			<section class="invitation" aria-labelledby="invitation-title">
-				<h2 id="invitation-title">Dimohon untuk hadir tepat waktu.</h2>
+				<h2 id="invitation-title">Sampai bertemu di pemutaran perdana film <em>Malamar Gawian</em>.</h2>
 				<div class="invitation-copy">
-					<p>Sampai bertemu di pemutaran perdana film <em>Malamar Gawian</em>.</p>
+					<p>Dimohon untuk hadir tepat waktu.</p>
 				</div>
 			</section>
 
@@ -479,7 +484,7 @@
 		<span class="music-toggle-label" id="musicLabel">Aktifkan suara</span>
 	</button>
 	<p class="music-status" id="musicStatus" aria-live="polite"></p>
-	<audio id="inviteMusic" src="assets/ost-mg.mp3" autoplay muted playsinline preload="auto" loop></audio>
+	<audio id="inviteMusic" src="assets/ost-mg.mp3" playsinline preload="auto" loop></audio>
 
 	<script>
 		const form = document.getElementById("rsvpForm");
@@ -506,6 +511,11 @@
 			musicLabel.textContent = soundEnabled ? "Matikan suara" : "Aktifkan suara";
 		}
 
+		function removeMusicUnlockListeners() {
+			document.removeEventListener("pointerdown", handleFirstPointerInteraction);
+			document.removeEventListener("keydown", enableMusicAfterInteraction);
+		}
+
 		musicToggle.addEventListener("click", async () => {
 			musicStatus.textContent = "";
 			try {
@@ -516,6 +526,9 @@
 					music.muted = !music.muted;
 				}
 				updateMusicToggle(!music.paused);
+				if (!music.muted) {
+					removeMusicUnlockListeners();
+				}
 			} catch (error) {
 				updateMusicToggle(false);
 				musicStatus.textContent = "Musik tidak dapat diputar. Periksa file audio atau coba lagi.";
@@ -530,24 +543,30 @@
 			musicStatus.textContent = "File musik tidak dapat dimuat.";
 		});
 
-		async function startInviteMusic() {
+		async function enableMusicAfterInteraction() {
 			try {
-				music.muted = true;
+				music.muted = false;
 				await music.play();
-				musicStatus.textContent = "Musik diputar tanpa suara. Ketuk ikon musik untuk menyalakan.";
+				musicStatus.textContent = "";
 				updateMusicToggle(true);
+				removeMusicUnlockListeners();
 			} catch (error) {
 				updateMusicToggle(false);
-				musicStatus.textContent = error.name === "NotAllowedError"
-					? "Musik belum mulai. Ketuk ikon musik untuk memutar."
-					: "Musik bermasalah. Ketuk ikon untuk mencoba lagi.";
+				musicStatus.textContent = "Ketuk ikon musik untuk menyalakan suara.";
 				if (error.name !== "NotAllowedError") {
-					console.error("Gagal memutar musik undangan:", error);
+					console.error("Gagal memutar musik undangan setelah interaksi:", error);
 				}
 			}
 		}
 
-		startInviteMusic();
+		function handleFirstPointerInteraction(event) {
+			if (event.target instanceof Element && !event.target.closest("#musicToggle")) {
+				enableMusicAfterInteraction();
+			}
+		}
+
+		document.addEventListener("pointerdown", handleFirstPointerInteraction);
+		document.addEventListener("keydown", enableMusicAfterInteraction);
 
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
