@@ -79,15 +79,15 @@
 		.invite-card::before { top: 14px; }
 		.invite-card::after { bottom: 14px; }
 		.invite-brand { position: absolute; top: 26px; left: 28px; display: flex; align-items: flex-start; }
+		.film-logo { display: block; width: min(200px, 70%); max-height: 88px; object-fit: contain; margin: 0 auto 30px; }
 		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(17px, 3vh, 26px) auto; color: var(--accent); font-size: 10px; }
 		.invite-divider::before, .invite-divider::after { width: 34px; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--accent)); }
 		.invite-divider::after { transform: rotate(180deg); }
-		.eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 9px; letter-spacing: .2em; }
+		.eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 12px; letter-spacing: .16em; }
 		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
-		.invite-recipient { max-width: 350px; margin: 18px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+		.invite-recipient { max-width: 350px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
 		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(15px, 2vh, 17px); font-weight: 700; line-height: 1.55; }
 		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
-		.film-logo { display: block; width: min(200px, 70%); max-height: 88px; object-fit: contain; margin: 0 auto 21px; }
 		.hero-title {
 			margin: 0;
 			color: var(--ink);
@@ -97,6 +97,7 @@
 			letter-spacing: .01em;
 			line-height: 1.2;
 		}
+		.film-subtitle { margin: 5px 0 0; color: var(--accent); font-family: Georgia, serif; font-size: clamp(13px, 1.8vw, 15px); font-style: italic; letter-spacing: .03em; line-height: 1.4; }
 		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(20px, 3vh, 28px); border-top: 1px solid var(--line); }
 		.hero-event-detail { padding: 12px 7px 11px; }
 		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
@@ -276,9 +277,9 @@
 		.form-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
 
 		footer {
-			display: flex;
+			display: grid;
+			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
-			justify-content: space-between;
 			gap: 20px;
 			width: min(100% - 48px, 1040px);
 			min-height: 68px;
@@ -288,17 +289,20 @@
 			letter-spacing: .06em;
 		}
 		.footer-logo { width: 100px; max-height: 28px; object-fit: contain; object-position: left center; }
-		.share-button { padding: 8px 0; border: 0; background: none; color: var(--ink); cursor: pointer; font-size: 10px; letter-spacing: .05em; }
-		.share-button:hover { color: var(--accent); }
+		.footer-title { text-align: center; }
+		.footer-links { display: flex; align-items: center; justify-content: flex-end; gap: 14px; white-space: nowrap; }
+		.footer-links a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); text-decoration: none; }
+		.footer-links svg { width: 13px; height: 13px; fill: currentColor; }
+		.footer-links a:hover { color: var(--accent); }
 
 		@media (max-width: 720px) {
 			.hero { padding: 14px 14px 78px; }
 			.invite-card { min-height: 0; padding: 76px 20px 34px; }
 			.invite-brand { top: 21px; left: 21px; }
 			.invite-divider { margin: 15px auto; }
-			.film-logo { width: min(180px, 68%); max-height: 74px; margin-bottom: 17px; }
+			.film-logo { width: min(180px, 68%); max-height: 74px; margin-bottom: 25px; }
 			.invite-intro { font-size: 10px; line-height: 1.7; }
-			.invite-recipient { margin-top: 16px; }
+			.invite-recipient { margin-top: 0; }
 			.invite-recipient strong { font-size: 14px; line-height: 1.5; }
 			.hero-event-details { margin-top: 21px; }
 			.hero-event-detail { padding: 12px 5px; }
@@ -313,14 +317,16 @@
 			.map-caption { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
-			footer { flex-wrap: wrap; width: calc(100% - 40px); padding: 18px 0; }
+			footer { grid-template-columns: 1fr auto; width: calc(100% - 40px); padding: 18px 0; }
+			.footer-title { grid-column: 1 / -1; grid-row: 2; text-align: left; }
+			.footer-links { grid-column: 2; grid-row: 1; }
 		}
 		@media (max-width: 380px) {
 			.hero { padding-right: 10px; padding-left: 10px; }
 			.invite-card { padding-right: 15px; padding-left: 15px; }
 			.invite-brand { top: 17px; left: 16px; }
 			.invite-intro { font-size: 10px; line-height: 1.65; }
-			.invite-recipient { margin-top: 14px; }
+			.invite-recipient { margin-top: 0; }
 			.invite-recipient strong { font-size: 13px; }
 			.hero-event-detail .detail-value { font-size: 11px; }
 		}
@@ -332,11 +338,11 @@
 			.invite-brand { top: 14px; left: 15px; }
 			.studio-mark { height: 24px; }
 			.invite-divider { margin: 10px auto; }
-			.eyebrow { margin-bottom: 7px; }
+			.eyebrow { margin-bottom: 7px; font-size: 11px; }
 			.invite-intro { font-size: 10px; line-height: 1.5; }
-			.invite-recipient { margin-top: 11px; font-size: 10px; line-height: 1.4; }
+			.invite-recipient { margin-top: 0; font-size: 10px; line-height: 1.4; }
 			.invite-recipient strong { margin-top: 0; font-size: 12px; line-height: 1.4; }
-			.film-logo { max-height: 58px; margin-top: 8px; margin-bottom: 12px; }
+			.film-logo { max-height: 58px; margin-top: 8px; margin-bottom: 20px; }
 			.hero-title { font-size: 21px; }
 			.hero-event-details { margin-top: 13px; }
 			.hero-event-detail { padding-top: 8px; padding-bottom: 8px; }
@@ -359,8 +365,8 @@
 					<img class="film-logo" src="images/logo-mg3.png" alt="Malamar Gawian">
 					<p class="eyebrow">Undangan eksklusif</p>
 					<h1 class="hero-title" id="hero-title">GALA PREMIERE</h1>
+					<p class="film-subtitle">Film Malamar Gawian</p>
 					<div class="invite-divider" aria-hidden="true"></div>
-					<p class="invite-intro">Ngerujaks Studio dengan bangga mengundang Anda untuk hadir secara eksklusif dalam pemutaran perdana film pendek kami.</p>
 					<p class="invite-recipient">
 						<strong>Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</strong>
 						<span class="seat-count">Jumlah Kursi: 2</span>
@@ -421,8 +427,7 @@
 			</section>
 
 			<section class="invitation" aria-labelledby="invitation-title">
-				<p class="section-kicker">Sebuah undangan</p>
-				<h2 id="invitation-title">Kami menantikan kehadiran Anda.</h2>
+				<h2 id="invitation-title">Dimohon untuk hadir tepat waktu.</h2>
 				<div class="invitation-copy">
 					<p>Sampai bertemu di pemutaran perdana film <em>Malamar Gawian</em>.</p>
 				</div>
@@ -431,9 +436,7 @@
 			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
 				<div class="rsvp">
 					<div>
-						<p class="section-kicker">Sampai bertemu</p>
 						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
-						<p class="rsvp-intro">Periksa instansi dan pilihan konfirmasi. Pesan akan disiapkan di WhatsApp untuk ditinjau sebelum dikirim.</p>
 					</div>
 					<form class="rsvp-form" id="rsvpForm">
 						<div class="field field-institution">
@@ -457,8 +460,17 @@
 
 		<footer>
 			<img class="footer-logo" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
-			<span>Malamar Gawian · Gala Premiere</span>
-			<button class="share-button" id="shareButton" type="button">Salin tautan undangan</button>
+			<span class="footer-title">Malamar Gawian Film · Gala Premiere Invitation</span>
+			<div class="footer-links">
+				<a href="https://malamargawianfilm.com" target="_blank" rel="noopener noreferrer">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 9h-3.06a15.7 15.7 0 0 0-1.24-5.08A8.03 8.03 0 0 1 18.92 11ZM12 4c.9 1.3 1.57 3.91 1.82 7h-3.64C10.43 7.91 11.1 5.3 12 4ZM4.08 13h3.06a15.7 15.7 0 0 0 1.24 5.08A8.03 8.03 0 0 1 4.08 13Zm3.06-2H4.08a8.03 8.03 0 0 1 4.3-5.08A15.7 15.7 0 0 0 7.14 11ZM12 20c-.9-1.3-1.57-3.91-1.82-7h3.64c-.25 3.09-.92 5.7-1.82 7Zm2.62-1.92A15.7 15.7 0 0 0 15.86 13h3.06a8.03 8.03 0 0 1-4.3 5.08Z"/></svg>
+					malamargawianfilm.com
+				</a>
+				<a href="https://www.instagram.com/malamargawian.film/" target="_blank" rel="noopener noreferrer">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
+					@malamargawian.film
+				</a>
+			</div>
 		</footer>
 	</div>
 
@@ -552,15 +564,6 @@
 			}
 		});
 
-		document.getElementById("shareButton").addEventListener("click", async () => {
-			const button = document.getElementById("shareButton");
-			try {
-				await navigator.clipboard.writeText(window.location.href);
-				button.textContent = "Tautan berhasil disalin";
-			} catch {
-				button.textContent = "Salin alamat halaman dari browser";
-			}
-		});
 	</script>
 </body>
 </html>
