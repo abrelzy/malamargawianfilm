@@ -142,12 +142,20 @@
 		.music-toggle[aria-pressed="false"] #musicIcon { color: var(--accent); }
 		.music-toggle[aria-pressed="true"] #musicIcon { animation: music-spin 3s linear infinite; }
 		.music-toggle-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-		.now-playing {
+		.rsvp-music-info {
 			position: fixed;
 			z-index: 4;
 			right: max(18px, env(safe-area-inset-right));
 			bottom: calc(max(18px, env(safe-area-inset-bottom)) + 44px);
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			gap: 4px;
 			max-width: min(340px, calc(100vw - 36px));
+		}
+		.now-playing {
+			position: static;
+			max-width: 100%;
 			margin: 0;
 			color: #c4c4ca;
 			font-size: 10px;
@@ -157,21 +165,14 @@
 		}
 		.now-playing span { display: block; margin-bottom: 2px; color: var(--accent); font-size: 8px; font-weight: 700; letter-spacing: .14em; }
 		.music-status {
-			position: fixed;
-			z-index: 4;
-			right: max(18px, env(safe-area-inset-right));
-			bottom: calc(max(18px, env(safe-area-inset-bottom)) + 90px);
+			position: static;
 			max-width: min(260px, calc(100vw - 84px));
 			margin: 0;
-			padding: 7px 10px;
-			border: 1px solid rgba(255, 255, 255, .08);
-			border-radius: 6px;
-			background: rgba(18, 18, 20, .72);
 			color: #c4c4ca;
 			font-size: 10px;
 			line-height: 1.4;
 			text-align: right;
-			backdrop-filter: blur(8px);
+			text-shadow: 0 1px 5px rgba(0, 0, 0, .8);
 		}
 		.music-status:empty { display: none; }
 		.scroll-cue {
@@ -361,6 +362,33 @@
 		.footer-links a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); text-decoration: none; }
 		.footer-links svg { width: 13px; height: 13px; fill: currentColor; }
 		.footer-links a:hover { color: var(--accent); }
+		.rsvp-controls {
+			display: flex;
+			width: min(100% - 48px, 920px);
+			min-height: 88px;
+			box-sizing: border-box;
+			margin: 0 auto;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding-top: 14px;
+			padding-bottom: 14px;
+		}
+		.rsvp-music-group { display: contents; }
+		body.rsvp-controls-visible .rsvp-controls {
+			display: flex;
+		}
+		body.rsvp-controls-visible .rsvp-music-group { display: flex; align-items: center; gap: 10px; }
+		body.rsvp-controls-visible .rsvp-music-info { position: static; min-width: 0; align-items: flex-end; }
+		body.rsvp-controls-visible .music-toggle,
+		body.rsvp-controls-visible .scroll-top {
+			position: static;
+			transform: none;
+		}
+		body.rsvp-controls-visible .now-playing,
+		body.rsvp-controls-visible .music-status { text-align: right; }
+		body.rsvp-controls-visible .music-status { max-width: min(260px, calc(100vw - 80px)); }
+		body.rsvp-controls-visible .scroll-top.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
 		@media (max-width: 720px) {
 			.hero { padding: 14px 14px 78px; }
@@ -385,8 +413,9 @@
 			.map-caption { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
-			footer { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 18px 0; }
+			footer { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 18px 0 calc(24px + env(safe-area-inset-bottom)); }
 			.footer-links { justify-content: flex-start; flex-wrap: wrap; white-space: normal; }
+			body.rsvp-controls-visible .rsvp-controls { width: calc(100% - 40px); }
 		}
 		@media (max-width: 380px) {
 			.hero { padding-right: 10px; padding-left: 10px; }
@@ -532,6 +561,19 @@
 					</form>
 					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP submission response" hidden></iframe>
 				</div>
+				<div class="rsvp-controls" id="rsvpControls">
+					<a class="scroll-top" id="scrollTop" href="#top" aria-label="Scroll to top" title="Scroll to top">↑</a>
+					<div class="rsvp-music-group">
+					<div class="rsvp-music-info">
+						<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack of Malamar Gawian)</p>
+						<p class="music-status" id="musicStatus" aria-live="polite">Tap the music icon to turn on sound.</p>
+					</div>
+						<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Turn invitation music on">
+							<span id="musicIcon" aria-hidden="true">♫</span>
+							<span class="music-toggle-label" id="musicLabel">Turn music on</span>
+						</button>
+					</div>
+				</div>
 			</section>
 		</main>
 
@@ -550,13 +592,6 @@
 		</footer>
 	</div>
 
-	<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Turn invitation music on">
-		<span id="musicIcon" aria-hidden="true">♫</span>
-		<span class="music-toggle-label" id="musicLabel">Turn music on</span>
-	</button>
-	<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack of Malamar Gawian)</p>
-	<p class="music-status" id="musicStatus" aria-live="polite"></p>
-	<a class="scroll-top" id="scrollTop" href="#top" aria-label="Scroll to top" title="Scroll to top">↑</a>
 	<audio id="inviteMusic" src="assets/ost-mg.mp3" playsinline preload="auto" loop></audio>
 	<dialog class="rsvp-reminder" id="rsvpReminder" aria-describedby="rsvpReminderMessage">
 		<p id="rsvpReminderMessage">Please complete the RSVP form at the bottom of the page.</p>
@@ -578,6 +613,7 @@
 		const musicStatus = document.getElementById("musicStatus");
 		const scrollCue = document.getElementById("scrollCue");
 		const scrollTop = document.getElementById("scrollTop");
+		const rsvpContent = document.querySelector(".rsvp");
 		const rsvpReminder = document.getElementById("rsvpReminder");
 		const rsvpReminderGo = document.getElementById("rsvpReminderGo");
 		let invitationVerified = false;
@@ -660,9 +696,40 @@
 			const hasScrolled = window.scrollY > window.innerHeight * 0.2;
 			scrollCue.classList.toggle("is-hidden", hasScrolled);
 			scrollTop.classList.toggle("is-visible", hasScrolled);
+
+			const rsvpBounds = rsvpContent.getBoundingClientRect();
+			const isDocked = document.body.classList.contains("rsvp-controls-visible");
+			const dockTriggerY = isDocked
+				? window.innerHeight
+				: scrollTop.getBoundingClientRect().top;
+			const shouldDockControls = hasScrolled
+				&& rsvpBounds.bottom < dockTriggerY
+				&& rsvpBounds.bottom > 0;
+			if (isDocked === shouldDockControls) return;
+
+			const movingControls = [musicStatus, document.querySelector(".now-playing"), scrollTop, musicToggle]
+				.filter(element => getComputedStyle(element).display !== "none");
+			movingControls.forEach(element => element.getAnimations().forEach(animation => animation.cancel()));
+			const startPositions = new Map(movingControls.map(element => [element, element.getBoundingClientRect()]));
+			document.body.classList.toggle("rsvp-controls-visible", shouldDockControls);
+
+			if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+			movingControls.forEach(element => {
+				const start = startPositions.get(element);
+				const end = element.getBoundingClientRect();
+				const x = start.left - end.left;
+				const y = start.top - end.top;
+				if (x || y) {
+					element.animate(
+						[{ transform: `translate(${x}px, ${y}px)` }, { transform: "translate(0, 0)" }],
+						{ duration: shouldDockControls ? 320 : 220, easing: "cubic-bezier(.22, 1, .36, 1)" }
+					);
+				}
+			});
 		}
 
 		window.addEventListener("scroll", updateScrollCue, { passive: true });
+		window.addEventListener("resize", updateScrollCue);
 		updateScrollCue();
 
 		function updateMusicToggle(isPlaying) {
@@ -679,7 +746,6 @@
 		}
 
 		musicToggle.addEventListener("click", async () => {
-			musicStatus.textContent = "";
 			try {
 				if (music.paused) {
 					music.muted = false;
@@ -693,13 +759,23 @@
 				}
 			} catch (error) {
 				updateMusicToggle(false);
-				musicStatus.textContent = "Music could not be played. Check the audio file or try again.";
+				musicStatus.textContent = music.error
+					? "The music file could not be loaded."
+					: "Tap the music icon to turn on sound.";
 				console.error("Could not play invitation music:", error);
 			}
 		});
 
-		music.addEventListener("play", () => updateMusicToggle(true));
-		music.addEventListener("pause", () => updateMusicToggle(false));
+		music.addEventListener("play", () => {
+			updateMusicToggle(true);
+			musicStatus.textContent = "";
+		});
+		music.addEventListener("pause", () => {
+			updateMusicToggle(false);
+			musicStatus.textContent = music.error
+				? "The music file could not be loaded."
+				: "Tap the music icon to turn on sound.";
+		});
 		music.addEventListener("volumechange", () => updateMusicToggle(!music.paused));
 		music.addEventListener("error", () => {
 			musicStatus.textContent = "The music file could not be loaded.";
@@ -714,7 +790,9 @@
 				removeMusicUnlockListeners();
 			} catch (error) {
 				updateMusicToggle(false);
-				musicStatus.textContent = "Tap the music icon to turn on sound.";
+				musicStatus.textContent = music.error
+					? "The music file could not be loaded."
+					: "Tap the music icon to turn on sound.";
 				if (error.name !== "NotAllowedError") {
 					console.error("Could not play invitation music after interaction:", error);
 				}
