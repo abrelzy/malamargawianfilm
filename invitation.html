@@ -369,6 +369,7 @@
 			right: 0;
 			bottom: max(18px, env(safe-area-inset-bottom));
 			left: 0;
+			--rsvp-footer-gap: 0px;
 			display: flex;
 			width: min(100% - 48px, 920px);
 			margin: 0 auto;
@@ -428,7 +429,7 @@
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
 			footer { grid-template-columns: auto 1fr; width: calc(100% - 40px); padding: 18px 0 calc(24px + env(safe-area-inset-bottom)); }
 			.footer-links { flex-direction: column; align-items: flex-end; justify-content: center; gap: 8px; white-space: normal; }
-			.rsvp-controls { width: calc(100% - 40px); }
+			.rsvp-controls { width: calc(100% - 40px); --rsvp-footer-gap: 8px; }
 		}
 		@media (max-width: 380px) {
 			.hero { padding-right: 10px; padding-left: 10px; }
@@ -712,11 +713,14 @@
 			scrollTop.classList.toggle("is-visible", hasScrolled);
 
 			const rsvpBounds = rsvpContent.getBoundingClientRect();
+			const controlsStyle = getComputedStyle(rsvpControls);
+			const bottomInset = parseFloat(controlsStyle.bottom);
+			const footerGap = parseFloat(controlsStyle.getPropertyValue("--rsvp-footer-gap"));
+			const dockBoundary = window.innerHeight - bottomInset + footerGap;
 			const shouldDockControls = hasScrolled
-				&& rsvpBounds.bottom <= window.innerHeight - parseFloat(getComputedStyle(rsvpControls).bottom);
+				&& rsvpBounds.bottom <= dockBoundary;
 			document.body.classList.toggle("rsvp-controls-visible", shouldDockControls);
-			const bottomInset = parseFloat(getComputedStyle(rsvpControls).bottom);
-			const controlsOffset = Math.min(0, rsvpBounds.bottom - (window.innerHeight - bottomInset));
+			const controlsOffset = Math.min(0, rsvpBounds.bottom - dockBoundary);
 			rsvpControls.style.setProperty("--rsvp-controls-offset", `${controlsOffset}px`);
 		}
 
