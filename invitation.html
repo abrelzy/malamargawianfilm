@@ -88,6 +88,7 @@
 		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
 		.invite-recipient { max-width: 350px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
 		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(15px, 2vh, 17px); font-weight: 700; line-height: 1.55; }
+		.recipient-organization { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
 		.hero-title {
 			margin: 0;
@@ -133,7 +134,22 @@
 		}
 		.music-toggle:hover { border-color: rgba(255, 213, 79, .42); background: rgba(18, 18, 20, .72); color: var(--ink); }
 		.music-toggle[aria-pressed="false"] #musicIcon { color: var(--accent); }
+		.music-toggle[aria-pressed="true"] #musicIcon { animation: music-spin 3s linear infinite; }
 		.music-toggle-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+		.now-playing {
+			position: fixed;
+			z-index: 4;
+			right: max(18px, env(safe-area-inset-right));
+			bottom: calc(max(18px, env(safe-area-inset-bottom)) + 44px);
+			max-width: min(340px, calc(100vw - 36px));
+			margin: 0;
+			color: #c4c4ca;
+			font-size: 10px;
+			line-height: 1.4;
+			text-align: right;
+			text-shadow: 0 1px 5px rgba(0, 0, 0, .8);
+		}
+		.now-playing span { display: block; margin-bottom: 2px; color: var(--accent); font-size: 8px; font-weight: 700; letter-spacing: .14em; }
 		.music-status {
 			position: fixed;
 			z-index: 4;
@@ -176,6 +192,7 @@
 		}
 		.scroll-cue.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 		.scroll-cue-icon { color: var(--accent); font-size: 15px; line-height: 1; animation: scroll-hint 1.8s ease-in-out infinite; }
+		@keyframes music-spin { to { transform: rotate(360deg); } }
 		@keyframes scroll-hint { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
 
 		.event-band {
@@ -276,11 +293,12 @@
 			text-transform: uppercase;
 		}
 		.rsvp-submit:hover { filter: brightness(1.08); }
+		.rsvp-submit:disabled { cursor: wait; opacity: .6; }
 		.form-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
 
 		footer {
 			display: grid;
-			grid-template-columns: 1fr auto 1fr;
+			grid-template-columns: 1fr auto;
 			align-items: center;
 			gap: 20px;
 			width: min(100% - 48px, 1040px);
@@ -291,7 +309,6 @@
 			letter-spacing: .06em;
 		}
 		.footer-logo { width: 100px; max-height: 28px; object-fit: contain; object-position: left center; }
-		.footer-title { text-align: center; }
 		.footer-links { display: flex; align-items: center; justify-content: flex-end; gap: 14px; white-space: nowrap; }
 		.footer-links a { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); text-decoration: none; }
 		.footer-links svg { width: 13px; height: 13px; fill: currentColor; }
@@ -321,8 +338,6 @@
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
 			footer { grid-template-columns: 1fr auto; width: calc(100% - 40px); padding: 18px 0; }
-			.footer-title { grid-column: 1 / -1; grid-row: 2; text-align: left; }
-			.footer-links { grid-column: 2; grid-row: 1; }
 		}
 		@media (max-width: 380px) {
 			.hero { padding-right: 10px; padding-left: 10px; }
@@ -373,8 +388,9 @@
 					<p class="film-subtitle">Film Malamar Gawian</p>
 					<div class="invite-divider" aria-hidden="true"></div>
 					<p class="invite-recipient">
-						<strong>Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</strong>
-						<span class="seat-count">Jumlah Kursi: 2</span>
+						<strong id="recipientName">Ibu Yuyun</strong>
+						<span class="recipient-organization" id="recipientOrganization">Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</span>
+						<span class="seat-count" id="seatCount">Jumlah Kursi: 2</span>
 					</p>
 					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
 						<div class="hero-event-detail">
@@ -432,7 +448,7 @@
 			</section>
 
 			<section class="invitation" aria-labelledby="invitation-title">
-				<h2 id="invitation-title">Sampai bertemu di pemutaran perdana film <em>Malamar Gawian</em>.</h2>
+				<h2 id="invitation-title">Sampai bertemu di pemutaran perdana <em>film Malamar Gawian</em>.</h2>
 				<div class="invitation-copy">
 					<p>Dimohon untuk hadir tepat waktu.</p>
 				</div>
@@ -442,10 +458,11 @@
 				<div class="rsvp">
 					<div>
 						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
+						<p class="rsvp-intro">Anda dapat mengirim konfirmasi ulang jika ingin mengubah status kehadiran.</p>
 					</div>
 					<form class="rsvp-form" id="rsvpForm">
 						<div class="field field-institution">
-							<label for="institution">Instansi</label>
+							<label for="institution">Undangan</label>
 							<input id="institution" name="institution" value="Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar" readonly>
 						</div>
 						<div class="field field-attendance">
@@ -455,17 +472,21 @@
 								<option value="belum dapat hadir">Mohon maaf, saya belum dapat hadir</option>
 							</select>
 						</div>
+						<input type="hidden" name="action" value="rsvp">
+						<input type="hidden" name="id" id="rsvpInvitationId">
+						<input type="hidden" name="code" id="rsvpInvitationCode">
+						<input type="hidden" name="request_id" id="rsvpRequestId">
 						<button class="rsvp-submit" type="submit">Kirim konfirmasi <span aria-hidden="true">↗</span></button>
 						<p class="rsvp-note">Jika ada kendala atau perubahan kehadiran, hubungi <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
 						<p class="form-status" id="formStatus" aria-live="polite"></p>
 					</form>
+					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="Respons penyimpanan RSVP" hidden></iframe>
 				</div>
 			</section>
 		</main>
 
 		<footer>
 			<img class="footer-logo" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
-			<span class="footer-title">Malamar Gawian Film · Gala Premiere Invitation</span>
 			<div class="footer-links">
 				<a href="https://malamargawianfilm.com" target="_blank" rel="noopener noreferrer">
 					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 9h-3.06a15.7 15.7 0 0 0-1.24-5.08A8.03 8.03 0 0 1 18.92 11ZM12 4c.9 1.3 1.57 3.91 1.82 7h-3.64C10.43 7.91 11.1 5.3 12 4ZM4.08 13h3.06a15.7 15.7 0 0 0 1.24 5.08A8.03 8.03 0 0 1 4.08 13Zm3.06-2H4.08a8.03 8.03 0 0 1 4.3-5.08A15.7 15.7 0 0 0 7.14 11ZM12 20c-.9-1.3-1.57-3.91-1.82-7h3.64c-.25 3.09-.92 5.7-1.82 7Zm2.62-1.92A15.7 15.7 0 0 0 15.86 13h3.06a8.03 8.03 0 0 1-4.3 5.08Z"/></svg>
@@ -483,18 +504,85 @@
 		<span id="musicIcon" aria-hidden="true">♫</span>
 		<span class="music-toggle-label" id="musicLabel">Aktifkan suara</span>
 	</button>
+	<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack Malamar Gawian)</p>
 	<p class="music-status" id="musicStatus" aria-live="polite"></p>
 	<audio id="inviteMusic" src="assets/ost-mg.mp3" playsinline preload="auto" loop></audio>
 
 	<script>
+		const RSVP_API_URL = "https://script.google.com/macros/s/AKfycbzOFvn2728_RAZUL44EgxUJVUcewjS6bRo8LlIxvF5RgDp6pICf7Q2kLBTst07KXO1a/exec";
 		const form = document.getElementById("rsvpForm");
 		const status = document.getElementById("formStatus");
+		const submitButton = form.querySelector(".rsvp-submit");
+		const responseFrame = document.getElementById("rsvpResponseFrame");
 		const music = document.getElementById("inviteMusic");
 		const musicToggle = document.getElementById("musicToggle");
 		const musicIcon = document.getElementById("musicIcon");
 		const musicLabel = document.getElementById("musicLabel");
 		const musicStatus = document.getElementById("musicStatus");
 		const scrollCue = document.getElementById("scrollCue");
+		let invitationVerified = false;
+		let activeRsvpRequestId = "";
+
+		function loadInvitationFromSpreadsheet() {
+			const query = new URLSearchParams(window.location.search);
+			const id = query.get("id") || "";
+			const code = query.get("code") || "";
+			if (!id || !code) {
+				status.textContent = "Tautan undangan tidak lengkap. Gunakan tautan khusus dari panitia.";
+				submitButton.disabled = true;
+				return;
+			}
+
+			submitButton.disabled = true;
+			status.textContent = "Memuat data undangan...";
+			const callbackName = `mgInvitation_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+			const script = document.createElement("script");
+			const timeout = window.setTimeout(() => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman."), 12000);
+
+			function finish(data, errorMessage) {
+				window.clearTimeout(timeout);
+				delete window[callbackName];
+				script.remove();
+				if (!data || !data.ok) {
+					status.textContent = errorMessage || data?.message || "Tautan undangan tidak valid.";
+					return;
+				}
+
+				document.getElementById("recipientName").textContent = data.invitation.name;
+				document.getElementById("recipientOrganization").textContent = data.invitation.organization;
+				document.getElementById("seatCount").textContent = `Jumlah Kursi: ${data.invitation.seats}`;
+				document.getElementById("institution").value = data.invitation.organization || data.invitation.name;
+				document.getElementById("rsvpInvitationId").value = id;
+				document.getElementById("rsvpInvitationCode").value = code;
+				if (data.invitation.attendance === "Hadir") {
+					document.getElementById("attendance").value = "akan hadir";
+				} else if (data.invitation.attendance === "Tidak hadir") {
+					document.getElementById("attendance").value = "belum dapat hadir";
+				}
+				invitationVerified = true;
+				submitButton.disabled = false;
+				status.textContent = data.invitation.attendance
+					? `Konfirmasi terakhir: ${data.invitation.attendance}. Kamu dapat mengubah pilihan lalu mengirim ulang.`
+					: "";
+			}
+
+			window[callbackName] = data => finish(data, "");
+			script.onerror = () => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman.");
+			const requestUrl = new URL(RSVP_API_URL);
+			requestUrl.searchParams.set("action", "lookup");
+			requestUrl.searchParams.set("id", id);
+			requestUrl.searchParams.set("code", code);
+			requestUrl.searchParams.set("callback", callbackName);
+			script.src = requestUrl.toString();
+			document.head.append(script);
+		}
+
+		if (RSVP_API_URL) {
+			form.action = RSVP_API_URL;
+			form.method = "post";
+			form.target = "rsvpResponseFrame";
+			loadInvitationFromSpreadsheet();
+		}
 
 		function updateScrollCue() {
 			scrollCue.classList.toggle("is-hidden", window.scrollY > window.innerHeight * 0.2);
@@ -568,8 +656,35 @@
 		document.addEventListener("pointerdown", handleFirstPointerInteraction);
 		document.addEventListener("keydown", enableMusicAfterInteraction);
 
+		window.addEventListener("message", event => {
+			const trustedResponseOrigin = event.origin === "https://script.google.com"
+				|| event.origin.endsWith(".googleusercontent.com");
+			if (event.source !== responseFrame.contentWindow && !trustedResponseOrigin) return;
+			const result = event.data;
+			if (!result || result.type !== "mg-rsvp-result" || result.requestId !== activeRsvpRequestId) return;
+
+			activeRsvpRequestId = "";
+			submitButton.disabled = false;
+			status.textContent = result.ok
+				? `Konfirmasi tersimpan sebagai "${result.attendance}". Jika berubah, kamu dapat kirim konfirmasi ulang.`
+				: result.message || "Konfirmasi belum berhasil disimpan. Coba lagi.";
+		});
+
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
+			if (RSVP_API_URL) {
+				if (!invitationVerified) {
+					status.textContent = "Data undangan belum terverifikasi. Muat ulang halaman lalu coba kembali.";
+					return;
+				}
+				activeRsvpRequestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+				document.getElementById("rsvpRequestId").value = activeRsvpRequestId;
+				submitButton.disabled = true;
+				status.textContent = "Menyimpan konfirmasi...";
+				HTMLFormElement.prototype.submit.call(form);
+				return;
+			}
+
 			const formData = new FormData(form);
 			const message = `Halo, saya dari ${formData.get("institution")} mengonfirmasi ${formData.get("attendance")} untuk Gala Premiere Malamar Gawian.`;
 			const whatsappUrl = `https://wa.me/6285194128355?text=${encodeURIComponent(message)}`;
