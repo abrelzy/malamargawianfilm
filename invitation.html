@@ -115,10 +115,10 @@
 		.hero-instagram { display: inline-flex; width: fit-content; align-items: center; justify-content: center; gap: 6px; color: var(--muted); font-size: 11px; text-decoration: none; }
 		.hero-instagram:hover { color: var(--accent); }
 		.hero-instagram svg { width: 14px; height: 14px; fill: currentColor; }
-		.organizer-credit { display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(100%, 1100px); margin: 0 auto; }
-		.organizer-section { padding: 32px 20px 48px; background: #fff; }
+		.organizer-credit { display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(calc(100% - 48px), 920px); margin: 0 auto; }
+		.organizer-section { padding: 32px 0 48px; background: #fff; }
 		.organizer-credit span { color: #555; font-size: clamp(12px, 1.5vw, 16px); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-		.organizer-credit img { display: block; width: 100%; max-width: 1100px; height: auto; }
+		.organizer-credit img { display: block; width: 100%; height: auto; }
 		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
 		.rsvp-note a { white-space: nowrap; }
 		.music-toggle {
@@ -449,6 +449,7 @@
 			.map-caption { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 5px 12px; }
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
+			.organizer-credit { width: calc(100% - 40px); }
 			footer { grid-template-columns: auto 1fr; width: calc(100% - 40px); padding: 18px 0 calc(24px + env(safe-area-inset-bottom)); }
 			.footer-links { flex-direction: column; align-items: flex-end; justify-content: center; gap: 8px; white-space: normal; }
 			.rsvp-controls { width: calc(100% - 40px); --rsvp-footer-gap: 24px; }
