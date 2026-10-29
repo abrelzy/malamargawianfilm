@@ -155,8 +155,8 @@
 		.music-status {
 			position: fixed;
 			z-index: 4;
-			bottom: max(20px, env(safe-area-inset-bottom));
-			left: max(18px, env(safe-area-inset-left));
+			right: max(18px, env(safe-area-inset-right));
+			bottom: calc(max(18px, env(safe-area-inset-bottom)) + 90px);
 			max-width: min(260px, calc(100vw - 84px));
 			margin: 0;
 			padding: 7px 10px;
@@ -166,6 +166,7 @@
 			color: #c4c4ca;
 			font-size: 10px;
 			line-height: 1.4;
+			text-align: right;
 			backdrop-filter: blur(8px);
 		}
 		.music-status:empty { display: none; }
@@ -195,6 +196,30 @@
 		}
 		.scroll-cue.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 		.scroll-cue-icon { color: var(--accent); font-size: 15px; line-height: 1; animation: scroll-hint 1.8s ease-in-out infinite; }
+		.scroll-top {
+			position: fixed;
+			z-index: 4;
+			bottom: max(18px, env(safe-area-inset-bottom));
+			left: max(18px, env(safe-area-inset-left));
+			display: grid;
+			width: 36px;
+			height: 36px;
+			place-items: center;
+			border: 1px solid rgba(156, 204, 101, .2);
+			border-radius: 999px;
+			background: rgba(18, 18, 20, .42);
+			box-shadow: 0 4px 14px rgba(0, 0, 0, .16);
+			color: var(--accent);
+			font-size: 18px;
+			line-height: 1;
+			text-decoration: none;
+			backdrop-filter: blur(12px);
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: opacity .2s ease, visibility .2s ease;
+		}
+		.scroll-top.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
 		.rsvp-reminder {
 			width: min(420px, calc(100% - 32px));
 			padding: 30px;
@@ -395,7 +420,7 @@
 <body>
 	<div class="page-shell">
 		<main>
-			<section class="hero" aria-labelledby="hero-title">
+			<section class="hero" id="top" aria-labelledby="hero-title">
 				<div class="invite-card">
 					<div class="invite-brand">
 						<img class="studio-mark" src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
@@ -524,6 +549,7 @@
 	</button>
 	<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack Malamar Gawian)</p>
 	<p class="music-status" id="musicStatus" aria-live="polite"></p>
+	<a class="scroll-top" id="scrollTop" href="#top" aria-label="Scroll to top" title="Scroll to top">↑</a>
 	<audio id="inviteMusic" src="assets/ost-mg.mp3" playsinline preload="auto" loop></audio>
 	<dialog class="rsvp-reminder" id="rsvpReminder" aria-describedby="rsvpReminderMessage">
 		<p id="rsvpReminderMessage">Please complete the RSVP form at the bottom of the page.</p>
@@ -544,6 +570,7 @@
 		const musicLabel = document.getElementById("musicLabel");
 		const musicStatus = document.getElementById("musicStatus");
 		const scrollCue = document.getElementById("scrollCue");
+		const scrollTop = document.getElementById("scrollTop");
 		const rsvpReminder = document.getElementById("rsvpReminder");
 		const rsvpReminderGo = document.getElementById("rsvpReminderGo");
 		let invitationVerified = false;
@@ -623,7 +650,9 @@
 		}
 
 		function updateScrollCue() {
-			scrollCue.classList.toggle("is-hidden", window.scrollY > window.innerHeight * 0.2);
+			const hasScrolled = window.scrollY > window.innerHeight * 0.2;
+			scrollCue.classList.toggle("is-hidden", hasScrolled);
+			scrollTop.classList.toggle("is-visible", hasScrolled);
 		}
 
 		window.addEventListener("scroll", updateScrollCue, { passive: true });
