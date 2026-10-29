@@ -79,14 +79,15 @@
 		.invite-card::before { top: 14px; }
 		.invite-card::after { bottom: 14px; }
 		.invite-brand { position: absolute; top: 26px; left: 28px; display: flex; align-items: flex-start; }
-		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(13px, 2.5vh, 22px) auto; color: var(--accent); font-size: 10px; }
+		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(17px, 3vh, 26px) auto; color: var(--accent); font-size: 10px; }
 		.invite-divider::before, .invite-divider::after { width: 34px; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--accent)); }
 		.invite-divider::after { transform: rotate(180deg); }
 		.eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 9px; letter-spacing: .2em; }
-		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.6; }
-		.invite-recipient { max-width: 350px; margin: 12px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
-		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(15px, 2vh, 17px); font-weight: 700; line-height: 1.45; }
-		.film-logo { display: block; width: min(260px, 76%); max-height: 112px; object-fit: contain; margin: 0 auto 15px; }
+		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
+		.invite-recipient { max-width: 350px; margin: 18px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(15px, 2vh, 17px); font-weight: 700; line-height: 1.55; }
+		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+		.film-logo { display: block; width: min(200px, 70%); max-height: 88px; object-fit: contain; margin: 0 auto 21px; }
 		.hero-title {
 			margin: 0;
 			color: var(--ink);
@@ -96,7 +97,7 @@
 			letter-spacing: .01em;
 			line-height: 1.2;
 		}
-		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(15px, 2.5vh, 22px); border-top: 1px solid var(--line); }
+		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(20px, 3vh, 28px); border-top: 1px solid var(--line); }
 		.hero-event-detail { padding: 12px 7px 11px; }
 		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
 		.hero-event-detail .detail-label { margin-bottom: 5px; font-size: 8px; letter-spacing: .16em; }
@@ -104,6 +105,7 @@
 		.hero-location { grid-column: 1 / -1; padding: 11px 7px 0; border-top: 1px solid var(--line); }
 		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(255, 213, 79, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
 		.music-toggle {
 			position: fixed;
 			z-index: 5;
@@ -238,7 +240,7 @@
 		.rsvp-intro { max-width: 420px; margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
 		.rsvp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 		.field { display: grid; gap: 7px; }
-		.field-name, .field-attendance { grid-column: 1 / -1; }
+		.field-name, .field-attendance, .field-institution { grid-column: 1 / -1; }
 		.field label { color: #a1a1aa; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 		.field input, .field select {
 			width: 100%;
@@ -252,6 +254,7 @@
 			font-size: 13px;
 		}
 		.field input:focus, .field select:focus { border-color: #3e3e44; box-shadow: 0 0 0 2px rgba(244,244,245,.08); }
+		.field input[readonly] { border-color: #303035; background: #202024; color: #a1a1aa; cursor: not-allowed; }
 		.rsvp-submit {
 			grid-column: 1 / -1;
 			display: flex;
@@ -292,14 +295,15 @@
 			.hero { padding: 14px 14px 78px; }
 			.invite-card { min-height: 0; padding: 76px 20px 34px; }
 			.invite-brand { top: 21px; left: 21px; }
-			.invite-divider { margin: 13px auto; }
-			.film-logo { width: min(230px, 74%); max-height: 96px; margin-bottom: 13px; }
-			.invite-intro { font-size: 10px; }
-			.invite-recipient { margin-top: 12px; }
-			.invite-recipient strong { font-size: 15px; }
-			.hero-event-details { margin-top: 17px; }
+			.invite-divider { margin: 15px auto; }
+			.film-logo { width: min(180px, 68%); max-height: 74px; margin-bottom: 17px; }
+			.invite-intro { font-size: 10px; line-height: 1.7; }
+			.invite-recipient { margin-top: 16px; }
+			.invite-recipient strong { font-size: 14px; line-height: 1.5; }
+			.hero-event-details { margin-top: 21px; }
 			.hero-event-detail { padding: 12px 5px; }
 			.hero-location { padding-top: 11px; }
+			.rsvp-note { font-size: 9px; }
 			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
 			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
 			.event-detail:last-child { border-bottom: 0; }
@@ -315,8 +319,9 @@
 			.hero { padding-right: 10px; padding-left: 10px; }
 			.invite-card { padding-right: 15px; padding-left: 15px; }
 			.invite-brand { top: 17px; left: 16px; }
-			.invite-intro { font-size: 10px; }
-			.invite-recipient strong { font-size: 14px; }
+			.invite-intro { font-size: 10px; line-height: 1.65; }
+			.invite-recipient { margin-top: 14px; }
+			.invite-recipient strong { font-size: 13px; }
 			.hero-event-detail .detail-value { font-size: 11px; }
 		}
 		@media (max-height: 680px) and (max-width: 720px) {
@@ -326,14 +331,14 @@
 			.invite-card::after { bottom: 9px; }
 			.invite-brand { top: 14px; left: 15px; }
 			.studio-mark { height: 24px; }
-			.invite-divider { margin: 9px auto; }
+			.invite-divider { margin: 10px auto; }
 			.eyebrow { margin-bottom: 7px; }
-			.invite-intro { font-size: 10px; line-height: 1.4; }
-			.invite-recipient { margin-top: 9px; font-size: 10px; line-height: 1.4; }
-			.invite-recipient strong { margin-top: 0; font-size: 13px; line-height: 1.35; }
-			.film-logo { max-height: 72px; margin-top: 10px; margin-bottom: 10px; }
+			.invite-intro { font-size: 10px; line-height: 1.5; }
+			.invite-recipient { margin-top: 11px; font-size: 10px; line-height: 1.4; }
+			.invite-recipient strong { margin-top: 0; font-size: 12px; line-height: 1.4; }
+			.film-logo { max-height: 58px; margin-top: 8px; margin-bottom: 12px; }
 			.hero-title { font-size: 21px; }
-			.hero-event-details { margin-top: 10px; }
+			.hero-event-details { margin-top: 13px; }
 			.hero-event-detail { padding-top: 8px; padding-bottom: 8px; }
 			.hero-location { padding-top: 8px; }
 			.hero-map-link { margin-top: 5px; padding: 6px 10px; }
@@ -357,7 +362,8 @@
 					<div class="invite-divider" aria-hidden="true"></div>
 					<p class="invite-intro">Ngerujaks Studio dengan bangga mengundang Anda untuk hadir secara eksklusif dalam pemutaran perdana film pendek kami.</p>
 					<p class="invite-recipient">
-						<strong>Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar)<br>Kabupaten Banjar</strong>
+						<strong>Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</strong>
+						<span class="seat-count">Jumlah Kursi: 2</span>
 					</p>
 					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
 						<div class="hero-event-detail">
@@ -372,6 +378,7 @@
 							<span class="detail-label">Lokasi</span>
 							<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)<br>Banjarmasin</p>
 							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Lihat lokasi di peta ↗</a>
+							<p class="rsvp-note">Gulir ke bawah untuk konfirmasi kehadiran.</p>
 						</div>
 					</div>
 				</div>
@@ -426,12 +433,12 @@
 					<div>
 						<p class="section-kicker">Sampai bertemu</p>
 						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
-						<p class="rsvp-intro">Isi nama dan konfirmasi kehadiran. Pesan konfirmasi akan disalin agar dapat dikirimkan kepada panitia.</p>
+						<p class="rsvp-intro">Periksa instansi dan pilihan konfirmasi. Pesan akan disiapkan di WhatsApp untuk ditinjau sebelum dikirim.</p>
 					</div>
 					<form class="rsvp-form" id="rsvpForm">
-						<div class="field field-name">
-							<label for="guestName">Nama</label>
-							<input id="guestName" name="name" autocomplete="name" placeholder="Nama lengkap" required>
+						<div class="field field-institution">
+							<label for="institution">Instansi</label>
+							<input id="institution" name="institution" value="Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar" readonly>
 						</div>
 						<div class="field field-attendance">
 							<label for="attendance">Konfirmasi</label>
@@ -440,7 +447,8 @@
 								<option value="belum dapat hadir">Mohon maaf, saya belum dapat hadir</option>
 							</select>
 						</div>
-						<button class="rsvp-submit" type="submit">Salin pesan konfirmasi <span aria-hidden="true">↗</span></button>
+						<button class="rsvp-submit" type="submit">Kirim konfirmasi <span aria-hidden="true">↗</span></button>
+						<p class="rsvp-note">Jika ada kendala atau perubahan kehadiran, hubungi <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
 						<p class="form-status" id="formStatus" aria-live="polite"></p>
 					</form>
 				</div>
@@ -529,15 +537,18 @@
 
 		startInviteMusic();
 
-		form.addEventListener("submit", async (event) => {
+		form.addEventListener("submit", (event) => {
 			event.preventDefault();
 			const formData = new FormData(form);
-			const message = `Halo panitia Gala Premiere Malamar Gawian, saya ${formData.get("name")} ${formData.get("attendance")}.`;
-			try {
-				await navigator.clipboard.writeText(message);
-				status.textContent = "Pesan disalin. Silakan kirimkan kepada panitia melalui kanal komunikasi undangan ini.";
-			} catch {
-				status.textContent = message;
+			const message = `Halo, saya dari ${formData.get("institution")} mengonfirmasi ${formData.get("attendance")} untuk Gala Premiere Malamar Gawian.`;
+			const whatsappUrl = `https://wa.me/6285194128355?text=${encodeURIComponent(message)}`;
+			const whatsappWindow = window.open(whatsappUrl, "_blank");
+
+			if (whatsappWindow) {
+				whatsappWindow.opener = null;
+				status.textContent = "WhatsApp dibuka dengan pesan konfirmasi. Tinjau pesan lalu tekan Kirim di WhatsApp.";
+			} else {
+				status.textContent = "WhatsApp tidak terbuka. Izinkan pop-up lalu coba lagi.";
 			}
 		});
 
