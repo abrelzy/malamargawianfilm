@@ -111,6 +111,9 @@
 		.hero-location { grid-column: 1 / -1; padding: 11px 7px 0; border-top: 1px solid var(--line); }
 		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(156, 204, 101, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+		.hero-instagram { display: flex; width: fit-content; align-items: center; justify-content: center; gap: 6px; margin: 16px auto 0; color: var(--muted); font-size: 11px; text-decoration: none; }
+		.hero-instagram:hover { color: var(--accent); }
+		.hero-instagram svg { width: 14px; height: 14px; fill: currentColor; }
 		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
 		.rsvp-note a { white-space: nowrap; }
 		.music-toggle {
@@ -452,13 +455,16 @@
 							<span class="detail-label">Location</span>
 							<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)<br>Banjarmasin</p>
 							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">View location on map ↗</a>
-							<p class="rsvp-note">Please scroll down to RSVP.</p>
+							<a class="hero-instagram" href="https://www.instagram.com/malamargawian.film/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @malamargawian.film">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
+								<span>@malamargawian.film</span>
+							</a>
 						</div>
 					</div>
 				</div>
 				<a class="scroll-cue" id="scrollCue" href="#detail-acara" aria-label="Scroll down to view event details">
 					<span class="scroll-cue-icon" aria-hidden="true">↓</span>
-					<span>Scroll for event details</span>
+					<span>Scroll down to RSVP</span>
 				</a>
 			</section>
 
