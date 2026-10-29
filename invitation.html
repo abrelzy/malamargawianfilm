@@ -107,6 +107,7 @@
 		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
 		.hero-event-detail .detail-label { margin-bottom: 5px; font-size: 8px; letter-spacing: .16em; }
 		.hero-event-detail .detail-value { font-size: 11px; line-height: 1.45; }
+		.hero-event-detail .detail-note { color: var(--ink); }
 		.hero-location { grid-column: 1 / -1; padding: 11px 7px 0; border-top: 1px solid var(--line); }
 		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(156, 204, 101, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -439,11 +440,13 @@
 					<div class="hero-event-details" aria-label="Event date, time, and location">
 						<div class="hero-event-detail">
 							<span class="detail-label">Date</span>
-							<p class="detail-value">Saturday, October 31, 2026</p>
+							<p class="detail-value">October 31, 2026</p>
+							<span class="detail-note">Saturday</span>
 						</div>
 						<div class="hero-event-detail">
 							<span class="detail-label">Time</span>
 							<p class="detail-value">10:00 AM WITA</p>
+							<span class="detail-note">Please arrive on time.</span>
 						</div>
 						<div class="hero-location">
 							<span class="detail-label">Location</span>
@@ -493,9 +496,6 @@
 
 			<section class="invitation" aria-labelledby="invitation-title">
 				<h2 id="invitation-title">We look forward to seeing you at the premiere of <br><em>Malamar Gawian</em>.</h2>
-				<div class="invitation-copy">
-					<p>Please arrive on time.</p>
-				</div>
 			</section>
 
 			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
