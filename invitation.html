@@ -111,9 +111,14 @@
 		.hero-location { grid-column: 1 / -1; padding: 11px 7px 0; border-top: 1px solid var(--line); }
 		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(156, 204, 101, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-		.hero-instagram { display: flex; width: fit-content; align-items: center; justify-content: center; gap: 6px; margin: 16px auto 0; color: var(--muted); font-size: 11px; text-decoration: none; }
+		.hero-instagrams { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; margin-top: 16px; }
+		.hero-instagram { display: inline-flex; width: fit-content; align-items: center; justify-content: center; gap: 6px; color: var(--muted); font-size: 11px; text-decoration: none; }
 		.hero-instagram:hover { color: var(--accent); }
 		.hero-instagram svg { width: 14px; height: 14px; fill: currentColor; }
+		.organizer-credit { display: flex; flex-direction: column; align-items: center; gap: 14px; width: min(100%, 1100px); margin: 0 auto; }
+		.organizer-section { padding: 32px 20px 48px; background: #fff; }
+		.organizer-credit span { color: #555; font-size: clamp(12px, 1.5vw, 16px); font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+		.organizer-credit img { display: block; width: 100%; max-width: 1100px; height: auto; }
 		.rsvp-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; font-style: italic; line-height: 1.6; }
 		.rsvp-note a { white-space: nowrap; }
 		.music-toggle {
@@ -269,6 +274,7 @@
 		.detail-label { display: block; margin-bottom: 9px; color: var(--accent); }
 		.detail-value { margin: 0; color: var(--ink); font-size: 14px; font-weight: 600; line-height: 1.55; }
 		.detail-note { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+		.map-invitation { background: #09090b; }
 		.map-preview {
 			width: min(100% - 48px, 920px);
 			margin: 20px auto 0;
@@ -430,7 +436,9 @@
 			.hero-event-detail { padding: clamp(6px, 1.4vh, 12px) 5px; }
 			.hero-location { padding-top: clamp(6px, 1.3vh, 11px); }
 			.hero-map-link { margin-top: clamp(4px, 1vh, 9px); }
-			.hero-instagram { margin-top: clamp(8px, 1.9vh, 16px); }
+			.hero-instagrams { margin-top: clamp(8px, 1.9vh, 16px); }
+			.hero-instagrams { flex-wrap: nowrap; gap: 7px; }
+			.hero-instagram { gap: 4px; font-size: 9px; }
 			.rsvp-note { font-size: 9px; }
 			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
 			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -512,10 +520,16 @@
 							<span class="detail-label">Location</span>
 							<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)<br>Banjarmasin</p>
 							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">View location on map ↗</a>
+							<div class="hero-instagrams" aria-label="Instagram accounts">
 							<a class="hero-instagram" href="https://www.instagram.com/malamargawian.film/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @malamargawian.film">
 								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
 								<span>@malamargawian.film</span>
 							</a>
+							<a class="hero-instagram" href="https://www.instagram.com/ngerujaks.studio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @ngerujaks.studio">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
+								<span>@ngerujaks.studio</span>
+							</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -525,41 +539,50 @@
 				</a>
 			</section>
 
-			<section class="event-band" id="detail-acara" aria-label="Gala Premiere details">
-				<div class="event-detail">
-					<span class="detail-label">Date</span>
-					<p class="detail-value">Saturday, October 31, 2026</p>
-				</div>
-				<div class="event-detail">
-					<span class="detail-label">Time</span>
-					<p class="detail-value">10:00 AM WITA</p>
-					<span class="detail-note">Until the event concludes</span>
-				</div>
-				<div class="event-detail">
-					<span class="detail-label">Location</span>
-					<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)</p>
-					<span class="detail-note">Banjarmasin</span>
-				</div>
-			</section>
+			<div class="map-invitation">
+				<section class="event-band" id="detail-acara" aria-label="Gala Premiere details">
+					<div class="event-detail">
+						<span class="detail-label">Date</span>
+						<p class="detail-value">Saturday, October 31, 2026</p>
+					</div>
+					<div class="event-detail">
+						<span class="detail-label">Time</span>
+						<p class="detail-value">10:00 AM WITA</p>
+						<span class="detail-note">Until the event concludes</span>
+					</div>
+					<div class="event-detail">
+						<span class="detail-label">Location</span>
+						<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)</p>
+						<span class="detail-note">Banjarmasin</span>
+					</div>
+				</section>
 
-			<section class="map-preview" aria-label="Event location map preview">
-				<iframe
-					class="map-frame"
-					src="https://www.google.com/maps?q=Kota%20Cinema%20Mall%20Belitung%20Darat%20KCM%20Belda%20Banjarmasin&output=embed"
-					title="Map of Kota Cinema Mall Belitung Darat, Banjarmasin"
-					loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"
-					allowfullscreen>
-				</iframe>
-				<div class="map-caption">
-					<span>Kota Cinema Mall Belitung Darat · Banjarmasin</span>
-					<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a>
-				</div>
-			</section>
+				<section class="map-preview" aria-label="Event location map preview">
+					<iframe
+						class="map-frame"
+						src="https://www.google.com/maps?q=Kota%20Cinema%20Mall%20Belitung%20Darat%20KCM%20Belda%20Banjarmasin&output=embed"
+						title="Map of Kota Cinema Mall Belitung Darat, Banjarmasin"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						allowfullscreen>
+					</iframe>
+					<div class="map-caption">
+						<span>Kota Cinema Mall Belitung Darat · Banjarmasin</span>
+						<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a>
+					</div>
+				</section>
 
-			<section class="invitation" aria-labelledby="invitation-title">
-				<h2 id="invitation-title">We look forward to seeing you at the premiere of <br><em>Malamar Gawian</em>.</h2>
-			</section>
+				<section class="invitation" aria-labelledby="invitation-title">
+					<h2 id="invitation-title">We look forward to seeing you at the premiere of <br><em>Malamar Gawian</em>.</h2>
+				</section>
+
+				<section class="organizer-section" aria-label="Organized by">
+					<div class="organizer-credit">
+						<span>Organized by</span>
+						<img src="assets/logo2bff.png" alt="Banjarmasin Film Festival and partners">
+					</div>
+				</section>
+			</div>
 
 			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
 				<div class="rsvp">
@@ -616,6 +639,10 @@
 				<a href="https://www.instagram.com/malamargawian.film/" target="_blank" rel="noopener noreferrer">
 					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
 					@malamargawian.film
+				</a>
+				<a href="https://www.instagram.com/ngerujaks.studio/" target="_blank" rel="noopener noreferrer">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg>
+					@ngerujaks.studio
 				</a>
 			</div>
 		</footer>
