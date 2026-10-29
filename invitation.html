@@ -543,6 +543,7 @@
 		const musicStatus = document.getElementById("musicStatus");
 		const scrollCue = document.getElementById("scrollCue");
 		const rsvpReminder = document.getElementById("rsvpReminder");
+		const rsvpReminderGo = document.getElementById("rsvpReminderGo");
 		let invitationVerified = false;
 		let activeRsvpRequestId = "";
 		const invitationLinkMessage = "Load your data, please wait...";
@@ -606,7 +607,10 @@
 			document.head.append(script);
 		}
 
-		document.getElementById("rsvpReminderGo").addEventListener("click", () => rsvpReminder.close());
+		rsvpReminderGo.addEventListener("click", () => {
+			rsvpReminder.close();
+			if (music.paused || music.muted) enableMusicAfterInteraction();
+		});
 		rsvpReminder.showModal();
 
 		if (RSVP_API_URL) {
@@ -680,13 +684,20 @@
 		}
 
 		function handleFirstPointerInteraction(event) {
-			if (event.target instanceof Element && !event.target.closest("#musicToggle")) {
+			if (event.target instanceof Element
+				&& !event.target.closest("#musicToggle")
+				&& !event.target.closest("#rsvpReminder")) {
 				enableMusicAfterInteraction();
 			}
 		}
 
+		function handleFirstKeyInteraction(event) {
+			if (rsvpReminder.open && event.target !== rsvpReminderGo) return;
+			enableMusicAfterInteraction();
+		}
+
 		document.addEventListener("pointerdown", handleFirstPointerInteraction);
-		document.addEventListener("keydown", enableMusicAfterInteraction);
+		document.addEventListener("keydown", handleFirstKeyInteraction);
 
 		window.addEventListener("message", event => {
 			const trustedResponseOrigin = event.origin === "https://script.google.com"
