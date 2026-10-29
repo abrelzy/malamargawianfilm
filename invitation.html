@@ -1,12 +1,15 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#09090b">
-	<meta name="description" content="Undangan Gala Premiere film Malamar Gawian. Mari bertemu dan menyaksikan ceritanya bersama.">
+	<meta name="description" content="An invitation to the Malamar Gawian film premiere. Join us for this special screening.">
 	<title>Gala Premiere — Malamar Gawian</title>
 	<link rel="icon" type="image/png" href="images/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<style>
 		:root {
 			color-scheme: dark;
@@ -24,7 +27,7 @@
 			margin: 0;
 			background: var(--paper);
 			color: var(--ink);
-			font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 			-webkit-font-smoothing: antialiased;
 		}
 		a { color: inherit; }
@@ -87,18 +90,18 @@
 		.eyebrow { margin: 0 0 9px; color: var(--accent); font-size: 12px; letter-spacing: .16em; }
 		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
 		.invite-recipient { max-width: 350px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
-		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(18px, 2.4vh, 21px); font-weight: 700; line-height: 1.45; }
+		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: "Playfair Display", Georgia, serif; font-size: clamp(18px, 2.4vh, 21px); font-weight: 700; line-height: 1.45; }
 		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
 		.hero-title {
 			margin: 0;
 			color: var(--ink);
-			font-family: Georgia, serif;
+			font-family: "Playfair Display", Georgia, serif;
 			font-size: clamp(23px, 3.8vw, 29px);
 			font-weight: 500;
 			letter-spacing: .01em;
 			line-height: 1.2;
 		}
-		.film-subtitle { margin: 5px 0 0; color: var(--accent); font-family: Georgia, serif; font-size: clamp(13px, 1.8vw, 15px); font-style: italic; letter-spacing: .03em; line-height: 1.4; }
+		.film-subtitle { margin: 5px 0 0; color: var(--accent); font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(16px, 2vw, 19px); font-style: italic; font-weight: 600; letter-spacing: .03em; line-height: 1.4; }
 		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(20px, 3vh, 28px); border-top: 1px solid var(--line); }
 		.hero-event-detail { padding: 12px 7px 11px; }
 		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
@@ -238,7 +241,7 @@
 		.section-kicker { margin: 0 0 12px; color: var(--accent); }
 		.invitation h2, .rsvp h2 {
 			margin: 0;
-			font-family: Georgia, serif;
+			font-family: "Playfair Display", Georgia, serif;
 			font-size: clamp(26px, 3.5vw, 34px);
 			font-weight: 500;
 			line-height: 1.15;
@@ -382,103 +385,103 @@
 					</div>
 					<img class="bff-mark" src="images/logo-bff.png" alt="BFF">
 					<img class="film-logo" src="images/logo-mg3.png" alt="Malamar Gawian">
-					<p class="eyebrow">Undangan eksklusif</p>
+					<p class="eyebrow">Exclusive Invitation</p>
 					<h1 class="hero-title" id="hero-title">GALA PREMIERE</h1>
-					<p class="film-subtitle">Film Malamar Gawian</p>
+					<p class="film-subtitle">Malamar Gawian Film</p>
 					<div class="invite-divider" aria-hidden="true"></div>
 					<p class="invite-recipient">
-						<strong id="recipientOrganization">Load your data, please wait...</strong>
+						<strong id="recipientOrganization">Loading your invitation, please wait...</strong>
 						<span class="seat-count" id="seatCount"></span>
 					</p>
-					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
+					<div class="hero-event-details" aria-label="Event date, time, and location">
 						<div class="hero-event-detail">
-							<span class="detail-label">Tanggal</span>
-							<p class="detail-value">Sabtu, 31 Oktober 2026</p>
+							<span class="detail-label">Date</span>
+							<p class="detail-value">Saturday, October 31, 2026</p>
 						</div>
 						<div class="hero-event-detail">
-							<span class="detail-label">Waktu</span>
-							<p class="detail-value">10.00 WITA · Sampai selesai</p>
+							<span class="detail-label">Time</span>
+							<p class="detail-value">10:00 AM WITA</p>
 						</div>
 						<div class="hero-location">
-							<span class="detail-label">Lokasi</span>
+							<span class="detail-label">Location</span>
 							<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)<br>Banjarmasin</p>
-							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Lihat lokasi di peta ↗</a>
-							<p class="rsvp-note">Gulir ke bawah untuk konfirmasi kehadiran.</p>
+							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">View location on map ↗</a>
+							<p class="rsvp-note">Scroll down to RSVP.</p>
 						</div>
 					</div>
 				</div>
-				<a class="scroll-cue" id="scrollCue" href="#detail-acara" aria-label="Gulir ke bawah untuk melihat detail acara">
+				<a class="scroll-cue" id="scrollCue" href="#detail-acara" aria-label="Scroll down to view event details">
 					<span class="scroll-cue-icon" aria-hidden="true">↓</span>
-					<span>Gulir untuk detail acara</span>
+					<span>Scroll for event details</span>
 				</a>
 			</section>
 
-			<section class="event-band" id="detail-acara" aria-label="Detail Gala Premiere">
+			<section class="event-band" id="detail-acara" aria-label="Gala Premiere details">
 				<div class="event-detail">
-					<span class="detail-label">Tanggal</span>
-					<p class="detail-value">Sabtu, 31 Oktober 2026</p>
+					<span class="detail-label">Date</span>
+					<p class="detail-value">Saturday, October 31, 2026</p>
 				</div>
 				<div class="event-detail">
-					<span class="detail-label">Waktu</span>
-					<p class="detail-value">10.00 WITA</p>
-					<span class="detail-note">Sampai selesai</span>
+					<span class="detail-label">Time</span>
+					<p class="detail-value">10:00 AM WITA</p>
+					<span class="detail-note">Until the event concludes</span>
 				</div>
 				<div class="event-detail">
-					<span class="detail-label">Lokasi</span>
+					<span class="detail-label">Location</span>
 					<p class="detail-value">Kota Cinema Mall Belitung Darat (KCM Belda)</p>
 					<span class="detail-note">Banjarmasin</span>
 				</div>
 			</section>
 
-			<section class="map-preview" aria-label="Pratinjau peta lokasi acara">
+			<section class="map-preview" aria-label="Event location map preview">
 				<iframe
 					class="map-frame"
 					src="https://www.google.com/maps?q=Kota%20Cinema%20Mall%20Belitung%20Darat%20KCM%20Belda%20Banjarmasin&output=embed"
-					title="Peta Kota Cinema Mall Belitung Darat, Banjarmasin"
+					title="Map of Kota Cinema Mall Belitung Darat, Banjarmasin"
 					loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade"
 					allowfullscreen>
 				</iframe>
 				<div class="map-caption">
 					<span>Kota Cinema Mall Belitung Darat · Banjarmasin</span>
-					<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Buka di Google Maps ↗</a>
+					<a href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a>
 				</div>
 			</section>
 
 			<section class="invitation" aria-labelledby="invitation-title">
-				<h2 id="invitation-title">Sampai bertemu di pemutaran perdana <br><em>film Malamar Gawian</em>.</h2>
+				<h2 id="invitation-title">We look forward to seeing you at the premiere of <br><em>Malamar Gawian</em>.</h2>
 				<div class="invitation-copy">
-					<p>Dimohon untuk hadir tepat waktu.</p>
+					<p>Please arrive on time.</p>
 				</div>
 			</section>
 
 			<section class="rsvp-wrap" id="konfirmasi" aria-labelledby="rsvp-title">
 				<div class="rsvp">
 					<div>
-						<h2 id="rsvp-title">Beri kabar kehadiran Anda.</h2>
-						<p class="rsvp-intro">Anda dapat mengirim konfirmasi ulang jika ingin mengubah status kehadiran.</p>
+						<h2 id="rsvp-title">Please confirm your attendance.</h2>
+						<p class="rsvp-intro">You can submit your RSVP again if you need to change your attendance.</p>
 					</div>
 					<form class="rsvp-form" id="rsvpForm">
 						<div class="field field-institution">
-							<label for="institution">Undangan</label>
+							<label for="institution">Invitation</label>
 							<input id="institution" name="institution" value="" readonly>
 						</div>
 						<div class="field field-attendance">
-							<label for="attendance">Konfirmasi</label>
+							<label for="attendance">Attendance</label>
 							<select id="attendance" name="attendance">
-								<option value="akan hadir">Dengan senang hati, saya akan hadir</option>
-								<option value="belum dapat hadir">Mohon maaf, saya belum dapat hadir</option>
+								<option value="akan hadir">Yes, I will attend</option>
+								<option value="belum dapat hadir">Sorry, I can't attend</option>
 							</select>
 						</div>
 						<input type="hidden" name="action" value="rsvp">
 						<input type="hidden" name="id" id="rsvpInvitationId">
 						<input type="hidden" name="code" id="rsvpInvitationCode">
 						<input type="hidden" name="request_id" id="rsvpRequestId">
-						<button class="rsvp-submit" type="submit">Kirim konfirmasi <span aria-hidden="true">↗</span></button>
-						<p class="rsvp-note">Jika ada kendala atau perubahan kehadiran, hubungi <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
+						<button class="rsvp-submit" type="submit">Submit RSVP <span aria-hidden="true">↗</span></button>
+						<p class="rsvp-note">For assistance or to update your attendance, contact <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
 						<p class="form-status" id="formStatus" aria-live="polite"></p>
 					</form>
-					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="Respons penyimpanan RSVP" hidden></iframe>
+					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP submission response" hidden></iframe>
 				</div>
 			</section>
 		</main>
@@ -498,9 +501,9 @@
 		</footer>
 	</div>
 
-	<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Putar musik undangan">
+	<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Turn invitation music on">
 		<span id="musicIcon" aria-hidden="true">♫</span>
-		<span class="music-toggle-label" id="musicLabel">Aktifkan suara</span>
+		<span class="music-toggle-label" id="musicLabel">Turn music on</span>
 	</button>
 	<p class="now-playing"><span>NOW PLAYING</span>Ignas Refian - Tak Usah Sempurna<br>(Official Soundtrack Malamar Gawian)</p>
 	<p class="music-status" id="musicStatus" aria-live="polite"></p>
@@ -534,10 +537,10 @@
 			}
 
 			submitButton.disabled = true;
-			status.textContent = "Memuat data undangan...";
+			status.textContent = "Loading your invitation...";
 			const callbackName = `mgInvitation_${Date.now()}_${Math.random().toString(36).slice(2)}`;
 			const script = document.createElement("script");
-			const timeout = window.setTimeout(() => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman."), 12000);
+			const timeout = window.setTimeout(() => finish(null, "Unable to load your invitation. Please refresh the page."), 12000);
 
 			function finish(data, errorMessage) {
 				window.clearTimeout(timeout);
@@ -546,12 +549,12 @@
 				if (!data || !data.ok) {
 					document.getElementById("recipientOrganization").textContent = invitationLinkMessage;
 					document.getElementById("seatCount").textContent = "";
-					status.textContent = errorMessage || data?.message || "Tautan undangan tidak valid.";
+					status.textContent = errorMessage || "This invitation link is invalid.";
 					return;
 				}
 
 				document.getElementById("recipientOrganization").textContent = data.invitation.organization || data.invitation.name;
-				document.getElementById("seatCount").textContent = `Jumlah Kursi: ${data.invitation.seats}`;
+				document.getElementById("seatCount").textContent = `Seats: ${data.invitation.seats}`;
 				document.getElementById("institution").value = data.invitation.organization || data.invitation.name;
 				document.getElementById("rsvpInvitationId").value = id;
 				document.getElementById("rsvpInvitationCode").value = code;
@@ -562,13 +565,16 @@
 				}
 				invitationVerified = true;
 				submitButton.disabled = false;
+				const attendanceLabel = data.invitation.attendance === "Hadir"
+					? "Attending"
+					: data.invitation.attendance === "Tidak hadir" ? "Not attending" : "";
 				status.textContent = data.invitation.attendance
-					? `Konfirmasi terakhir: ${data.invitation.attendance}. Kamu dapat mengubah pilihan lalu mengirim ulang.`
+					? `Your latest RSVP: ${attendanceLabel}. You can change your selection and submit again.`
 					: "";
 			}
 
 			window[callbackName] = data => finish(data, "");
-			script.onerror = () => finish(null, "Data undangan tidak dapat dimuat. Coba muat ulang halaman.");
+			script.onerror = () => finish(null, "Unable to load your invitation. Please refresh the page.");
 			const requestUrl = new URL(RSVP_API_URL);
 			requestUrl.searchParams.set("action", "lookup");
 			requestUrl.searchParams.set("id", id);
@@ -595,9 +601,9 @@
 		function updateMusicToggle(isPlaying) {
 			const soundEnabled = isPlaying && !music.muted;
 			musicToggle.setAttribute("aria-pressed", String(soundEnabled));
-			musicToggle.setAttribute("aria-label", soundEnabled ? "Matikan suara musik undangan" : "Aktifkan suara musik undangan");
+			musicToggle.setAttribute("aria-label", soundEnabled ? "Turn invitation music off" : "Turn invitation music on");
 			musicIcon.textContent = soundEnabled ? "♫" : "♪";
-			musicLabel.textContent = soundEnabled ? "Matikan suara" : "Aktifkan suara";
+			musicLabel.textContent = soundEnabled ? "Turn music off" : "Turn music on";
 		}
 
 		function removeMusicUnlockListeners() {
@@ -620,8 +626,8 @@
 				}
 			} catch (error) {
 				updateMusicToggle(false);
-				musicStatus.textContent = "Musik tidak dapat diputar. Periksa file audio atau coba lagi.";
-				console.error("Gagal memutar musik undangan:", error);
+				musicStatus.textContent = "Music could not be played. Check the audio file or try again.";
+				console.error("Could not play invitation music:", error);
 			}
 		});
 
@@ -629,7 +635,7 @@
 		music.addEventListener("pause", () => updateMusicToggle(false));
 		music.addEventListener("volumechange", () => updateMusicToggle(!music.paused));
 		music.addEventListener("error", () => {
-			musicStatus.textContent = "File musik tidak dapat dimuat.";
+			musicStatus.textContent = "The music file could not be loaded.";
 		});
 
 		async function enableMusicAfterInteraction() {
@@ -641,9 +647,9 @@
 				removeMusicUnlockListeners();
 			} catch (error) {
 				updateMusicToggle(false);
-				musicStatus.textContent = "Ketuk ikon musik untuk menyalakan suara.";
+				musicStatus.textContent = "Tap the music icon to turn on sound.";
 				if (error.name !== "NotAllowedError") {
-					console.error("Gagal memutar musik undangan setelah interaksi:", error);
+					console.error("Could not play invitation music after interaction:", error);
 				}
 			}
 		}
@@ -667,35 +673,36 @@
 			activeRsvpRequestId = "";
 			submitButton.disabled = false;
 			status.textContent = result.ok
-				? `Konfirmasi tersimpan sebagai "${result.attendance}". Jika berubah, kamu dapat kirim konfirmasi ulang.`
-				: result.message || "Konfirmasi belum berhasil disimpan. Coba lagi.";
+				? `Your RSVP has been saved as "${result.attendance === "Hadir" ? "Attending" : "Not attending"}". You can submit again if it changes.`
+				: "Your RSVP could not be saved. Please try again.";
 		});
 
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
 			if (RSVP_API_URL) {
 				if (!invitationVerified) {
-					status.textContent = "Data undangan belum terverifikasi. Muat ulang halaman lalu coba kembali.";
+					status.textContent = "Your invitation has not been verified. Refresh the page and try again.";
 					return;
 				}
 				activeRsvpRequestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 				document.getElementById("rsvpRequestId").value = activeRsvpRequestId;
 				submitButton.disabled = true;
-				status.textContent = "Menyimpan konfirmasi...";
+				status.textContent = "Saving your RSVP...";
 				HTMLFormElement.prototype.submit.call(form);
 				return;
 			}
 
 			const formData = new FormData(form);
-			const message = `Halo, saya dari ${formData.get("institution")} mengonfirmasi ${formData.get("attendance")} untuk Gala Premiere Malamar Gawian.`;
+			const attendance = formData.get("attendance") === "akan hadir" ? "will attend" : "will not be able to attend";
+			const message = `Hello, I am representing ${formData.get("institution")} and would like to confirm that we ${attendance} the Malamar Gawian Gala Premiere.`;
 			const whatsappUrl = `https://wa.me/6285194128355?text=${encodeURIComponent(message)}`;
 			const whatsappWindow = window.open(whatsappUrl, "_blank");
 
 			if (whatsappWindow) {
 				whatsappWindow.opener = null;
-				status.textContent = "WhatsApp dibuka dengan pesan konfirmasi. Tinjau pesan lalu tekan Kirim di WhatsApp.";
+				status.textContent = "WhatsApp opened with your RSVP message. Review it, then tap Send in WhatsApp.";
 			} else {
-				status.textContent = "WhatsApp tidak terbuka. Izinkan pop-up lalu coba lagi.";
+				status.textContent = "WhatsApp did not open. Allow pop-ups and try again.";
 			}
 		});
 
