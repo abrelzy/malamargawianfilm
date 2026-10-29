@@ -88,7 +88,6 @@
 		.invite-intro { max-width: 350px; margin: 0; color: #a1a1aa; font-size: 11px; line-height: 1.75; }
 		.invite-recipient { max-width: 350px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
 		.invite-recipient strong { display: block; margin-top: 0; color: var(--ink); font-family: Georgia, serif; font-size: clamp(15px, 2vh, 17px); font-weight: 700; line-height: 1.55; }
-		.recipient-organization { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 		.seat-count { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
 		.hero-title {
 			margin: 0;
@@ -388,8 +387,7 @@
 					<p class="film-subtitle">Film Malamar Gawian</p>
 					<div class="invite-divider" aria-hidden="true"></div>
 					<p class="invite-recipient">
-						<strong id="recipientName">Ibu Yuyun</strong>
-						<span class="recipient-organization" id="recipientOrganization">Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</span>
+						<strong id="recipientOrganization">Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</strong>
 						<span class="seat-count" id="seatCount">Jumlah Kursi: 2</span>
 					</p>
 					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
@@ -548,8 +546,7 @@
 					return;
 				}
 
-				document.getElementById("recipientName").textContent = data.invitation.name;
-				document.getElementById("recipientOrganization").textContent = data.invitation.organization;
+				document.getElementById("recipientOrganization").textContent = data.invitation.organization || data.invitation.name;
 				document.getElementById("seatCount").textContent = `Jumlah Kursi: ${data.invitation.seats}`;
 				document.getElementById("institution").value = data.invitation.organization || data.invitation.name;
 				document.getElementById("rsvpInvitationId").value = id;
