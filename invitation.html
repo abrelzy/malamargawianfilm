@@ -44,70 +44,91 @@
 		.hero {
 			display: grid;
 			place-items: center;
+			min-height: 100vh;
 			min-height: 100svh;
-			padding: 22px;
+			padding: clamp(16px, 4vh, 36px) 18px;
 			text-align: center;
 			background:
-				radial-gradient(ellipse at 50% 42%, rgba(255, 152, 0, .07), transparent 52%),
+				radial-gradient(ellipse at 50% 30%, rgba(255, 152, 0, .1), transparent 58%),
 				var(--paper);
 		}
 		.invite-card {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			width: min(100%, 560px);
-			min-height: calc(100svh - 44px);
-			padding: clamp(24px, 5vh, 48px) clamp(22px, 6vw, 56px);
-			border: 1px solid #29292d;
-			border-radius: 8px;
-			background: rgba(18, 18, 20, .88);
-			box-shadow: 0 24px 80px rgba(0, 0, 0, .22);
+			width: min(100%, 520px);
+			min-height: min(780px, calc(100svh - 72px));
+			padding: clamp(28px, 6vh, 54px) clamp(22px, 7vw, 58px);
+			border: 1px solid rgba(255, 213, 79, .22);
+			border-radius: 4px;
+			background: linear-gradient(160deg, rgba(24, 23, 22, .97), rgba(13, 13, 15, .97));
+			box-shadow: 0 28px 90px rgba(0, 0, 0, .42), inset 0 0 0 5px rgba(255, 255, 255, .018);
 		}
+		.invite-card::before, .invite-card::after {
+			position: absolute;
+			left: 50%;
+			width: 54px;
+			height: 1px;
+			content: "";
+			transform: translateX(-50%);
+			background: linear-gradient(90deg, transparent, var(--accent), transparent);
+		}
+		.invite-card::before { top: 14px; }
+		.invite-card::after { bottom: 14px; }
 		.invite-brand { display: grid; justify-items: center; gap: 8px; }
-		.invite-brand .studio-mark { width: 108px; height: 40px; }
-		.invite-brand .topbar-label { font-size: 9px; }
-		.invite-divider { width: 36px; height: 1px; margin: 22px auto; background: linear-gradient(90deg, var(--accent), var(--accent-end)); }
-		.eyebrow { margin: 0 0 10px; color: var(--accent); }
-		.invite-intro { max-width: 390px; margin: 0; color: #d4d4d8; font-family: Georgia, serif; font-size: clamp(15px, 2.2vh, 18px); line-height: 1.55; }
-		.invite-recipient { margin: 18px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
-		.invite-recipient strong { display: block; margin-top: 5px; color: var(--ink); font-size: 13px; font-weight: 600; }
-		.film-logo { display: block; width: min(280px, 78%); max-height: 100px; object-fit: contain; margin: 22px auto 10px; }
+		.invite-brand .studio-mark { width: 102px; height: 38px; }
+		.invite-brand .topbar-label { font-size: 9px; letter-spacing: .18em; }
+		.invite-divider { display: flex; align-items: center; gap: 9px; margin: clamp(16px, 3vh, 28px) auto; color: var(--accent); font-size: 10px; }
+		.invite-divider::before, .invite-divider::after { width: 34px; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--accent)); }
+		.invite-divider::after { transform: rotate(180deg); }
+		.eyebrow { margin: 0 0 12px; color: var(--accent); }
+		.invite-intro { max-width: 380px; margin: 0; color: #d4d4d8; font-family: Georgia, serif; font-size: clamp(16px, 2.4vh, 19px); line-height: 1.6; }
+		.invite-recipient { max-width: 380px; margin: clamp(16px, 3vh, 24px) 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+		.invite-recipient strong { display: block; margin-top: 5px; color: var(--ink); font-family: Georgia, serif; font-size: 15px; font-weight: 500; line-height: 1.5; }
+		.film-logo { display: block; width: min(250px, 76%); max-height: 88px; object-fit: contain; margin: clamp(17px, 3vh, 26px) auto 8px; }
 		.hero-title {
 			margin: 0;
 			color: var(--ink);
 			font-family: Georgia, serif;
-			font-size: clamp(22px, 4vw, 30px);
+			font-size: clamp(23px, 4vw, 31px);
 			font-weight: 500;
 			line-height: 1.12;
 		}
-		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: 22px; border-top: 1px solid var(--line); }
-		.hero-event-detail { padding: 14px 8px 0; }
+		.hero-event-details { display: grid; grid-template-columns: 1fr 1fr; width: 100%; margin-top: clamp(17px, 3vh, 25px); border-top: 1px solid var(--line); }
+		.hero-event-detail { padding: 13px 7px 12px; }
 		.hero-event-detail + .hero-event-detail { border-left: 1px solid var(--line); }
 		.hero-event-detail .detail-label { margin-bottom: 6px; font-size: 9px; }
 		.hero-event-detail .detail-value { font-size: 12px; }
-		.hero-location { grid-column: 1 / -1; padding: 11px 8px 0; border-top: 1px solid var(--line); }
-		.hero-map-link { display: inline-block; margin-top: 8px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
+		.hero-location { grid-column: 1 / -1; padding: 12px 7px 0; border-top: 1px solid var(--line); }
+		.hero-map-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; padding: 8px 12px; border: 1px solid rgba(255, 213, 79, .3); border-radius: 999px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-decoration: none; text-transform: uppercase; }
 		.hero-map-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 		.music-toggle {
+			position: fixed;
+			z-index: 5;
+			right: max(18px, env(safe-area-inset-right));
+			bottom: max(18px, env(safe-area-inset-bottom));
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
 			gap: 9px;
-			min-height: 36px;
-			margin-top: 17px;
-			padding: 0 14px;
-			border: 1px solid var(--line);
+			min-height: 46px;
+			padding: 0 17px;
+			border: 1px solid rgba(255, 213, 79, .48);
 			border-radius: 999px;
-			background: #18181b;
+			background: rgba(18, 18, 20, .94);
+			box-shadow: 0 8px 26px rgba(0, 0, 0, .38);
 			color: var(--ink);
 			cursor: pointer;
-			font-size: 10px;
+			font-size: 11px;
 			font-weight: 600;
-			letter-spacing: .05em;
+			letter-spacing: .03em;
+			backdrop-filter: blur(12px);
 		}
-		.music-toggle:hover { border-color: #3e3e44; }
-		.music-status { min-height: 14px; margin: 6px 0 0; color: var(--muted); font-size: 10px; }
+		.music-toggle:hover { background: #222124; }
+		.music-toggle[aria-pressed="true"] #musicIcon { color: var(--accent); }
+		.music-status { position: fixed; z-index: 4; right: 20px; bottom: 72px; max-width: min(280px, calc(100vw - 40px)); margin: 0; color: var(--muted); font-size: 10px; text-align: right; }
 
 		.event-band {
 			display: grid;
@@ -225,17 +246,16 @@
 		.share-button:hover { color: var(--accent); }
 
 		@media (max-width: 720px) {
-			.hero { padding: 14px; }
-			.invite-card { min-height: calc(100svh - 28px); padding: 22px 20px; }
-			.invite-divider { margin: 16px auto; }
-			.invite-intro { font-size: 15px; }
-			.invite-recipient { margin-top: 14px; }
-			.film-logo { width: min(240px, 75%); max-height: 84px; margin-top: 17px; }
+			.hero { padding: 14px 14px 78px; }
+			.invite-card { min-height: 0; padding: 34px 20px; }
+			.invite-divider { margin: 17px auto; }
+			.invite-intro { font-size: 16px; }
+			.invite-recipient { margin-top: 16px; }
+			.invite-recipient strong { font-size: 14px; }
+			.film-logo { width: min(230px, 72%); max-height: 78px; margin-top: 18px; }
 			.hero-event-details { margin-top: 17px; }
-			.hero-event-detail { padding-top: 11px; }
-			.hero-location { padding-top: 9px; }
-			.music-toggle { margin-top: 12px; }
-			.music-status { margin-top: 4px; }
+			.hero-event-detail { padding: 12px 5px; }
+			.hero-location { padding-top: 11px; }
 			.event-band { grid-template-columns: 1fr; width: calc(100% - 40px); padding: 8px 0; }
 			.event-detail, .event-detail:first-child, .event-detail:last-child { padding: 15px 0; border-right: 0; border-bottom: 1px solid var(--line); }
 			.event-detail:last-child { border-bottom: 0; }
@@ -246,6 +266,33 @@
 			.invitation { padding: 40px 24px 44px; }
 			.rsvp { grid-template-columns: 1fr; gap: 22px; padding: 34px 20px; }
 			footer { flex-wrap: wrap; width: calc(100% - 40px); padding: 18px 0; }
+		}
+		@media (max-width: 380px) {
+			.hero { padding-right: 10px; padding-left: 10px; }
+			.invite-card { padding-right: 15px; padding-left: 15px; }
+			.invite-intro { font-size: 15px; }
+			.invite-recipient strong { font-size: 13px; }
+			.hero-event-detail .detail-value { font-size: 11px; }
+		}
+		@media (max-height: 680px) and (max-width: 720px) {
+			.hero { padding-top: 8px; padding-bottom: 66px; }
+			.invite-card { padding-top: 22px; padding-bottom: 22px; }
+			.invite-card::before { top: 9px; }
+			.invite-card::after { bottom: 9px; }
+			.invite-brand { gap: 4px; }
+			.invite-brand .studio-mark { height: 30px; }
+			.invite-brand .topbar-label { font-size: 8px; }
+			.invite-divider { margin: 9px auto; }
+			.eyebrow { margin-bottom: 7px; }
+			.invite-intro { font-size: 14px; line-height: 1.4; }
+			.invite-recipient { margin-top: 9px; font-size: 10px; line-height: 1.4; }
+			.invite-recipient strong { margin-top: 3px; font-size: 12px; line-height: 1.35; }
+			.film-logo { max-height: 54px; margin-top: 10px; margin-bottom: 5px; }
+			.hero-title { font-size: 21px; }
+			.hero-event-details { margin-top: 10px; }
+			.hero-event-detail { padding-top: 8px; padding-bottom: 8px; }
+			.hero-location { padding-top: 8px; }
+			.hero-map-link { margin-top: 5px; padding: 6px 10px; }
 		}
 		@media (prefers-reduced-motion: reduce) {
 			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
@@ -285,11 +332,6 @@
 							<a class="hero-map-link" href="https://maps.app.goo.gl/L5PSD3upiTbVFq97A" target="_blank" rel="noopener noreferrer">Lihat lokasi di peta ↗</a>
 						</div>
 					</div>
-					<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Putar musik undangan">
-						<span id="musicIcon" aria-hidden="true">▶</span>
-						<span id="musicLabel">Putar musik</span>
-					</button>
-					<p class="music-status" id="musicStatus" aria-live="polite"></p>
 				</div>
 			</section>
 
@@ -366,7 +408,12 @@
 		</footer>
 	</div>
 
-	<audio id="inviteMusic" src="assets/ost-mg.mp3" preload="none" loop></audio>
+	<button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Putar musik undangan">
+		<span id="musicIcon" aria-hidden="true">▶</span>
+		<span id="musicLabel">Putar musik</span>
+	</button>
+	<p class="music-status" id="musicStatus" aria-live="polite"></p>
+	<audio id="inviteMusic" src="assets/ost-mg.mp3" autoplay preload="auto" loop></audio>
 
 	<script>
 		const form = document.getElementById("rsvpForm");
@@ -407,6 +454,21 @@
 		music.addEventListener("error", () => {
 			musicStatus.textContent = "File musik tidak dapat dimuat.";
 		});
+
+		async function startInviteMusic() {
+			try {
+				await music.play();
+				updateMusicToggle(true);
+			} catch (error) {
+				updateMusicToggle(false);
+				musicStatus.textContent = "Ketuk tombol musik untuk mulai memutar.";
+				if (error.name !== "NotAllowedError") {
+					console.error("Gagal memutar musik undangan:", error);
+				}
+			}
+		}
+
+		startInviteMusic();
 
 		form.addEventListener("submit", async (event) => {
 			event.preventDefault();
