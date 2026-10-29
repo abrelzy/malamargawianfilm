@@ -337,7 +337,8 @@
 		}
 		.rsvp-submit:hover { filter: brightness(1.08); }
 		.rsvp-submit:disabled { cursor: wait; opacity: .6; }
-		.form-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
+		.form-status { grid-column: 1 / -1; margin: 0; color: #a1a1aa; font-size: 12px; line-height: 1.5; }
+		.form-status:empty { display: none; }
 
 		footer {
 			display: grid;
@@ -520,8 +521,8 @@
 						<input type="hidden" name="code" id="rsvpInvitationCode">
 						<input type="hidden" name="request_id" id="rsvpRequestId">
 						<button class="rsvp-submit" type="submit">Submit RSVP <span aria-hidden="true">↗</span></button>
-						<p class="rsvp-note">For assistance or to update your attendance, contact <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
 						<p class="form-status" id="formStatus" aria-live="polite"></p>
+						<p class="rsvp-note">For assistance or to update your attendance, contact <a href="https://wa.me/6285194128355" target="_blank" rel="noopener noreferrer">Zainal Ilmi (+6285194128355)</a>.</p>
 					</form>
 					<iframe id="rsvpResponseFrame" name="rsvpResponseFrame" title="RSVP submission response" hidden></iframe>
 				</div>
