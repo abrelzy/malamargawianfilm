@@ -387,8 +387,8 @@
 					<p class="film-subtitle">Film Malamar Gawian</p>
 					<div class="invite-divider" aria-hidden="true"></div>
 					<p class="invite-recipient">
-						<strong id="recipientOrganization">Kepala Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar</strong>
-						<span class="seat-count" id="seatCount">Jumlah Kursi: 2</span>
+						<strong id="recipientOrganization">Gunakan link yang dibagikan oleh Ngerujaks Studio untuk mengakses undangan.</strong>
+						<span class="seat-count" id="seatCount"></span>
 					</p>
 					<div class="hero-event-details" aria-label="Waktu dan lokasi acara">
 						<div class="hero-event-detail">
@@ -461,7 +461,7 @@
 					<form class="rsvp-form" id="rsvpForm">
 						<div class="field field-institution">
 							<label for="institution">Undangan</label>
-							<input id="institution" name="institution" value="Dinas Kebudayaan, Kepemudaan, Olahraga dan Pariwisata (Disbudporapar) Kabupaten Banjar" readonly>
+							<input id="institution" name="institution" value="" readonly>
 						</div>
 						<div class="field field-attendance">
 							<label for="attendance">Konfirmasi</label>
@@ -520,13 +520,15 @@
 		const scrollCue = document.getElementById("scrollCue");
 		let invitationVerified = false;
 		let activeRsvpRequestId = "";
+		const invitationLinkMessage = "Gunakan link yang dibagikan oleh Ngerujaks Studio untuk mengakses undangan.";
 
 		function loadInvitationFromSpreadsheet() {
 			const query = new URLSearchParams(window.location.search);
 			const id = query.get("id") || "";
 			const code = query.get("code") || "";
 			if (!id || !code) {
-				status.textContent = "Tautan undangan tidak lengkap. Gunakan tautan khusus dari panitia.";
+				document.getElementById("recipientOrganization").textContent = invitationLinkMessage;
+				document.getElementById("seatCount").textContent = "";
 				submitButton.disabled = true;
 				return;
 			}
@@ -542,6 +544,8 @@
 				delete window[callbackName];
 				script.remove();
 				if (!data || !data.ok) {
+					document.getElementById("recipientOrganization").textContent = invitationLinkMessage;
+					document.getElementById("seatCount").textContent = "";
 					status.textContent = errorMessage || data?.message || "Tautan undangan tidak valid.";
 					return;
 				}
