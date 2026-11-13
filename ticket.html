@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Malamar Gawian — Screenings</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- GOOGLE FONTS: INTER -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0c0c0e;
+      --card-hover: #141418;
+      --line: #1c1c22;
+      --line-active: #33333d;
+      --white: #ffffff;
+      --text: #eaeaea;
+      --muted: #71717a;
+      --gold: #FFD54F;
+      --accent: #9CCC65;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* MINIMAL TOP HEADER */
+    header {
+      padding: 24px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-ngerujaks {
+      height: 24px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      opacity: 0.95;
+    }
+
+    .logo-mg-header {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* CENTER STAGE */
+    main {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 24px 60px;
+      text-align: center;
+    }
+
+    /* OFFICIAL WEBSITE LINK (BOTTOM OF VENUE LIST) */
+    .home-action-wrap {
+      margin-top: 14px;
+    }
+
+    .btn-visit-home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-visit-home:hover {
+      background: var(--card-hover);
+      border-color: var(--line-active);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-visit-home .arrow-right {
+      color: var(--muted);
+      font-size: 16px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-visit-home:hover .arrow-right {
+      color: var(--white);
+      transform: translateX(3px);
+    }
+
+    h1 {
+      font-size: clamp(28px, 4.8vw, 42px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    /* VENUE CARDS */
+    .venue-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+
+    .venue-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .venue-item:hover:not(.is-disabled) {
+      background: var(--card-hover);
+      border-color: var(--line-active);
+      transform: translateY(-1px);
+    }
+
+    .venue-item.is-selected {
+      border-color: var(--white);
+      background: #141418;
+      box-shadow: 0 0 0 1px var(--white);
+    }
+
+    /* GREYED OUT / COMING SOON */
+    .venue-item.is-disabled {
+      cursor: not-allowed;
+      opacity: 0.42;
+      background: #08080a;
+      border-color: #17171c;
+      filter: grayscale(1);
+    }
+
+    .venue-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .venue-city {
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .venue-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .venue-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .venue-tag-status {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .arrow-icon {
+      font-size: 16px;
+      color: var(--muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .venue-item:hover:not(.is-disabled) .arrow-icon,
+    .venue-item.is-selected .arrow-icon {
+      color: var(--white);
+      transform: translateX(3px);
+    }
+
+    /* FLOATING MODAL OVERLAY */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .floating-dialog {
+      background: #0d0d10;
+      border: 1px solid var(--line-active);
+      border-radius: 16px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      text-align: left;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.85);
+      transform: translateY(14px) scale(0.98);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .modal-scroll-area {
+      padding: 32px 28px 20px;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-overlay.is-open .floating-dialog {
+      transform: translateY(0) scale(1);
+    }
+
+    .btn-close-modal {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #18181d;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 15px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.15s ease;
+      z-index: 10;
+    }
+
+    .btn-close-modal:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .modal-header-venue {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-right: 36px;
+    }
+
+    .modal-header-venue h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+    }
+
+    .modal-header-venue p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* SCREENING PROGRAM PACKAGE */
+    .package-card {
+      background: #131317;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .package-card.highlight {
+      border-color: #2e2e38;
+      background: #141419;
+    }
+
+    /* POSTER DISPLAY / PLACEHOLDER */
+    .poster-box {
+      aspect-ratio: 1 / 1.35;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .poster-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .poster-placeholder-tag {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .poster-placeholder-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #000;
+      text-transform: uppercase;
+    }
+
+    .package-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .package-badge-tag {
+      display: inline-flex;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(156, 204, 101, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .package-title {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .film-roster {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .film-roster strong {
+      color: #ffffff;
+    }
+
+    /* SHOWTIMES SECTION */
+    .schedule-day-block {
+      margin-top: 10px;
+    }
+
+    .day-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #d1d1d6;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .day-title::before {
+      content: "•";
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .slots-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .time-chip {
+      background: #1c1c22;
+      border: 1px solid #282832;
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .time-chip:hover {
+      background: #25252e;
+      border-color: var(--white);
+    }
+
+    .time-chip.is-active {
+      background: var(--white);
+      border-color: var(--white);
+    }
+
+    .time-val {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .time-chip.is-active .time-val {
+      color: #000000;
+    }
+
+    .time-seats {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .time-chip.is-active .time-seats {
+      color: #333333;
+    }
+
+    /* FLOATING BOTTOM ACTION BAR IN MODAL */
+    .booking-bar {
+      padding: 16px 28px calc(16px + env(safe-area-inset-bottom, 0px));
+      background: #111115;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 20;
+      flex-shrink: 0;
+      box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn-buy-ticket {
+      width: 100%;
+      background: #1c1c22;
+      color: #666672;
+      border: 1px solid #282832;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: not-allowed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .btn-buy-ticket.is-active {
+      background: var(--white);
+      color: #000000;
+      border-color: var(--white);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-buy-ticket.is-active:hover {
+      background: #f0f0f0;
+      transform: translateY(-1px);
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid var(--line);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      header, footer {
+        padding: 20px 24px;
+      }
+
+      .modal-overlay {
+        padding: 0;
+        align-items: flex-end; /* Bottom sheet on mobile */
+      }
+
+      .floating-dialog {
+        max-height: 92vh;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .modal-scroll-area {
+        padding: 24px 20px 16px;
+      }
+
+      .package-card {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .poster-box, .poster-placeholder {
+        width: 110px;
+        margin: 0 auto;
+      }
+
+      .booking-bar {
+        padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MINIMAL HEADER -->
+  <header>
+    <a href="index.html" aria-label="Ngerujaks Studio">
+      <img src="images/logo-ngerujaks.png" alt="Ngerujaks Studio" class="logo-ngerujaks">
+    </a>
+    <a href="index.html" aria-label="Malamar Gawian">
+      <img src="images/logo-mg3.png" alt="Malamar Gawian" class="logo-mg-header">
+    </a>
+  </header>
+
+  <!-- STAGE -->
+  <main>
+    <h1>Select Screening Location</h1>
+
+    <!-- 4 VENUE LIST -->
+    <div class="venue-list" id="venueList">
+      <!-- 1. GEDUNG BALAIRUNG SARI (ACTIVE) -->
+      <div class="venue-item" data-id="balairung">
+        <div class="venue-info">
+          <span class="venue-city">Banjarmasin</span>
+          <div class="venue-name">Gedung Balairung Sari Taman Budaya Banjarmasin</div>
+          <span class="venue-sub">Organized by Banua Film Academy</span>
+        </div>
+        <div class="arrow-icon">→</div>
+      </div>
+
+      <!-- 2. KOTA CINEMA MALL BANJARMASIN (COMING SOON) -->
+      <div class="venue-item is-disabled" data-id="kcm" title="Opening Soon">
+        <div class="venue-info">
+          <span class="venue-city">Banjarmasin</span>
+          <div class="venue-name">Kota Cinema Mall Banjarmasin</div>
+          <span class="venue-sub">Organized by Forum Sineas Banua</span>
+        </div>
+        <div class="venue-tag-status">Coming Soon</div>
+      </div>
+
+      <!-- 3. PLATINUM BATULICIN (COMING SOON) -->
+      <div class="venue-item is-disabled" data-id="batulicin" title="Opening Soon">
+        <div class="venue-info">
+          <span class="venue-city">Batulicin</span>
+          <div class="venue-name">Platinum Cineplex Batulicin</div>
+          <span class="venue-sub">Organized by Layar Tanbu</span>
+        </div>
+        <div class="venue-tag-status">Coming Soon</div>
+      </div>
+
+      <!-- 4. NSC KOTABARU (COMING SOON) -->
+      <div class="venue-item is-disabled" data-id="kotabaru" title="Opening Soon">
+        <div class="venue-info">
+          <span class="venue-city">Kotabaru</span>
+          <div class="venue-name">New Star Cineplex Kotabaru</div>
+          <span class="venue-sub">Organized by Kaya Films</span>
+        </div>
+        <div class="venue-tag-status">Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- OFFICIAL WEBSITE LINK (UNDER SCREENING LOCATIONS) -->
+    <div class="home-action-wrap">
+      <a href="index.html" class="btn-visit-home">
+        <span>Official Website Malamar Gawian</span>
+        <span class="arrow-right">→</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- FLOATING MODAL SHOWTIME (BALAIRUNG SARI 18-19 NOV) -->
+  <div class="modal-overlay" id="showtimeModal" role="dialog" aria-modal="true" aria-labelledby="modalVenueTitle">
+    <div class="floating-dialog">
+      <button type="button" class="btn-close-modal" id="modalClose" aria-label="Close">✕</button>
+
+      <div class="modal-scroll-area">
+        <div class="modal-header-venue">
+          <h2 id="modalVenueTitle">Gedung Balairung Sari Taman Budaya Banjarmasin</h2>
+          <p>Organized by Banua Film Academy · 18 – 19 November 2026</p>
+        </div>
+
+        <!-- PACKAGE 1: BULIK BAKISAH (PAKET DRAMA - INCLUDE MALAMAR GAWIAN) -->
+      <div class="package-card highlight">
+        <div class="poster-box">
+          <img src="images/poster-bulik-bakisah.jpg" alt="Poster Bulik Bakisah" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>Bulik Bakisah</span></div>'">
+        </div>
+
+        <div class="package-body">
+          <span class="package-badge-tag">Paket Drama</span>
+          <h3 class="package-title">Bulik Bakisah</h3>
+          <p class="film-roster">
+            <strong>Malamar Gawian</strong> · Rasi Arah Pulang · Jangan Dicium · Misi 41 · Tamakan Dabu
+          </p>
+
+          <!-- JADWAL RABU 18 NOV -->
+          <div class="schedule-day-block">
+            <span class="day-title">Rabu, 18 November 2026</span>
+            <div class="slots-row">
+              <div class="time-chip" data-film-id="14" data-pkg="Bulik Bakisah" data-date="Rabu, 18 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/14">
+                <span class="time-val">19.00</span>
+                <span class="time-seats" id="seat-14">sisa 220 kursi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- JADWAL KAMIS 19 NOV -->
+          <div class="schedule-day-block">
+            <span class="day-title">Kamis, 19 November 2026</span>
+            <div class="slots-row">
+              <div class="time-chip" data-film-id="16" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/16">
+                <span class="time-val">16.00</span>
+                <span class="time-seats" id="seat-16">sisa 220 kursi</span>
+              </div>
+              <div class="time-chip" data-film-id="18" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="21.05" data-url="https://aruhganal.com/tiket/film/18">
+                <span class="time-val">21.05</span>
+                <span class="time-seats" id="seat-18">sisa 220 kursi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACKAGE 2: RAHASIA KAMPUNG (PAKET HOROR) -->
+      <div class="package-card">
+        <div class="poster-box">
+          <img src="images/poster-rahasia-kampung.jpg" alt="Poster Rahasia Kampung" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>Rahasia Kampung</span></div>'">
+        </div>
+
+        <div class="package-body">
+          <span class="package-badge-tag" style="color: #f87171; background: rgba(248, 113, 113, 0.1);">Paket Horor</span>
+          <h3 class="package-title">Rahasia Kampung</h3>
+          <p class="film-roster">
+            Sisigan Kariau: Sima · Pulasit · Gagampiran · Suruh Aja Gin
+          </p>
+
+          <!-- JADWAL RABU 18 NOV -->
+          <div class="schedule-day-block">
+            <span class="day-title">Rabu, 18 November 2026</span>
+            <div class="slots-row">
+              <div class="time-chip" data-film-id="13" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/13">
+                <span class="time-val">16.00</span>
+                <span class="time-seats" id="seat-13">sisa 220 kursi</span>
+              </div>
+              <div class="time-chip" data-film-id="15" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="21.00" data-url="https://aruhganal.com/tiket/film/15">
+                <span class="time-val">21.00</span>
+                <span class="time-seats" id="seat-15">sisa 220 kursi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- JADWAL KAMIS 19 NOV -->
+          <div class="schedule-day-block">
+            <span class="day-title">Kamis, 19 November 2026</span>
+            <div class="slots-row">
+              <div class="time-chip" data-film-id="17" data-pkg="Rahasia Kampung" data-date="Kamis, 19 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/17">
+                <span class="time-val">19.00</span>
+                <span class="time-seats" id="seat-17">sisa 220 kursi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> <!-- /.modal-scroll-area -->
+
+      <!-- REDIRECT ACTION (PERMANENT FLOATING BOTTOM BAR) -->
+      <div class="booking-bar">
+        <button type="button" id="btnBuyTicket" class="btn-buy-ticket" disabled>
+          <span id="btnBuyText">Select a Showtime to Continue</span>
+        </button>
+        <p class="disclaimer">You will be redirected to the official ticketing portal (aruhganal.com).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Malamar Gawian © 2026</span>
+  </footer>
+
+  <script>
+    const balairungCard = document.querySelector('.venue-item[data-id="balairung"]');
+    const showtimeModal = document.getElementById('showtimeModal');
+    const modalClose = document.getElementById('modalClose');
+    const timeChips = document.querySelectorAll('.time-chip');
+    const btnBuyTicket = document.getElementById('btnBuyTicket');
+    const btnBuyText = document.getElementById('btnBuyText');
+
+    let selectedTicketUrl = null;
+
+    // OPEN FLOATING MODAL WHEN BALAIRUNG SARI IS CLICKED
+    balairungCard.addEventListener('click', () => {
+      showtimeModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // CLOSE MODAL
+    function closeModal() {
+      showtimeModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    showtimeModal.addEventListener('click', (e) => {
+      if (e.target === showtimeModal) closeModal();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && showtimeModal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+
+    // TIME CHIP SELECTION
+    timeChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        timeChips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+
+        const pkg = chip.dataset.pkg;
+        const time = chip.dataset.time;
+        selectedTicketUrl = chip.dataset.url;
+
+        // Activate button and update text
+        btnBuyTicket.removeAttribute('disabled');
+        btnBuyTicket.classList.add('is-active');
+        btnBuyText.textContent = `Buy Ticket · ${pkg} (${time} WITA) →`;
+      });
+    });
+
+    // REDIRECT TO TICKETING URL ON CLICK
+    btnBuyTicket.addEventListener('click', () => {
+      if (selectedTicketUrl) {
+        window.open(selectedTicketUrl, '_blank', 'noopener,noreferrer');
+      }
+    });
+
+    // AUTO UPDATE SEATS FROM ARUHGANAL
+    async function updateLiveSeats() {
+      // 1. Coba fetch api-seats.php (jika di hosting PHP)
+      // 2. Fallback fetch seats-cache.json (jika di static host / python server)
+      let json = null;
+      try {
+        const res = await fetch('api-seats.php', { cache: 'no-cache' });
+        if (res.ok) {
+          json = await res.json();
+        }
+      } catch (e) {
+        // Abaikan, lanjut ke fallback
+      }
+
+      if (!json || !json.data) {
+        try {
+          const res = await fetch('seats-cache.json', { cache: 'no-cache' });
+          if (res.ok) {
+            json = await res.json();
+          }
+        } catch (e) {
+          // Abaikan
+        }
+      }
+
+      if (json && json.data) {
+        Object.keys(json.data).forEach(id => {
+          const el = document.getElementById(`seat-${id}`);
+          if (el && json.data[id].text) {
+            el.textContent = json.data[id].text;
+            if (json.data[id].remaining <= 0) {
+              el.style.color = '#ef4444';
+              el.textContent = 'tiket habis';
+            }
+          }
+        });
+      }
+    }
+
+    // Initial check and periodic polling every 45s
+    updateLiveSeats();
+    setInterval(updateLiveSeats, 45000);
+  </script>
+</body>
+</html>

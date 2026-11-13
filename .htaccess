@@ -10,3 +10,13 @@ RewriteCond %{THE_REQUEST} \s/+archive\.html[\s?] [NC]
 RewriteRule ^archive\.html$ /archive [R=301,L]
 
 RewriteRule ^archive/?$ archive.html [L]
+
+RewriteCond %{THE_REQUEST} \s/+ticket\.html[\s?] [NC]
+RewriteRule ^ticket\.html$ /ticket [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+tiket\.html[\s?] [NC]
+RewriteRule ^tiket\.html$ /ticket [R=301,L]
+
+RewriteRule ^ticket/?$ ticket.html [L]
+RewriteRule ^tiket/?$ ticket.html [L]
+RewriteRule ^nonton/?$ ticket.html [L]

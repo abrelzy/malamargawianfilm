@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#09090b">
+    <title>Kru, Support & Sponsor — Malamar Gawian</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #09090b;
+            --surface: #111114;
+            --surface-hover: #16161a;
+            --ink: #f4f4f5;
+            --muted: #82828c;
+            --subtle: #52525b;
+            --line: #1f1f24;
+            --line-strong: #2e2e36;
+            --accent: #9CCC65;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 84px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* MINIMAL TOPBAR */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(9, 9, 11, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .topbar-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            height: 68px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.92;
+        }
+
+        .brand-sep {
+            width: 1px;
+            height: 16px;
+            background: var(--line-strong);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        /* EDITORIAL HERO */
+        .hero {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 88px 28px 64px;
+            border-bottom: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: end;
+            gap: 48px;
+        }
+
+        .hero-kicker {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-family: "Fraunces", Georgia, serif;
+            font-size: clamp(34px, 5vw, 56px);
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title em {
+            font-family: "Fraunces", Georgia, serif;
+            font-style: italic;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .hero-copy {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.75;
+            max-width: 420px;
+            justify-self: end;
+        }
+
+        /* FILTER TABS */
+        .filter-bar {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 22px 28px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            padding: 7px 15px;
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--muted);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--ink);
+        }
+
+        .tab-btn.active {
+            color: var(--ink);
+            border-color: var(--line-strong);
+            background: var(--surface);
+        }
+
+        .filter-hint {
+            font-size: 11px;
+            color: var(--subtle);
+            letter-spacing: 0.04em;
+        }
+
+        /* MAIN SECTIONS */
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 28px 110px;
+        }
+
+        .section-block {
+            padding-top: 72px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 36px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-head-left {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+        }
+
+        .section-num {
+            font-family: "Fraunces", Georgia, serif;
+            font-style: italic;
+            font-size: 19px;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-family: "Fraunces", Georgia, serif;
+            font-size: clamp(22px, 2.8vw, 28px);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .section-note {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* MINIMAL CREW GRID */
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 24px 16px;
+        }
+
+        .crew-card {
+            group: crew;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .crew-photo-wrap {
+            position: relative;
+            aspect-ratio: 1 / 1.15;
+            overflow: hidden;
+            background: var(--surface);
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .crew-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(25%) contrast(1.03);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+
+        .crew-card:hover .crew-photo-wrap img {
+            transform: scale(1.04);
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .photo-hover-pill {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            padding: 3px 8px;
+            background: rgba(9, 9, 11, 0.78);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .crew-card:hover .photo-hover-pill {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .crew-role {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .crew-name {
+            font-family: "Fraunces", Georgia, serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.25;
+            margin-bottom: 4px;
+        }
+
+        .crew-teaser {
+            font-size: 11.5px;
+            color: var(--muted);
+            line-height: 1.45;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* MINIMAL SUPPORT & SPONSOR GRID */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .partner-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+        }
+
+        .partner-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--line-strong);
+            transform: translateY(-3px);
+        }
+
+        .partner-photo-wrap {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: #0d0d10;
+        }
+
+        .partner-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+
+        .partner-card:hover .partner-photo-wrap img {
+            transform: scale(1.04);
+            opacity: 1;
+        }
+
+        .partner-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .partner-category {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .partner-name {
+            font-family: "Fraunces", Georgia, serif;
+            font-size: 19px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+
+        .partner-teaser {
+            font-size: 12.5px;
+            color: var(--muted);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .partner-link-row {
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .partner-card:hover .partner-link-row span:last-child {
+            color: var(--ink);
+        }
+
+        /* STORY POP-UP MODAL (CLEAN EDITORIAL VIEW) */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(6, 6, 8, 0.86);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .modal-backdrop.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .modal-dialog {
+            width: min(100%, 840px);
+            max-height: min(88vh, 680px);
+            background: var(--surface);
+            border: 1px solid var(--line-strong);
+            border-radius: 8px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            position: relative;
+            box-shadow: 0 32px 90px rgba(0, 0, 0, 0.75);
+            transform: translateY(12px) scale(0.985);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-backdrop.is-open .modal-dialog {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 5;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(9, 9, 11, 0.7);
+            border: 1px solid var(--line-strong);
+            color: var(--muted);
+            display: grid;
+            place-items: center;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .modal-photo-col {
+            background: #0b0b0e;
+            height: 100%;
+            min-height: 360px;
+            overflow: hidden;
+        }
+
+        .modal-photo-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-content-col {
+            padding: 40px 38px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-kicker {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .modal-name {
+            font-family: "Fraunces", Georgia, serif;
+            font-size: clamp(26px, 3.2vw, 34px);
+            font-weight: 500;
+            line-height: 1.15;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .modal-subrole {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .modal-quote {
+            font-family: "Fraunces", Georgia, serif;
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--ink);
+            padding-left: 16px;
+            border-left: 2px solid var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .modal-story-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--subtle);
+            margin-bottom: 10px;
+        }
+
+        .modal-story {
+            font-size: 13.5px;
+            color: #cfcfd6;
+            line-height: 1.8;
+            white-space: pre-line;
+            margin-bottom: 28px;
+        }
+
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            margin-bottom: 24px;
+        }
+
+        .meta-block span {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--subtle);
+            margin-bottom: 3px;
+        }
+
+        .meta-block strong {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .modal-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .modal-ext-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 8px 14px;
+            border: 1px solid rgba(156, 204, 101, 0.3);
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-ext-link:hover {
+            background: var(--accent);
+            color: #09090b;
+        }
+
+        .modal-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-nav-btn {
+            padding: 7px 12px;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--muted);
+            transition: all 0.2s ease;
+        }
+
+        .modal-nav-btn:hover:not(:disabled) {
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .modal-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 40px 28px;
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a:hover {
+            color: var(--ink);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 56px 22px 44px;
+            }
+
+            .hero-copy {
+                justify-self: start;
+                max-width: 540px;
+            }
+
+            .crew-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 20px 14px;
+            }
+
+            .partner-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .modal-dialog {
+                grid-template-columns: 1fr;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .modal-photo-col {
+                min-height: 260px;
+                max-height: 300px;
+            }
+
+            .modal-content-col {
+                padding: 26px 22px 22px;
+                overflow-y: visible;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .topbar-inner {
+                padding: 0 18px;
+            }
+
+            .nav-links {
+                gap: 14px;
+                font-size: 10px;
+            }
+
+            .filter-bar,
+            main,
+            footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="index.html" class="brand" aria-label="Malamar Gawian">
+                <img src="images/logo-ngerujaks.png" alt="Ngerujaks Studio">
+                <span class="brand-sep" aria-hidden="true"></span>
+                <img src="images/logo-mg3.png" alt="Malamar Gawian">
+            </a>
+            <nav class="nav-links" aria-label="Navigasi halaman">
+                <a href="#kru">Kru</a>
+                <a href="#support">Support</a>
+                <a href="#sponsor">Sponsor</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <p class="hero-kicker">Di Balik Layar · Malamar Gawian</p>
+            <h1 class="hero-title">Orang-orang, cerita, dan <em>dukungan</em> yang menghidupkan film ini.</h1>
+        </div>
+        <p class="hero-copy">
+            Setiap adegan lahir dari perjalanan panjang para kru, dukungan komunitas, serta mitra sponsor. Klik pada
+            foto siapa pun di bawah untuk membaca cerita lengkap di balik keterlibatan mereka.
+        </p>
+    </section>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+        <div class="filter-tabs" id="filterTabs" role="tablist">
+            <button type="button" class="tab-btn active" data-filter="all">Semua</button>
+            <button type="button" class="tab-btn" data-filter="crew">Kru Produksi</button>
+            <button type="button" class="tab-btn" data-filter="support">Support & Partner</button>
+            <button type="button" class="tab-btn" data-filter="sponsor">Sponsor</button>
+        </div>
+        <span class="filter-hint">Klik kartu untuk membuka cerita pop-up</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- 01. KRU -->
+        <section class="section-block" id="kru" data-section="crew">
+            <div class="section-head">
+                <div class="section-head-left">
+                    <span class="section-num">01</span>
+                    <h2 class="section-title">Kru Produksi</h2>
+                </div>
+                <span class="section-note">Cerita di balik layar pembuatan film</span>
+            </div>
+            <div class="crew-grid" id="crewGrid"></div>
+        </section>
+
+        <!-- 02. SUPPORT -->
+        <section class="section-block" id="support" data-section="support">
+            <div class="section-head">
+                <div class="section-head-left">
+                    <span class="section-num">02</span>
+                    <h2 class="section-title">Support & Kolaborator</h2>
+                </div>
+                <span class="section-note">Instansi, komunitas, dan ruang yang mendukung</span>
+            </div>
+            <div class="partner-grid" id="supportGrid"></div>
+        </section>
+
+        <!-- 03. SPONSOR -->
+        <section class="section-block" id="sponsor" data-section="sponsor">
+            <div class="section-head">
+                <div class="section-head-left">
+                    <span class="section-num">03</span>
+                    <h2 class="section-title">Official Sponsor</h2>
+                </div>
+                <span class="section-note">Mitra brand yang berjalan bersama kami</span>
+            </div>
+            <div class="partner-grid" id="sponsorGrid"></div>
+        </section>
+    </main>
+
+    <!-- POP-UP MODAL -->
+    <div class="modal-backdrop" id="storyModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+        <div class="modal-dialog">
+            <button type="button" class="modal-close" id="modalClose" aria-label="Tutup">✕</button>
+
+            <div class="modal-photo-col">
+                <img id="modalPhoto" src="" alt="">
+            </div>
+
+            <div class="modal-content-col">
+                <p class="modal-kicker" id="modalKicker">KRU PRODUKSI</p>
+                <h3 class="modal-name" id="modalName">Nama</h3>
+                <p class="modal-subrole" id="modalSubrole">Peran / Jabatan</p>
+
+                <blockquote class="modal-quote" id="modalQuote"></blockquote>
+
+                <p class="modal-story-label" id="modalStoryLabel">Cerita di Balik Layar</p>
+                <div class="modal-story" id="modalStory"></div>
+
+                <div class="modal-meta" id="modalMeta"></div>
+
+                <div class="modal-footer">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="modal-ext-link" id="modalLink">
+                        Instagram ↗
+                    </a>
+                    <div class="modal-nav">
+                        <button type="button" class="modal-nav-btn" id="prevBtn">← Sebelumnya</button>
+                        <button type="button" class="modal-nav-btn" id="nextBtn">Selanjutnya →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <span>© 2026 Ngerujaks Studio · Malamar Gawian</span>
+        <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="invitation.html">Invitation</a>
+            <a href="https://www.instagram.com/malamargawian.film/" target="_blank"
+                rel="noopener noreferrer">@malamargawian.film</a>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           TEMPLATE DATA DUMMY (MUDAH DIISI SENDIRI NANTI)
+           Tinggal ganti nilai: name, role, department, photo, quote, story, instagram
+           ========================================================================== */
+
+        const crewList = [
+            {
+                type: "crew",
+                name: "Bagas Pratama",
+                role: "Producer",
+                department: "Production",
+                location: "Banjarbaru",
+                instagram: "@bagaspratama",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+                teaser: "Mengawal perjalanan produksi dari ide pertama di meja kopi hingga layar lebar.",
+                quote: "Tulis kutipan singkat atau kalimat paling berkesan dari kru ini selama proses syuting.",
+                story: "Di bagian ini nanti kamu bisa menuliskan cerita personal di balik keterlibatan kru ini.\n\nMisalnya bagaimana awal mula ia diajak bergabung ke proyek Malamar Gawian, tantangan paling berkesan waktu di lokasi syuting, atau momen lucu yang tidak terlupakan bersama tim."
+            },
+            {
+                type: "crew",
+                name: "Dimas Aditya",
+                role: "Director & Writer",
+                department: "Directing",
+                location: "Martapura",
+                instagram: "@dimasaditya",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
+                teaser: "Merangkai keresahan mencari pekerjaan pertama menjadi komedi satir yang dekat dengan keseharian.",
+                quote: "Mencari gawian kada selalu kawa langsung dapat, tapi perjalanannya selalu punya cerita.",
+                story: "Tuliskan cerita di balik proses penulisan naskah dan penyutradaraan film ini.\n\nKamu bisa menceritakan inspirasi awal adegan-adegan di dalam film, proses bedah naskah bersama kru, hingga bagaimana rasanya meneriakkan 'cut' terakhir di hari penutupan produksi."
+            },
+            {
+                type: "crew",
+                name: "Rizky Ramadhan",
+                role: "Director of Photography",
+                department: "Camera & Lighting",
+                location: "Banjarmasin",
+                instagram: "@rizkyramadhan",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+                teaser: "Menangkap hangatnya lanskap sungai, rawa, dan ruang-ruang keseharian Kalimantan Selatan.",
+                quote: "Setiap sudut kampung punya cahayanya sendiri kalau kita sabar menunggu.",
+                story: "Ceritakan bagaimana proses merancang visual dan tone warna Malamar Gawian.\n\nMisalnya cerita saat mengejar matahari sore di pinggir sungai, memilih lensa, atau kerja sama tim kamera di tengah cuaca yang berubah-ubah."
+            },
+            {
+                type: "crew",
+                name: "Fajar Nugraha",
+                role: "Art Director",
+                department: "Art & Wardrobe",
+                location: "Banjarbaru",
+                instagram: "@fajarnugraha",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+                teaser: "Membangun detail ruang dan properti agar dunia di dalam cerita terasa hidup dan jujur.",
+                quote: "Properti kecil di sudut meja sering kali bercerita lebih banyak daripada dialog.",
+                story: "Tuliskan cerita di balik pencarian properti unik atau penataan set lokasi.\n\nBagaimana tim artistik menyulap ruangan kosong menjadi ruang yang punya karakter kuat sesuai naskah."
+            },
+            {
+                type: "crew",
+                name: "Bayu Saputra",
+                role: "Sound Recordist",
+                department: "Sound",
+                location: "Martapura",
+                instagram: "@bayusaputra",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+                teaser: "Menjaga setiap bisikan dialog dan atmosfer suara lingkungan terekam dengan jernih.",
+                quote: "Hening di set adalah musik paling indah sebelum kata 'action' dimulai.",
+                story: "Ceritakan pengalaman seru departemen suara selama di lapangan.\n\nMulai dari tantangan merekam di dekat jalan raya atau sungai, hingga momen-momen lucu saat harus menunggu suara motor lewat."
+            },
+            {
+                type: "crew",
+                name: "Nadia Larasati",
+                role: "Costume & Make Up",
+                department: "Art & Wardrobe",
+                location: "Banjarmasin",
+                instagram: "@nadialarasati",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+                teaser: "Menghadirkan identitas setiap karakter lewat pilihan busana dan riasan yang natural.",
+                quote: "Pakaian yang dipakai karakter adalah kesan pertama sebelum ia berbicara.",
+                story: "Tuliskan cerita di balik pemilihan kostum para pemeran.\n\nBagaimana riset pakaian sehari-hari dilakukan agar penonton langsung merasa dekat dengan sosok karakter utama."
+            },
+            {
+                type: "crew",
+                name: "Alif Hidayat",
+                role: "Editor",
+                department: "Post-Production",
+                location: "Banjarbaru",
+                instagram: "@alifhidayat",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80",
+                teaser: "Merajut ratusan potongan gambar menjadi ritme cerita dan komedi yang pas.",
+                quote: "Film ditulis tiga kali: di naskah, di lokasi syuting, dan di meja editing.",
+                story: "Ceritakan proses begadang di ruang pascaproduksi, memilih take terbaik, dan menemukan timing komedi yang paling mengena."
+            },
+            {
+                type: "crew",
+                name: "Reza Mahendra",
+                role: "Music & Sound Designer",
+                department: "Post-Production",
+                location: "Banjarmasin",
+                instagram: "@rezamahendra",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=80",
+                teaser: "Memberi nyawa emosional lewat komposisi musik tema dan lanskap tata suara.",
+                quote: "Nada yang tepat bisa membuat adegan sederhana terasa hangat di ingatan.",
+                story: "Tuliskan cerita di balik pembuatan musik ilustrasi dan Original Soundtrack Malamar Gawian."
+            }
+        ];
+
+        const supportList = [
+            {
+                type: "support",
+                name: "Banua Film Fund 2026",
+                role: "Official Program Support",
+                department: "Program & Pendanaan",
+                location: "Kalimantan Selatan",
+                instagram: "@banuafilmfund",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Mendukung penuh ruang tumbuh sineas lokal dari tahap pengembangan ide hingga layar bioskop.",
+                quote: "Kolaborasi ekosistem yang membuka jalan bagi cerita-cerita lokal untuk didengar lebih luas.",
+                story: "Tuliskan cerita bagaimana bentuk dukungan dari instansi atau komunitas ini membantu perjalanan produksi Malamar Gawian.\n\nMisalnya dukungan pendanaan, fasilitas ruang diskusi, pendampingan mentoring, atau penyediaan gedung pemutaran."
+            },
+            {
+                type: "support",
+                name: "Komunitas Sineas Banua",
+                role: "Location & Community Partner",
+                department: "Dukungan Lokasi & Warga",
+                location: "Martapura",
+                instagram: "@sineasbanua",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Membuka pintu lingkungan dan keramahan warga selama proses pengambilan gambar berlangsung.",
+                quote: "Keramahan warga sekitar adalah energi terbesar bagi seluruh kru di lapangan.",
+                story: "Ceritakan kehangatan warga, perangkat desa, atau komunitas lokal yang ikut membantu mengamankan jalannya syuting dan meminjamkan tempat mereka."
+            },
+            {
+                type: "support",
+                name: "Radio Gelora Nada FM",
+                role: "Official Media Partner",
+                department: "Publikasi & Media",
+                location: "Banjarmasin",
+                instagram: "@geloranadafm",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Menyebarkan kabar dan cerita di balik produksi Malamar Gawian kepada publik luas.",
+                quote: "Membawa cerita dari sudut Banua ke telinga para pendengar dan penonton.",
+                story: "Tuliskan bagaimana peran rekan-rekan media dalam mengawal publikasi, sesi wawancara radio, hingga liputan menuju Gala Premiere."
+            }
+        ];
+
+        const sponsorList = [
+            {
+                type: "sponsor",
+                name: "Karsa Visual Apparel",
+                role: "Official Apparel Partner",
+                department: "Main Sponsor",
+                location: "Banjarbaru",
+                instagram: "@karsavisual",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Mendukung identitas tim produksi melalui pengadaan official merchandise dan apparel kru.",
+                quote: "Berjalan bersama karya lokal dengan kualitas produksi terbaik.",
+                story: "Tuliskan cerita kolaborasi bersama brand sponsor ini.\n\nMisalnya bagaimana mereka langsung menyambut baik ide film ini dan mendukung kebutuhan seragam/merchandise seluruh kru yang bertugas."
+            },
+            {
+                type: "sponsor",
+                name: "Sudut Temu Coffee",
+                role: "Hospitality & Cafe Partner",
+                department: "Co-Sponsor",
+                location: "Banjarbaru",
+                instagram: "@suduttemu.bjb",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Menyediakan ruang nyaman untuk diskusi praproduksi sekaligus lokasi pengambilan gambar.",
+                quote: "Banyak ide besar yang lahir dari obrolan hangat di meja sudut kafe.",
+                story: "Ceritakan bagaimana tempat atau produk dari sponsor ini menemani proses kreatif tim, mulai dari rapat bedah naskah hingga hari syuting."
+            },
+            {
+                type: "sponsor",
+                name: "Dapur Selera Banua",
+                role: "Logistik & Konsumsi Partner",
+                department: "Supporting Sponsor",
+                location: "Martapura",
+                instagram: "@dapurselera",
+                linkUrl: "https://instagram.com/",
+                photo: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80",
+                teaser: "Menjaga semangat dan energi seluruh kru serta pemeran selama hari-hari syuting yang padat.",
+                quote: "Produksi yang bahagia dimulai dari asupan yang hangat di sela waktu istirahat.",
+                story: "Tuliskan apresiasi dan cerita dukungan sponsor ini dalam mendukung kelancaran logistik selama produksi berlangsung."
+            }
+        ];
+
+        /* ==========================================================================
+           RENDER CARDS & MODAL LOGIC
+           ========================================================================== */
+
+        const crewGrid = document.getElementById("crewGrid");
+        const supportGrid = document.getElementById("supportGrid");
+        const sponsorGrid = document.getElementById("sponsorGrid");
+
+        function renderCrew() {
+            crewGrid.innerHTML = "";
+            crewList.forEach((item, index) => {
+                const card = document.createElement("article");
+                card.className = "crew-card";
+                card.tabIndex = 0;
+                card.setAttribute("role", "button");
+                card.innerHTML = `
+          <div class="crew-photo-wrap">
+            <img src="${item.photo}" alt="${item.name}" loading="lazy">
+            <span class="photo-hover-pill">Baca Cerita ↗</span>
+          </div>
+          <span class="crew-role">${item.role}</span>
+          <h3 class="crew-name">${item.name}</h3>
+          <p class="crew-teaser">${item.teaser}</p>
+        `;
+                card.addEventListener("click", () => openModal(crewList, index));
+                card.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openModal(crewList, index);
+                    }
+                });
+                crewGrid.appendChild(card);
+            });
+        }
+
+        function renderPartners(list, container) {
+            container.innerHTML = "";
+            list.forEach((item, index) => {
+                const card = document.createElement("article");
+                card.className = "partner-card";
+                card.tabIndex = 0;
+                card.setAttribute("role", "button");
+                card.innerHTML = `
+          <div class="partner-photo-wrap">
+            <img src="${item.photo}" alt="${item.name}" loading="lazy">
+          </div>
+          <div class="partner-body">
+            <span class="partner-category">${item.role}</span>
+            <h3 class="partner-name">${item.name}</h3>
+            <p class="partner-teaser">${item.teaser}</p>
+            <div class="partner-link-row">
+              <span>${item.location}</span>
+              <span>Cerita & Detail ↗</span>
+            </div>
+          </div>
+        `;
+                card.addEventListener("click", () => openModal(list, index));
+                card.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        openModal(list, index);
+                    }
+                });
+                container.appendChild(card);
+            });
+        }
+
+        /* MODAL STATE */
+        const modal = document.getElementById("storyModal");
+        const modalClose = document.getElementById("modalClose");
+        const modalPhoto = document.getElementById("modalPhoto");
+        const modalKicker = document.getElementById("modalKicker");
+        const modalName = document.getElementById("modalName");
+        const modalSubrole = document.getElementById("modalSubrole");
+        const modalQuote = document.getElementById("modalQuote");
+        const modalStoryLabel = document.getElementById("modalStoryLabel");
+        const modalStory = document.getElementById("modalStory");
+        const modalMeta = document.getElementById("modalMeta");
+        const modalLink = document.getElementById("modalLink");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        let activeList = [];
+        let activeIndex = 0;
+
+        function openModal(list, index) {
+            activeList = list;
+            activeIndex = index;
+            updateModal();
+            modal.classList.add("is-open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            modal.classList.remove("is-open");
+            document.body.style.overflow = "";
+        }
+
+        function updateModal() {
+            const item = activeList[activeIndex];
+            if (!item) return;
+
+            modalPhoto.src = item.photo;
+            modalPhoto.alt = item.name;
+
+            if (item.type === "crew") {
+                modalKicker.textContent = `KRU · ${item.department}`;
+                modalStoryLabel.textContent = "Cerita di Balik Layar";
+            } else if (item.type === "support") {
+                modalKicker.textContent = `SUPPORT · ${item.department}`;
+                modalStoryLabel.textContent = "Cerita Kolaborasi & Dukungan";
+            } else {
+                modalKicker.textContent = `SPONSOR · ${item.department}`;
+                modalStoryLabel.textContent = "Cerita Kemitraan";
+            }
+
+            modalName.textContent = item.name;
+            modalSubrole.textContent = item.role;
+
+            if (item.quote) {
+                modalQuote.style.display = "block";
+                modalQuote.textContent = `“${item.quote}”`;
+            } else {
+                modalQuote.style.display = "none";
+            }
+
+            modalStory.textContent = item.story;
+
+            modalMeta.innerHTML = `
+        <div class="meta-block">
+          <span>Bidang / Kategori</span>
+          <strong>${item.department}</strong>
+        </div>
+        <div class="meta-block">
+          <span>Domisili / Lokasi</span>
+          <strong>${item.location}</strong>
+        </div>
+        <div class="meta-block">
+          <span>Kontak / Sosial</span>
+          <strong>${item.instagram}</strong>
+        </div>
+      `;
+
+            modalLink.href = item.linkUrl || "#";
+            modalLink.textContent = `${item.instagram} ↗`;
+
+            prevBtn.disabled = activeIndex <= 0;
+            nextBtn.disabled = activeIndex >= activeList.length - 1;
+        }
+
+        modalClose.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                updateModal();
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (activeIndex < activeList.length - 1) {
+                activeIndex++;
+                updateModal();
+            }
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (!modal.classList.contains("is-open")) return;
+            if (e.key === "Escape") closeModal();
+            if (e.key === "ArrowLeft" && activeIndex > 0) {
+                activeIndex--;
+                updateModal();
+            }
+            if (e.key === "ArrowRight" && activeIndex < activeList.length - 1) {
+                activeIndex++;
+                updateModal();
+            }
+        });
+
+        /* FILTER TABS */
+        document.querySelectorAll(".tab-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                const filter = btn.dataset.filter;
+                document.querySelectorAll(".section-block").forEach(sec => {
+                    if (filter === "all" || sec.dataset.section === filter) {
+                        sec.style.display = "block";
+                    } else {
+                        sec.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        renderCrew();
+        renderPartners(supportList, supportGrid);
+        renderPartners(sponsorList, sponsorGrid);
+    </script>
+</body>
+
+</html>
