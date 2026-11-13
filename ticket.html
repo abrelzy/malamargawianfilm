@@ -324,6 +324,22 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .bfa-more-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.15s ease, text-decoration 0.15s ease;
+    }
+
+    .bfa-more-info:hover {
+      text-decoration: underline;
+      opacity: 0.9;
     }
 
     /* SCREENING PROGRAM PACKAGE */
@@ -691,7 +707,12 @@
 
         <div class="modal-header-venue">
           <h2 id="modalVenueTitle">Gedung Balairung Sari Taman Budaya Banjarmasin</h2>
-          <p>Organized by Banua Film Academy · 18 – 19 November 2026</p>
+          <p>
+            Organized by Banua Film Academy · 18 – 19 November 2026<br>
+            <a href="https://arunika.space/catalog/bff2026" target="_blank" rel="noopener noreferrer" class="bfa-more-info">
+              More Info About Banua Film Academy 2026 →
+            </a>
+          </p>
         </div>
 
         <!-- PACKAGE 1: BULIK BAKISAH (PAKET DRAMA - INCLUDE MALAMAR GAWIAN) -->
