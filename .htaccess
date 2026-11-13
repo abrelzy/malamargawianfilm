@@ -14,9 +14,13 @@ RewriteRule ^archive/?$ archive.html [L]
 RewriteCond %{THE_REQUEST} \s/+ticket\.html[\s?] [NC]
 RewriteRule ^ticket\.html$ /ticket [R=301,L]
 
-RewriteCond %{THE_REQUEST} \s/+tiket\.html[\s?] [NC]
-RewriteRule ^tiket\.html$ /ticket [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+tiket(?:\.html)?[\s?] [NC]
+RewriteRule ^tiket(?:\.html)?$ /ticket [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+buy-ticket(?:\.html)?[\s?] [NC]
+RewriteRule ^buy-ticket(?:\.html)?$ /ticket [R=301,L]
 
 RewriteRule ^ticket/?$ ticket.html [L]
 RewriteRule ^tiket/?$ ticket.html [L]
+RewriteRule ^buy-ticket/?$ ticket.html [L]
 RewriteRule ^nonton/?$ ticket.html [L]
