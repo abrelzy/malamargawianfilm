@@ -289,6 +289,22 @@
       border-color: var(--white);
     }
 
+    .modal-banner-wrap {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--line);
+      background: #000;
+    }
+
+    .modal-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
     .modal-header-venue {
       margin-bottom: 24px;
       padding-bottom: 16px;
@@ -650,6 +666,11 @@
       <button type="button" class="btn-close-modal" id="modalClose" aria-label="Close">✕</button>
 
       <div class="modal-scroll-area">
+        <!-- BFA SCREENING BANNER -->
+        <div class="modal-banner-wrap">
+          <img src="assets/bfa-banner.jpeg" alt="Banua Film Academy Screening Banner" class="modal-banner-img">
+        </div>
+
         <div class="modal-header-venue">
           <h2 id="modalVenueTitle">Gedung Balairung Sari Taman Budaya Banjarmasin</h2>
           <p>Organized by Banua Film Academy · 18 – 19 November 2026</p>
@@ -673,7 +694,7 @@
             <span class="day-title">Rabu, 18 November 2026</span>
             <div class="slots-row">
               <div class="time-chip" data-film-id="14" data-pkg="Bulik Bakisah" data-date="Rabu, 18 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/14">
-                <span class="time-val">19.00</span>
+                <span class="time-val">19.00 WITA</span>
                 <span class="time-seats" id="seat-14">sisa 220 kursi</span>
               </div>
             </div>
@@ -684,11 +705,11 @@
             <span class="day-title">Kamis, 19 November 2026</span>
             <div class="slots-row">
               <div class="time-chip" data-film-id="16" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/16">
-                <span class="time-val">16.00</span>
+                <span class="time-val">16.00 WITA</span>
                 <span class="time-seats" id="seat-16">sisa 220 kursi</span>
               </div>
               <div class="time-chip" data-film-id="18" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="21.05" data-url="https://aruhganal.com/tiket/film/18">
-                <span class="time-val">21.05</span>
+                <span class="time-val">21.05 WITA</span>
                 <span class="time-seats" id="seat-18">sisa 220 kursi</span>
               </div>
             </div>
@@ -714,11 +735,11 @@
             <span class="day-title">Rabu, 18 November 2026</span>
             <div class="slots-row">
               <div class="time-chip" data-film-id="13" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/13">
-                <span class="time-val">16.00</span>
+                <span class="time-val">16.00 WITA</span>
                 <span class="time-seats" id="seat-13">sisa 220 kursi</span>
               </div>
               <div class="time-chip" data-film-id="15" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="21.00" data-url="https://aruhganal.com/tiket/film/15">
-                <span class="time-val">21.00</span>
+                <span class="time-val">21.00 WITA</span>
                 <span class="time-seats" id="seat-15">sisa 220 kursi</span>
               </div>
             </div>
@@ -729,8 +750,34 @@
             <span class="day-title">Kamis, 19 November 2026</span>
             <div class="slots-row">
               <div class="time-chip" data-film-id="17" data-pkg="Rahasia Kampung" data-date="Kamis, 19 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/17">
-                <span class="time-val">19.00</span>
+                <span class="time-val">19.00 WITA</span>
                 <span class="time-seats" id="seat-17">sisa 220 kursi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACKAGE 3: SPECIAL SCREENING PIRUNDUK -->
+      <div class="package-card">
+        <div class="poster-box">
+          <img src="images/poster-pirunduk.jpg" alt="Poster Film Pirunduk" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>PIRUNDUK</span></div>'">
+        </div>
+
+        <div class="package-body">
+          <span class="package-badge-tag" style="color: #60a5fa; background: rgba(96, 165, 250, 0.1);">Special Screening</span>
+          <h3 class="package-title">Pirunduk</h3>
+          <p class="film-roster">
+            Film Panjang Karya Forum Sineas Banua · Pemutaran Khusus
+          </p>
+
+          <!-- JADWAL JUMAT 20 NOV -->
+          <div class="schedule-day-block">
+            <span class="day-title">Jumat, 20 November 2026</span>
+            <div class="slots-row">
+              <div class="time-chip" data-film-id="pirunduk" data-pkg="Pirunduk" data-date="Jumat, 20 November 2026" data-time="20.00" data-url="https://aruhganal.com/tiket#pirunduk">
+                <span class="time-val">20.00 WITA</span>
+                <span class="time-seats" id="seat-pirunduk">sisa 998 tiket</span>
               </div>
             </div>
           </div>
