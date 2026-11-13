@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,15 +171,14 @@
     .venue-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
-    .venue-city {
-      font-size: 10.5px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .venue-date-badge {
+      font-size: 11px;
       font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.02em;
     }
 
     .venue-name {
@@ -190,7 +190,7 @@
     }
 
     .venue-sub {
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--muted);
     }
 
@@ -342,17 +342,17 @@
       opacity: 0.9;
     }
 
-    /* SCREENING PROGRAM PACKAGE */
+    /* SCREENING PROGRAM PACKAGE (CINEMA PASS LAYOUT) */
     .package-card {
       background: #131317;
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 20px;
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 22px;
-      align-items: start;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.2s ease;
     }
 
     .package-card.highlight {
@@ -360,101 +360,132 @@
       background: #141419;
     }
 
-    /* POSTER DISPLAY / PLACEHOLDER */
-    .poster-box {
+    /* CINEMA POSTER HERO (FULL POSTER PRESENTATION) */
+    .poster-hero {
+      position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.35;
-      background: #ffffff;
-      border-radius: 10px;
+      aspect-ratio: 1 / 1.32;
+      /* Sesuai rasio poster vertikal utuh */
+      background: #000;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .poster-box img {
+    .poster-hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
     }
 
-    .poster-placeholder-tag {
-      font-size: 8px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: #666;
-      margin-bottom: 4px;
+    .poster-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 40%, rgba(19, 19, 23, 0.7) 80%, rgba(19, 19, 23, 1) 100%);
+      pointer-events: none;
     }
 
-    .poster-placeholder-title {
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.15;
-      color: #000;
-      text-transform: uppercase;
-    }
-
-    .package-body {
+    .poster-hero-badges {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
     }
 
     .package-badge-tag {
       display: inline-flex;
-      font-size: 9.5px;
+      font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 700;
-      color: var(--accent);
-      background: rgba(156, 204, 101, 0.1);
-      padding: 3px 8px;
-      border-radius: 4px;
+      color: #000000;
+      background: var(--accent);
+      padding: 5px 12px;
+      border-radius: 999px;
       width: fit-content;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    .package-badge-tag.horor {
+      background: #f87171;
+      color: #000000;
+    }
+
+    .package-badge-tag.special {
+      background: #60a5fa;
+      color: #000000;
+    }
+
+    .package-price-badge {
+      background: rgba(0, 0, 0, 0.88);
+      border: 1px solid rgba(255, 213, 79, 0.5);
+      color: var(--gold);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    .featured-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(156, 204, 101, 0.12);
+      border: 1px solid rgba(156, 204, 101, 0.35);
+      color: #bbf7d0;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      width: fit-content;
+      margin-bottom: 2px;
+    }
+
+    .package-body {
+      padding: 16px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .package-title {
-      font-size: 16.5px;
+      font-size: 19px;
       font-weight: 700;
       color: var(--white);
-      letter-spacing: -0.01em;
-    }
-
-    .package-price {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
     }
 
     .package-synopsis {
-      font-size: 12px;
-      color: #b0b0b8;
+      font-size: 12.5px;
+      color: #b8b8c2;
+      line-height: 1.55;
+    }
+
+    .film-roster-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      color: #9c9ca6;
       line-height: 1.5;
-      margin-top: 2px;
     }
 
-    .film-roster {
-      font-size: 11px;
-      color: #8e8e98;
-      line-height: 1.45;
-      margin-top: 2px;
-    }
-
-    .film-roster strong {
+    .film-roster-box strong {
       color: #ffffff;
     }
 
     /* SHOWTIMES SECTION */
     .schedule-day-block {
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .day-title {
@@ -474,33 +505,39 @@
     }
 
     .slots-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .time-chip {
-      background: #1c1c22;
-      border: 1px solid #282832;
-      border-radius: 6px;
-      padding: 8px 14px;
+      background: #18181f;
+      border: 1.5px solid #2e2e3a;
+      border-radius: 10px;
+      padding: 10px 14px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
-      transition: all 0.15s ease;
+      gap: 4px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      position: relative;
     }
 
     .time-chip:hover {
-      background: #25252e;
-      border-color: var(--white);
+      background: #23232d;
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
     }
 
     .time-chip.is-active {
       background: var(--white);
       border-color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
     }
 
     .time-val {
@@ -508,6 +545,9 @@
       font-weight: 700;
       color: var(--white);
       line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .time-chip.is-active .time-val {
@@ -515,12 +555,14 @@
     }
 
     .time-seats {
-      font-size: 10px;
-      color: var(--muted);
+      font-size: 10.5px;
+      color: #9c9ca6;
+      font-weight: 500;
     }
 
     .time-chip.is-active .time-seats {
       color: #333333;
+      font-weight: 600;
     }
 
     /* FLOATING BOTTOM ACTION BAR IN MODAL */
@@ -588,13 +630,16 @@
     }
 
     @media (max-width: 600px) {
-      header, footer {
+
+      header,
+      footer {
         padding: 20px 24px;
       }
 
       .modal-overlay {
         padding: 0;
-        align-items: flex-end; /* Bottom sheet on mobile */
+        align-items: flex-end;
+        /* Bottom sheet on mobile */
       }
 
       .floating-dialog {
@@ -611,30 +656,43 @@
       }
 
       .package-card {
-        grid-template-columns: 145px 1fr;
-        gap: 16px;
-        padding: 16px;
+        margin-bottom: 24px;
+        border-radius: 16px;
       }
 
-      .poster-box, .poster-placeholder {
-        width: 100%;
-        margin: 0;
+      .poster-hero {
+        aspect-ratio: 1 / 1.32;
+      }
+
+      .featured-callout {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(156, 204, 101, 0.12);
+        border: 1px solid rgba(156, 204, 101, 0.35);
+        color: #bbf7d0;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 8px;
+        width: fit-content;
+        margin-bottom: 2px;
+      }
+
+      .package-body {
+        padding: 14px 16px 18px;
       }
 
       .package-title {
-        font-size: 15px;
+        font-size: 17px;
       }
 
-      .day-title {
-        font-size: 11.5px;
+      .package-synopsis {
+        font-size: 12px;
       }
 
-      .time-chip {
-        padding: 7px 10px;
-      }
-
-      .time-val {
-        font-size: 13.5px;
+      .slots-row {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .booking-bar {
@@ -643,6 +701,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- MINIMAL HEADER -->
@@ -664,7 +723,7 @@
       <!-- 1. GEDUNG BALAIRUNG SARI (ACTIVE) -->
       <div class="venue-item" data-id="balairung">
         <div class="venue-info">
-          <span class="venue-city">Banjarmasin</span>
+          <span class="venue-date-badge">18 – 19 November 2026</span>
           <div class="venue-name">Gedung Balairung Sari Taman Budaya Banjarmasin</div>
           <span class="venue-sub">Organized by Banua Film Academy</span>
         </div>
@@ -674,7 +733,6 @@
       <!-- 2. KOTA CINEMA MALL BANJARMASIN (COMING SOON) -->
       <div class="venue-item is-disabled" data-id="kcm" title="Opening Soon">
         <div class="venue-info">
-          <span class="venue-city">Banjarmasin</span>
           <div class="venue-name">Kota Cinema Mall Banjarmasin</div>
           <span class="venue-sub">Organized by Forum Sineas Banua</span>
         </div>
@@ -684,7 +742,6 @@
       <!-- 3. PLATINUM BATULICIN (COMING SOON) -->
       <div class="venue-item is-disabled" data-id="batulicin" title="Opening Soon">
         <div class="venue-info">
-          <span class="venue-city">Batulicin</span>
           <div class="venue-name">Platinum Cineplex Batulicin</div>
           <span class="venue-sub">Organized by Layar Tanbu</span>
         </div>
@@ -694,7 +751,6 @@
       <!-- 4. NSC KOTABARU (COMING SOON) -->
       <div class="venue-item is-disabled" data-id="kotabaru" title="Opening Soon">
         <div class="venue-info">
-          <span class="venue-city">Kotabaru</span>
           <div class="venue-name">New Star Cineplex Kotabaru</div>
           <span class="venue-sub">Organized by Kaya Films</span>
         </div>
@@ -726,7 +782,8 @@
           <h2 id="modalVenueTitle">Gedung Balairung Sari Taman Budaya Banjarmasin</h2>
           <p>
             Organized by Banua Film Academy · 18 – 19 November 2026<br>
-            <a href="https://arunika.space/catalog/bff2026" target="_blank" rel="noopener noreferrer" class="bfa-more-info">
+            <a href="https://arunika.space/catalog/bff2026" target="_blank" rel="noopener noreferrer"
+              class="bfa-more-info">
               More Info About Banua Film Academy 2026 →
             </a>
           </p>
@@ -734,31 +791,40 @@
 
         <!-- PACKAGE 1: BULIK BAKISAH (PAKET DRAMA - INCLUDE MALAMAR GAWIAN) -->
         <div class="package-card highlight">
-          <div class="poster-box">
-            <img src="images/poster-bulik-bakisah.jpg" alt="Poster Bulik Bakisah" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>Bulik Bakisah</span></div>'">
+          <div class="poster-hero">
+            <img src="images/poster-bulik-bakisah.jpg" alt="Poster Bulik Bakisah"
+              onerror="this.src='images/screenings/schedule-balairung.jpg'">
+            <div class="poster-hero-overlay"></div>
+            <div class="poster-hero-badges">
+              <span class="package-badge-tag">Paket Drama</span>
+              <span class="package-price-badge">Rp25.000 / tiket</span>
+            </div>
           </div>
 
           <div class="package-body">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
-              <span class="package-badge-tag">Paket Drama</span>
-              <span class="package-price">Rp25.000 / tiket</span>
+            <div class="featured-callout">
+              <span>Film <strong>Malamar Gawian</strong> tayang di paket ini</span>
             </div>
 
             <h3 class="package-title">Bulik Bakisah - Drama Package</h3>
-            
+
             <p class="package-synopsis">
-              Setiap cerita memiliki perjalanan. Setiap karakter menyimpan pengalaman yang layak untuk didengar. Bulik Bakisah menghadirkan lima film omnibus drama yang mengeksplorasi berbagai kisah, emosi, dan perspektif melalui karya-karya sinema Banua.
+              Setiap cerita memiliki perjalanan. Setiap karakter menyimpan pengalaman yang layak untuk didengar. Bulik
+              Bakisah menghadirkan lima film omnibus drama yang mengeksplorasi berbagai kisah, emosi, dan perspektif
+              melalui karya-karya sinema Banua.
             </p>
 
-            <p class="film-roster">
-              <strong>Films Included:</strong> <strong>Malamar Gawian</strong>, Rasi Arah Pulang, Jangan Dicium, Misi 41, Tamakan Dabu
-            </p>
+            <div class="film-roster-box">
+              <strong>Films Included:</strong> <strong>Malamar Gawian</strong>, Rasi Arah Pulang, Jangan Dicium, Misi
+              41, Tamakan Dabu
+            </div>
 
             <!-- JADWAL RABU 18 NOV -->
             <div class="schedule-day-block">
               <span class="day-title">Rabu, 18 November 2026</span>
               <div class="slots-row">
-                <div class="time-chip" data-film-id="14" data-pkg="Bulik Bakisah" data-date="Rabu, 18 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/14">
+                <div class="time-chip" data-film-id="14" data-pkg="Bulik Bakisah" data-date="Rabu, 18 November 2026"
+                  data-time="19.00" data-url="https://aruhganal.com/tiket/film/14">
                   <span class="time-val">19.00 WITA</span>
                   <span class="time-seats" id="seat-14">sisa 220 kursi</span>
                 </div>
@@ -769,11 +835,13 @@
             <div class="schedule-day-block">
               <span class="day-title">Kamis, 19 November 2026</span>
               <div class="slots-row">
-                <div class="time-chip" data-film-id="16" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/16">
+                <div class="time-chip" data-film-id="16" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026"
+                  data-time="16.00" data-url="https://aruhganal.com/tiket/film/16">
                   <span class="time-val">16.00 WITA</span>
                   <span class="time-seats" id="seat-16">sisa 220 kursi</span>
                 </div>
-                <div class="time-chip" data-film-id="18" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026" data-time="21.05" data-url="https://aruhganal.com/tiket/film/18">
+                <div class="time-chip" data-film-id="18" data-pkg="Bulik Bakisah" data-date="Kamis, 19 November 2026"
+                  data-time="21.05" data-url="https://aruhganal.com/tiket/film/18">
                   <span class="time-val">21.05 WITA</span>
                   <span class="time-seats" id="seat-18">sisa 220 kursi</span>
                 </div>
@@ -784,35 +852,41 @@
 
         <!-- PACKAGE 2: RAHASIA KAMPUNG (PAKET HOROR) -->
         <div class="package-card">
-          <div class="poster-box">
-            <img src="images/poster-rahasia-kampung.jpg" alt="Poster Rahasia Kampung" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>Rahasia Kampung</span></div>'">
+          <div class="poster-hero">
+            <img src="images/poster-rahasia-kampung.jpg" alt="Poster Rahasia Kampung"
+              onerror="this.src='images/screenings/schedule-balairung.jpg'">
+            <div class="poster-hero-overlay"></div>
+            <div class="poster-hero-badges">
+              <span class="package-badge-tag horor">Paket Horor</span>
+              <span class="package-price-badge">Rp25.000 / tiket</span>
+            </div>
           </div>
 
           <div class="package-body">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
-              <span class="package-badge-tag" style="color: #f87171; background: rgba(248, 113, 113, 0.1);">Paket Horor</span>
-              <span class="package-price">Rp25.000 / tiket</span>
-            </div>
-
             <h3 class="package-title">Rahasia Kampung - Horor Package</h3>
 
             <p class="package-synopsis">
-              Berani menyelami cerita-cerita yang tumbuh dari misteri, kepercayaan, dan imajinasi horor lokal? Rahasia Kampung menghadirkan empat film omnibus horor yang membawa penonton menjelajahi sisi lain cerita dan pengalaman masyarakat Banua.
+              Berani menyelami cerita-cerita yang tumbuh dari misteri, kepercayaan, dan imajinasi horor lokal? Rahasia
+              Kampung menghadirkan empat film omnibus horor yang membawa penonton menjelajahi sisi lain cerita dan
+              pengalaman masyarakat Banua.
             </p>
 
-            <p class="film-roster">
-              <strong>Films Included:</strong> Sisigan Kariau: Sima, Pulasit, Gagampiran (Hutang Baras Dibayar Baras), Suruh Aja Gin
-            </p>
+            <div class="film-roster-box">
+              <strong>Films Included:</strong> Sisigan Kariau: Sima, Pulasit, Gagampiran (Hutang Baras Dibayar Baras),
+              Suruh Aja Gin
+            </div>
 
             <!-- JADWAL RABU 18 NOV -->
             <div class="schedule-day-block">
               <span class="day-title">Rabu, 18 November 2026</span>
               <div class="slots-row">
-                <div class="time-chip" data-film-id="13" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="16.00" data-url="https://aruhganal.com/tiket/film/13">
+                <div class="time-chip" data-film-id="13" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026"
+                  data-time="16.00" data-url="https://aruhganal.com/tiket/film/13">
                   <span class="time-val">16.00 WITA</span>
                   <span class="time-seats" id="seat-13">sisa 220 kursi</span>
                 </div>
-                <div class="time-chip" data-film-id="15" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026" data-time="21.00" data-url="https://aruhganal.com/tiket/film/15">
+                <div class="time-chip" data-film-id="15" data-pkg="Rahasia Kampung" data-date="Rabu, 18 November 2026"
+                  data-time="21.00" data-url="https://aruhganal.com/tiket/film/15">
                   <span class="time-val">21.00 WITA</span>
                   <span class="time-seats" id="seat-15">sisa 220 kursi</span>
                 </div>
@@ -823,7 +897,8 @@
             <div class="schedule-day-block">
               <span class="day-title">Kamis, 19 November 2026</span>
               <div class="slots-row">
-                <div class="time-chip" data-film-id="17" data-pkg="Rahasia Kampung" data-date="Kamis, 19 November 2026" data-time="19.00" data-url="https://aruhganal.com/tiket/film/17">
+                <div class="time-chip" data-film-id="17" data-pkg="Rahasia Kampung" data-date="Kamis, 19 November 2026"
+                  data-time="19.00" data-url="https://aruhganal.com/tiket/film/17">
                   <span class="time-val">19.00 WITA</span>
                   <span class="time-seats" id="seat-17">sisa 220 kursi</span>
                 </div>
@@ -834,27 +909,30 @@
 
         <!-- PACKAGE 3: SPECIAL SCREENING PIRUNDUK -->
         <div class="package-card">
-          <div class="poster-box">
-            <img src="images/poster-pirunduk.jpg" alt="Poster Film Pirunduk" onerror="this.parentElement.innerHTML='<div class=\'poster-placeholder\'><span class=\'poster-placeholder-tag\'>Poster Art</span><span class=\'poster-placeholder-title\'>PIRUNDUK</span></div>'">
+          <div class="poster-hero">
+            <img src="images/poster-pirunduk.jpg" alt="Poster Film Pirunduk"
+              onerror="this.src='images/screenings/schedule-balairung.jpg'">
+            <div class="poster-hero-overlay"></div>
+            <div class="poster-hero-badges">
+              <span class="package-badge-tag special">Special Screening</span>
+              <span class="package-price-badge">Rp25.000 / tiket</span>
+            </div>
           </div>
 
           <div class="package-body">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
-              <span class="package-badge-tag" style="color: #60a5fa; background: rgba(96, 165, 250, 0.1);">Special Screening</span>
-              <span class="package-price">Rp25.000 / tiket</span>
-            </div>
-
             <h3 class="package-title">Special Screening - Pirunduk</h3>
 
             <p class="package-synopsis">
-              PIRUNDUK hadir dalam special screening sebagai salah satu program pemutaran spesial Aruh Film Banua 2026. Saksikan karya ini bersama penonton lainnya dalam satu sesi pemutaran khusus di Gedung Sultan Suriansyah.
+              PIRUNDUK hadir dalam special screening sebagai salah satu program pemutaran spesial Aruh Film Banua 2026.
+              Saksikan karya ini bersama penonton lainnya dalam satu sesi pemutaran khusus di Gedung Sultan Suriansyah.
             </p>
 
             <!-- JADWAL JUMAT 20 NOV -->
             <div class="schedule-day-block">
               <span class="day-title">Jumat, 20 November 2026 · Gedung Sultan Suriansyah</span>
               <div class="slots-row">
-                <div class="time-chip" data-film-id="pirunduk" data-pkg="Pirunduk" data-date="Jumat, 20 November 2026" data-time="20.00" data-url="https://aruhganal.com/tiket#pirunduk">
+                <div class="time-chip" data-film-id="pirunduk" data-pkg="Pirunduk" data-date="Jumat, 20 November 2026"
+                  data-time="20.00" data-url="https://aruhganal.com/tiket#pirunduk">
                   <span class="time-val">20.00 WITA</span>
                   <span class="time-seats" id="seat-pirunduk">sisa 998 tiket</span>
                 </div>
@@ -980,4 +1058,5 @@
     setInterval(updateLiveSeats, 45000);
   </script>
 </body>
+
 </html>
