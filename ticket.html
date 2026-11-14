@@ -1016,27 +1016,56 @@
 
     // AUTO UPDATE SEATS FROM ARUHGANAL
     async function updateLiveSeats() {
-      // 1. Coba fetch api-seats.php (jika di hosting PHP)
-      // 2. Fallback fetch seats-cache.json (jika di static host / python server)
       let json = null;
+
+      // 1. Prioritas: Coba ambil dari seats-cache.json (cepat & selalu ter-sync)
       try {
-        const res = await fetch('api-seats.php', { cache: 'no-cache' });
+        const res = await fetch('seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
         if (res.ok) {
           json = await res.json();
         }
-      } catch (e) {
-        // Abaikan, lanjut ke fallback
-      }
+      } catch (e) {}
 
+      // 2. Alternatif: Jika ada backend PHP (cPanel)
       if (!json || !json.data) {
         try {
-          const res = await fetch('seats-cache.json', { cache: 'no-cache' });
+          const res = await fetch('api-seats.php', { cache: 'no-store' });
           if (res.ok) {
             json = await res.json();
           }
-        } catch (e) {
-          // Abaikan
-        }
+        } catch (e) {}
+      }
+
+      // 3. Fallback Live Client-side Scraping via Jina Reader (tanpa perlu server/PHP)
+      if (!json || !json.data) {
+        try {
+          const filmIds = ['13', '14', '15', '16', '17', '18'];
+          const liveData = {};
+          
+          await Promise.all(filmIds.map(async (id) => {
+            try {
+              const resp = await fetch(`https://r.jina.ai/https://aruhganal.com/tiket/film/${id}`, {
+                headers: { 'X-No-Cache': 'true' }
+              });
+              if (resp.ok) {
+                const text = await resp.text();
+                const m = text.match(/Kursi tersisa\s*\*\*([^\*]+)\*\*/i);
+                if (m) {
+                  const raw = m[1].trim();
+                  const num = parseInt(raw, 10);
+                  liveData[id] = {
+                    remaining: isNaN(num) ? 220 : num,
+                    text: isNaN(num) ? `sisa ${raw}` : (num <= 0 ? 'tiket habis' : `sisa ${num} kursi`)
+                  };
+                }
+              }
+            } catch (err) {}
+          }));
+
+          if (Object.keys(liveData).length > 0) {
+            json = { data: liveData };
+          }
+        } catch (e) {}
       }
 
       if (json && json.data) {
