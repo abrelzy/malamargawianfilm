@@ -567,7 +567,7 @@
 
     /* FLOATING BOTTOM ACTION BAR IN MODAL */
     .booking-bar {
-      padding: 16px 28px calc(16px + env(safe-area-inset-bottom, 0px));
+      padding: 14px 28px calc(14px + env(safe-area-inset-bottom, 0px));
       background: #111115;
       border-top: 1px solid var(--line);
       display: flex;
@@ -576,6 +576,47 @@
       z-index: 20;
       flex-shrink: 0;
       box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    /* SCROLL HINT GUIDE */
+    .modal-scroll-guide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #9c9ca6;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      margin-bottom: -2px;
+    }
+
+    .modal-scroll-guide:hover {
+      color: var(--white);
+    }
+
+    .modal-scroll-guide.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      display: none;
+    }
+
+    .scroll-arrow-anim {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-block;
+      animation: bounceDown 1.5s infinite ease-in-out;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
     }
 
     .btn-buy-ticket {
@@ -945,6 +986,10 @@
 
       <!-- REDIRECT ACTION (PERMANENT FLOATING BOTTOM BAR) -->
       <div class="booking-bar">
+        <div class="modal-scroll-guide" id="scrollGuideBalairung" title="Scroll ke bawah untuk melihat semua jadwal">
+          <span>Scroll ke bawah untuk jadwal lainnya</span>
+          <span class="scroll-arrow-anim">↓</span>
+        </div>
         <button type="button" id="btnBuyTicket" class="btn-buy-ticket" disabled>
           <span id="btnBuyText">Select a Showtime to Continue</span>
         </button>
@@ -1017,6 +1062,10 @@
 
       <!-- REDIRECT ACTION (FLOATING BOTTOM BAR) -->
       <div class="booking-bar">
+        <div class="modal-scroll-guide" id="scrollGuideBatulicin" title="Scroll ke bawah untuk melihat informasi sesi">
+          <span>Scroll ke bawah untuk informasi sesi</span>
+          <span class="scroll-arrow-anim">↓</span>
+        </div>
         <button type="button" id="btnBuyBatulicinTicket" class="btn-buy-ticket" disabled>
           <span id="btnBuyBatulicinText">Select a Showtime to Continue</span>
         </button>
@@ -1045,11 +1094,50 @@
     let selectedTicketUrl = null;
     let selectedBatulicinUrl = null;
 
+    // SCROLL GUIDE CONTROLLER
+    const balairungScrollArea = showtimeModal.querySelector('.modal-scroll-area');
+    const scrollGuideBalairung = document.getElementById('scrollGuideBalairung');
+    if (balairungScrollArea && scrollGuideBalairung) {
+      function checkBalairungScroll() {
+        const isNearBottom = balairungScrollArea.scrollTop + balairungScrollArea.clientHeight >= balairungScrollArea.scrollHeight - 30;
+        if (isNearBottom) {
+          scrollGuideBalairung.classList.add('is-hidden');
+        } else {
+          scrollGuideBalairung.classList.remove('is-hidden');
+        }
+      }
+      balairungScrollArea.addEventListener('scroll', checkBalairungScroll);
+      scrollGuideBalairung.addEventListener('click', () => {
+        balairungScrollArea.scrollBy({ top: 320, behavior: 'smooth' });
+      });
+    }
+
+    const batulicinScrollArea = batulicinModal ? batulicinModal.querySelector('.modal-scroll-area') : null;
+    const scrollGuideBatulicin = document.getElementById('scrollGuideBatulicin');
+    if (batulicinScrollArea && scrollGuideBatulicin) {
+      function checkBatulicinScroll() {
+        const isNearBottom = batulicinScrollArea.scrollTop + batulicinScrollArea.clientHeight >= batulicinScrollArea.scrollHeight - 30;
+        if (isNearBottom) {
+          scrollGuideBatulicin.classList.add('is-hidden');
+        } else {
+          scrollGuideBatulicin.classList.remove('is-hidden');
+        }
+      }
+      batulicinScrollArea.addEventListener('scroll', checkBatulicinScroll);
+      scrollGuideBatulicin.addEventListener('click', () => {
+        batulicinScrollArea.scrollBy({ top: 260, behavior: 'smooth' });
+      });
+    }
+
     // OPEN FLOATING MODAL WHEN BALAIRUNG SARI IS CLICKED
     if (balairungCard) {
       balairungCard.addEventListener('click', () => {
         showtimeModal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        if (balairungScrollArea && scrollGuideBalairung) {
+          balairungScrollArea.scrollTop = 0;
+          setTimeout(checkBalairungScroll, 50);
+        }
       });
     }
 
@@ -1058,6 +1146,10 @@
       batulicinCard.addEventListener('click', () => {
         batulicinModal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        if (batulicinScrollArea && scrollGuideBatulicin) {
+          batulicinScrollArea.scrollTop = 0;
+          setTimeout(checkBatulicinScroll, 50);
+        }
       });
     }
 
