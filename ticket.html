@@ -1018,52 +1018,30 @@
     async function updateLiveSeats() {
       let json = null;
 
-      // 1. Prioritas: Coba ambil dari seats-cache.json (cepat & selalu ter-sync)
+      // 1. Ambil langsung dari Raw GitHub (bypass cache Cloudflare/browser secara realtime)
       try {
-        const res = await fetch('seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
+        const res = await fetch('https://raw.githubusercontent.com/abrelzy/malamargawianfilm/main/seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
         if (res.ok) {
           json = await res.json();
         }
       } catch (e) {}
 
-      // 2. Alternatif: Jika ada backend PHP (cPanel)
+      // 2. Fallback: Local seats-cache.json
       if (!json || !json.data) {
         try {
-          const res = await fetch('api-seats.php', { cache: 'no-store' });
+          const res = await fetch('seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
           if (res.ok) {
             json = await res.json();
           }
         } catch (e) {}
       }
 
-      // 3. Fallback Live Client-side Scraping via Jina Reader (tanpa perlu server/PHP)
+      // 3. Fallback PHP jika ada
       if (!json || !json.data) {
         try {
-          const filmIds = ['13', '14', '15', '16', '17', '18'];
-          const liveData = {};
-          
-          await Promise.all(filmIds.map(async (id) => {
-            try {
-              const resp = await fetch(`https://r.jina.ai/https://aruhganal.com/tiket/film/${id}`, {
-                headers: { 'X-No-Cache': 'true' }
-              });
-              if (resp.ok) {
-                const text = await resp.text();
-                const m = text.match(/Kursi tersisa\s*\*\*([^\*]+)\*\*/i);
-                if (m) {
-                  const raw = m[1].trim();
-                  const num = parseInt(raw, 10);
-                  liveData[id] = {
-                    remaining: isNaN(num) ? 220 : num,
-                    text: isNaN(num) ? `sisa ${raw}` : (num <= 0 ? 'tiket habis' : `sisa ${num} kursi`)
-                  };
-                }
-              }
-            } catch (err) {}
-          }));
-
-          if (Object.keys(liveData).length > 0) {
-            json = { data: liveData };
+          const res = await fetch('api-seats.php', { cache: 'no-store' });
+          if (res.ok) {
+            json = await res.json();
           }
         } catch (e) {}
       }
@@ -1082,9 +1060,9 @@
       }
     }
 
-    // Initial check and periodic polling every 45s
+    // Initial check and periodic polling every 30s
     updateLiveSeats();
-    setInterval(updateLiveSeats, 45000);
+    setInterval(updateLiveSeats, 30000);
   </script>
 </body>
 

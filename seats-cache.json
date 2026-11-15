@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": 1794760365,
+  "timestamp": 1794760752,
   "data": {
     "13": {
       "remaining": 218,
@@ -8,9 +8,9 @@
       "raw": "218 dari 220"
     },
     "14": {
-      "remaining": 211,
-      "text": "sisa 211 kursi",
-      "raw": "211 dari 220"
+      "remaining": 198,
+      "text": "sisa 198 kursi",
+      "raw": "198 dari 220"
     },
     "15": {
       "remaining": 219,
@@ -18,9 +18,9 @@
       "raw": "219 dari 220"
     },
     "16": {
-      "remaining": 216,
-      "text": "sisa 216 kursi",
-      "raw": "216 dari 220"
+      "remaining": 214,
+      "text": "sisa 214 kursi",
+      "raw": "214 dari 220"
     },
     "17": {
       "remaining": 216,
