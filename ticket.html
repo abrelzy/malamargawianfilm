@@ -730,20 +730,21 @@
         <div class="arrow-icon">→</div>
       </div>
 
-      <!-- 2. KOTA CINEMA MALL BANJARMASIN (COMING SOON) -->
+      <!-- 2. PLATINUM BATULICIN (ACTIVE) -->
+      <div class="venue-item" data-id="batulicin">
+        <div class="venue-info">
+          <span class="venue-date-badge">Senin, 23 November 2026</span>
+          <div class="venue-name">Platinum Cineplex Batulicin</div>
+          <span class="venue-sub">Organized by Layar Tanbu</span>
+        </div>
+        <div class="arrow-icon">→</div>
+      </div>
+
+      <!-- 3. KOTA CINEMA MALL BANJARMASIN (COMING SOON) -->
       <div class="venue-item is-disabled" data-id="kcm" title="Opening Soon">
         <div class="venue-info">
           <div class="venue-name">Kota Cinema Mall Banjarmasin</div>
           <span class="venue-sub">Organized by Forum Sineas Banua</span>
-        </div>
-        <div class="venue-tag-status">Coming Soon</div>
-      </div>
-
-      <!-- 3. PLATINUM BATULICIN (COMING SOON) -->
-      <div class="venue-item is-disabled" data-id="batulicin" title="Opening Soon">
-        <div class="venue-info">
-          <div class="venue-name">Platinum Cineplex Batulicin</div>
-          <span class="venue-sub">Organized by Layar Tanbu</span>
         </div>
         <div class="venue-tag-status">Coming Soon</div>
       </div>
@@ -952,6 +953,78 @@
     </div>
   </div>
 
+  <!-- FLOATING MODAL SHOWTIME (PLATINUM CINEPLEX BATULICIN) -->
+  <div class="modal-overlay" id="batulicinModal" role="dialog" aria-modal="true" aria-labelledby="modalBatulicinTitle">
+    <div class="floating-dialog">
+      <button type="button" class="btn-close-modal" id="modalBatulicinClose" aria-label="Close">✕</button>
+
+      <div class="modal-scroll-area">
+        <div class="modal-header-venue">
+          <h2 id="modalBatulicinTitle">Platinum Cineplex Batulicin</h2>
+          <p>
+            Organized by Layar Tanbu · Studio 1 · Senin, 23 November 2026<br>
+            <a href="https://layartanbu.ilunoire.co" target="_blank" rel="noopener noreferrer"
+              class="bfa-more-info">
+              Official Layar Tanbu Website →
+            </a>
+          </p>
+        </div>
+
+        <!-- PACKAGE: BULIK BAKISAH (INCLUDE MALAMAR GAWIAN) -->
+        <div class="package-card highlight">
+          <div class="poster-hero">
+            <img src="images/poster-bulik-bakisah.jpg" alt="Poster Bulik Bakisah"
+              onerror="this.src='images/screenings/schedule-balairung.jpg'">
+            <div class="poster-hero-overlay"></div>
+            <div class="poster-hero-badges">
+              <span class="package-badge-tag">Bulik Bakisah</span>
+              <span class="package-price-badge">Mulai Rp45.000 / tiket</span>
+            </div>
+          </div>
+
+          <div class="package-body">
+            <div class="featured-callout">
+              <span>Film <strong>Malamar Gawian</strong> tayang di sesi ini</span>
+            </div>
+
+            <h3 class="package-title">Bulik Bakisah</h3>
+
+            <p class="package-synopsis">
+              Setiap cerita memiliki perjalanan. Setiap karakter menyimpan pengalaman yang layak untuk didengar. Bulik
+              Bakisah menghadirkan film omnibus yang mengeksplorasi berbagai kisah, emosi, dan perspektif
+              melalui karya sinema Banua.
+            </p>
+
+            <div class="film-roster-box">
+              <strong>Films Included:</strong> <strong>Malamar Gawian</strong>, Rasi Arah Pulang, Jangan Dicium, Misi
+              41, Tamakan Dabu
+            </div>
+
+            <!-- JADWAL SENIN 23 NOV -->
+            <div class="schedule-day-block">
+              <span class="day-title">Senin, 23 November 2026 · Studio 1</span>
+              <div class="slots-row">
+                <div class="time-chip" data-film-id="batulicin-bulik" data-pkg="Bulik Bakisah" data-date="Senin, 23 November 2026"
+                  data-time="20.00" data-url="https://layartanbu.ilunoire.co/screenings/53f9d6bf-0849-4770-9f90-953306892e75/seats">
+                  <span class="time-val">20.00 WITA</span>
+                  <span class="time-seats" id="seat-batulicin-bulik">sisa 92 kursi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /.modal-scroll-area -->
+
+      <!-- REDIRECT ACTION (FLOATING BOTTOM BAR) -->
+      <div class="booking-bar">
+        <button type="button" id="btnBuyBatulicinTicket" class="btn-buy-ticket" disabled>
+          <span id="btnBuyBatulicinText">Select a Showtime to Continue</span>
+        </button>
+        <p class="disclaimer">You will be redirected to the official Layar Tanbu ticketing portal.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <span>Malamar Gawian © 2026</span>
@@ -959,23 +1032,44 @@
 
   <script>
     const balairungCard = document.querySelector('.venue-item[data-id="balairung"]');
+    const batulicinCard = document.querySelector('.venue-item[data-id="batulicin"]');
     const showtimeModal = document.getElementById('showtimeModal');
+    const batulicinModal = document.getElementById('batulicinModal');
     const modalClose = document.getElementById('modalClose');
-    const timeChips = document.querySelectorAll('.time-chip');
+    const modalBatulicinClose = document.getElementById('modalBatulicinClose');
     const btnBuyTicket = document.getElementById('btnBuyTicket');
     const btnBuyText = document.getElementById('btnBuyText');
+    const btnBuyBatulicinTicket = document.getElementById('btnBuyBatulicinTicket');
+    const btnBuyBatulicinText = document.getElementById('btnBuyBatulicinText');
 
     let selectedTicketUrl = null;
+    let selectedBatulicinUrl = null;
 
     // OPEN FLOATING MODAL WHEN BALAIRUNG SARI IS CLICKED
-    balairungCard.addEventListener('click', () => {
-      showtimeModal.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    });
+    if (balairungCard) {
+      balairungCard.addEventListener('click', () => {
+        showtimeModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
 
-    // CLOSE MODAL
+    // OPEN FLOATING MODAL WHEN BATULICIN IS CLICKED
+    if (batulicinCard) {
+      batulicinCard.addEventListener('click', () => {
+        batulicinModal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // CLOSE BALAIRUNG MODAL
     function closeModal() {
       showtimeModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    // CLOSE BATULICIN MODAL
+    function closeBatulicinModal() {
+      batulicinModal.classList.remove('is-open');
       document.body.style.overflow = '';
     }
 
@@ -984,16 +1078,27 @@
       if (e.target === showtimeModal) closeModal();
     });
 
+    if (modalBatulicinClose) {
+      modalBatulicinClose.addEventListener('click', closeBatulicinModal);
+    }
+    if (batulicinModal) {
+      batulicinModal.addEventListener('click', (e) => {
+        if (e.target === batulicinModal) closeBatulicinModal();
+      });
+    }
+
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && showtimeModal.classList.contains('is-open')) {
-        closeModal();
+      if (e.key === 'Escape') {
+        if (showtimeModal.classList.contains('is-open')) closeModal();
+        if (batulicinModal && batulicinModal.classList.contains('is-open')) closeBatulicinModal();
       }
     });
 
-    // TIME CHIP SELECTION
-    timeChips.forEach(chip => {
+    // TIME CHIP SELECTION (BALAIRUNG SARI)
+    const balairungChips = showtimeModal.querySelectorAll('.time-chip');
+    balairungChips.forEach(chip => {
       chip.addEventListener('click', () => {
-        timeChips.forEach(c => c.classList.remove('is-active'));
+        balairungChips.forEach(c => c.classList.remove('is-active'));
         chip.classList.add('is-active');
 
         const pkg = chip.dataset.pkg;
@@ -1007,6 +1112,26 @@
       });
     });
 
+    // TIME CHIP SELECTION (BATULICIN)
+    if (batulicinModal) {
+      const batulicinChips = batulicinModal.querySelectorAll('.time-chip');
+      batulicinChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          batulicinChips.forEach(c => c.classList.remove('is-active'));
+          chip.classList.add('is-active');
+
+          const pkg = chip.dataset.pkg;
+          const time = chip.dataset.time;
+          selectedBatulicinUrl = chip.dataset.url;
+
+          // Activate button and update text
+          btnBuyBatulicinTicket.removeAttribute('disabled');
+          btnBuyBatulicinTicket.classList.add('is-active');
+          btnBuyBatulicinText.textContent = `Buy Ticket · ${pkg} (${time} WITA) →`;
+        });
+      });
+    }
+
     // REDIRECT TO TICKETING URL ON CLICK
     btnBuyTicket.addEventListener('click', () => {
       if (selectedTicketUrl) {
@@ -1014,7 +1139,15 @@
       }
     });
 
-    // AUTO UPDATE SEATS FROM ARUHGANAL
+    if (btnBuyBatulicinTicket) {
+      btnBuyBatulicinTicket.addEventListener('click', () => {
+        if (selectedBatulicinUrl) {
+          window.open(selectedBatulicinUrl, '_blank', 'noopener,noreferrer');
+        }
+      });
+    }
+
+    // AUTO UPDATE SEATS FROM CACHE / LIVE
     async function updateLiveSeats() {
       let json = null;
 

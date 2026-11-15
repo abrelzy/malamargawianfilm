@@ -22,7 +22,7 @@ def sync():
     for fid in film_ids:
         try:
             url = f"https://aruhganal.com/tiket/film/{fid}"
-            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
             html = urllib.request.urlopen(req, timeout=5).read().decode('utf-8', errors='ignore')
             m = re.search(r'Kursi tersisa(?:&nbsp;|\s)+<b>(.*?)</b>', html)
             if m:
@@ -44,7 +44,7 @@ def sync():
     # Special Pirunduk
     try:
         url = "https://aruhganal.com/tiket"
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
         html = urllib.request.urlopen(req, timeout=5).read().decode('utf-8', errors='ignore')
         m = re.search(r'Sisa\s*<b[^>]*>(\d+)</b>\s*tiket', html)
         if m:
@@ -57,6 +57,23 @@ def sync():
     except Exception:
         if 'pirunduk' not in data:
             data['pirunduk'] = {'remaining': 997, 'text': 'sisa 997 tiket'}
+
+    # Layar Tanbu - Platinum Cineplex Batulicin
+    try:
+        url = "https://layartanbu.ilunoire.co/api/v1/screenings/53f9d6bf-0849-4770-9f90-953306892e75/seats"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
+        res_text = urllib.request.urlopen(req, timeout=5).read().decode('utf-8')
+        tanbu_data = json.loads(res_text)
+        rem = tanbu_data.get('counts', {}).get('available', 0)
+        tot = tanbu_data.get('counts', {}).get('total', 147)
+        data['batulicin-bulik'] = {
+            'remaining': rem,
+            'text': f"sisa {rem} kursi" if rem > 0 else "tiket habis",
+            'raw': f"{rem} dari {tot}"
+        }
+    except Exception:
+        if 'batulicin-bulik' not in data:
+            data['batulicin-bulik'] = {'remaining': 93, 'text': 'sisa 93 kursi'}
 
     payload = {
         'status': 'success',
