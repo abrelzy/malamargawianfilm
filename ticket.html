@@ -1243,28 +1243,41 @@
     async function updateLiveSeats() {
       let json = null;
 
-      // 1. Ambil langsung dari Raw GitHub (bypass cache Cloudflare/browser secara realtime)
+      // 1. Prioritas Utama: GitHub Raw API langsung (CORS diizinkan, bypass cache 100%)
       try {
-        const res = await fetch('https://raw.githubusercontent.com/abrelzy/malamargawianfilm/main/seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
+        const res = await fetch('https://api.github.com/repos/abrelzy/malamargawianfilm/contents/seats-cache.json?v=' + Date.now(), {
+          headers: { 'Accept': 'application/vnd.github.raw+json' },
+          cache: 'no-store'
+        });
         if (res.ok) {
           json = await res.json();
         }
       } catch (e) {}
 
-      // 2. Fallback: Local seats-cache.json
+      // 2. jsDelivr CDN
       if (!json || !json.data) {
         try {
-          const res = await fetch('seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
+          const res = await fetch('https://cdn.jsdelivr.net/gh/abrelzy/malamargawianfilm@main/seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
           if (res.ok) {
             json = await res.json();
           }
         } catch (e) {}
       }
 
-      // 3. Fallback PHP jika ada
+      // 3. Raw GitHub Content
       if (!json || !json.data) {
         try {
-          const res = await fetch('api-seats.php', { cache: 'no-store' });
+          const res = await fetch('https://raw.githubusercontent.com/abrelzy/malamargawianfilm/main/seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
+          if (res.ok) {
+            json = await res.json();
+          }
+        } catch (e) {}
+      }
+
+      // 4. Local fallback
+      if (!json || !json.data) {
+        try {
+          const res = await fetch('seats-cache.json?v=' + Date.now(), { cache: 'no-store' });
           if (res.ok) {
             json = await res.json();
           }
