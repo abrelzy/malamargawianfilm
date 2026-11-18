@@ -1,26 +1,26 @@
 {
   "status": "success",
-  "timestamp": 1794964930,
+  "timestamp": 1794991465,
   "data": {
     "13": {
-      "remaining": 209,
-      "text": "sisa 209 kursi",
-      "raw": "209 dari 220"
+      "remaining": 206,
+      "text": "sisa 206 kursi",
+      "raw": "206 dari 220"
     },
     "14": {
-      "remaining": 124,
-      "text": "sisa 124 kursi",
-      "raw": "124 dari 220"
+      "remaining": 112,
+      "text": "sisa 112 kursi",
+      "raw": "112 dari 220"
     },
     "15": {
-      "remaining": 192,
-      "text": "sisa 192 kursi",
-      "raw": "192 dari 220"
+      "remaining": 179,
+      "text": "sisa 179 kursi",
+      "raw": "179 dari 220"
     },
     "16": {
-      "remaining": 199,
-      "text": "sisa 199 kursi",
-      "raw": "199 dari 220"
+      "remaining": 191,
+      "text": "sisa 191 kursi",
+      "raw": "191 dari 220"
     },
     "17": {
       "remaining": 210,
@@ -28,14 +28,14 @@
       "raw": "210 dari 220"
     },
     "18": {
-      "remaining": 197,
-      "text": "sisa 197 kursi",
-      "raw": "197 dari 220"
+      "remaining": 194,
+      "text": "sisa 194 kursi",
+      "raw": "194 dari 220"
     },
     "pirunduk": {
-      "remaining": 970,
-      "text": "sisa 970 tiket",
-      "raw": "970 dari 1000"
+      "remaining": 958,
+      "text": "sisa 958 tiket",
+      "raw": "958 dari 1000"
     },
     "batulicin-bulik": {
       "remaining": 71,
