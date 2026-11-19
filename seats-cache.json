@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": 1795044913,
+  "timestamp": 1795062578,
   "data": {
     "13": {
       "remaining": 206,
@@ -18,19 +18,19 @@
       "raw": "173 dari 220"
     },
     "16": {
-      "remaining": 191,
-      "text": "sisa 191 kursi",
-      "raw": "191 dari 220"
-    },
-    "17": {
-      "remaining": 210,
-      "text": "sisa 210 kursi",
-      "raw": "210 dari 220"
-    },
-    "18": {
       "remaining": 187,
       "text": "sisa 187 kursi",
       "raw": "187 dari 220"
+    },
+    "17": {
+      "remaining": 207,
+      "text": "sisa 207 kursi",
+      "raw": "207 dari 220"
+    },
+    "18": {
+      "remaining": 182,
+      "text": "sisa 182 kursi",
+      "raw": "182 dari 220"
     },
     "pirunduk": {
       "remaining": 958,
@@ -38,9 +38,9 @@
       "raw": "958 dari 1000"
     },
     "batulicin-bulik": {
-      "remaining": 70,
-      "text": "sisa 70 kursi",
-      "raw": "70 dari 147"
+      "remaining": 67,
+      "text": "sisa 67 kursi",
+      "raw": "67 dari 147"
     }
   }
 }
