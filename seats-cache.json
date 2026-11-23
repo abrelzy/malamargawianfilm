@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "timestamp": 1795399316,
+  "timestamp": 1795430358,
   "data": {
     "13": {
       "remaining": 205,
@@ -38,9 +38,9 @@
       "raw": "958 dari 1000"
     },
     "batulicin-bulik": {
-      "remaining": 43,
-      "text": "sisa 43 kursi",
-      "raw": "43 dari 147"
+      "remaining": 26,
+      "text": "sisa 26 kursi",
+      "raw": "26 dari 147"
     }
   }
 }
